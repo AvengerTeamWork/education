@@ -32,7 +32,7 @@ public interface TeacService {
 	 * @param 教师密码
 	 * @return
 	 */
-	public boolean adminTeac(int id,String pwd);
+	public Teacher adminTeac(int id,String pwd);
 
 	/**
 	 * 找回密码

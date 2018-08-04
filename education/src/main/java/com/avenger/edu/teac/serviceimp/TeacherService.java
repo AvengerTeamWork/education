@@ -28,11 +28,11 @@ public class TeacherService implements TeacService{
 	}
 
 	@Override
-	public boolean adminTeac(int id, String pwd) {
+	public Teacher adminTeac(int id, String pwd) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
-
+	
 	@Override
 	public void resultInput() {
 		// TODO Auto-generated method stub
@@ -62,5 +62,5 @@ public class TeacherService implements TeacService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 }

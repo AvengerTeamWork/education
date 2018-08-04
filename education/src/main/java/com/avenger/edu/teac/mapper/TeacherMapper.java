@@ -13,29 +13,18 @@ import com.avenger.edu.teac.model.Teacher;
 @Mapper
 public interface TeacherMapper {
 
-	@Select(value = { "select * from teacher where id=#{id}" })
+	@Select(value = { "select * from teacher where teac_id=#{id}" })
 	public Teacher findOne(int id);
 	
 	@Select(value = {"select * from teacher"})
 	public List<Teacher> findAll();
 	
-	@Update(value = {"update teacher set teac_password=#{pwd} where id=#{id}"})
+	@Update(value = {"update teacher set teac_password=#{pwd} where teac_id=#{id}"})
 	public void changePwd(String pwd,int id);
 	
-	/**
-	 * 登录
-	 * @param 教师编号
-	 * @param 教师密码
-	 * @return
-	 */
-	public boolean adminTeac(int id,String pwd);
+	@Select(value = {"select * from teacher where teac_id=#{id} and teac_password=#{pwd}"})
+	public Teacher adminTeac(int id,String pwd);
 
-	/**
-	 * 找回密码
-	 * @param 教师编号
-	 * @param 身份证后六位
-	 * @return
-	 */
 	//public boolean findPwd(int id,String card);
 	
 	/**
@@ -54,16 +43,9 @@ public interface TeacherMapper {
 	 */
 	public List<CourseTable> findTable();
 	
-	/**
-	 * 查找所有重修的学生
-	 * @return
-	 */
+	@Select(value = {"select * from 学生重修表"})
 	public List<Student> queryStudent();
 	
-	/**
-	 * 根据id查找某个重修的学生
-	 * @param id
-	 * @return
-	 */
+	@Select(value = {"select * from 学生重修表 where stu_id=#{id}"})
 	public Student queryOne(int id);
 }
