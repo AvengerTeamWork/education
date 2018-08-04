@@ -1,5 +1,10 @@
 package com.avenger.edu.teac.model;
 
+/**
+ * 教师类
+ * @author zc
+ * 2018年8月4日12:03:27
+ */
 public class Teacher {
 
 	private int id;
@@ -10,7 +15,7 @@ public class Teacher {
 	private String email;
 	private String phone;
 	private String pic;
-	private int courseId;
+	private Course course;
 	
 	public Teacher() {
 		
@@ -80,12 +85,13 @@ public class Teacher {
 		this.pic = pic;
 	}
 
-	public int getCourseId() {
-		return courseId;
+	public Course getCourse() {
+		return course;
 	}
 
-	public void setCourseId(int courseId) {
-		this.courseId = courseId;
+	public void setCourse(Course course) {
+		this.course = course;
 	}
+	
 	
 }
