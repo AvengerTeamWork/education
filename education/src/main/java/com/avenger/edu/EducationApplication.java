@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.avenger.edu.teac.mapper")
+@MapperScan("com.avenger.edu")
 public class EducationApplication {
 
 	public static void main(String[] args) {
