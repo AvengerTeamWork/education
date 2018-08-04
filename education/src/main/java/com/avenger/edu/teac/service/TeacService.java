@@ -2,6 +2,8 @@ package com.avenger.edu.teac.service;
 
 import java.util.List;
 
+import com.avenger.edu.teac.model.CourseTable;
+import com.avenger.edu.teac.model.Student;
 import com.avenger.edu.teac.model.Teacher;
 
 public interface TeacService {
@@ -50,5 +52,23 @@ public interface TeacService {
 	 */
 	public void resultInput2();
 	
+	/**
+	 * 查看教师课表
+	 * @return
+	 */
+	public List<CourseTable> findTable();
+	
+	/**
+	 * 查找所有重修的学生
+	 * @return
+	 */
+	public List<Student> queryStudent();
+	
+	/**
+	 * 根据id查找某个重修的学生
+	 * @param id
+	 * @return
+	 */
+	public Student queryOne(int id);
 	
 }
