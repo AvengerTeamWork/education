@@ -1,20 +1,20 @@
 package com.avenger.edu.teac.model;
 
 /**
- * 必修成绩类
+ * 选修成绩
  * @author zc
- * 2018年8月6日09:35:38
+ * 2018年8月6日11:14:09
  */
-public class Grade {
+public class Grade1 {
 
 	private int id;
 	private Student stu;
-	private Subject sub;
+	private Selec selec;
 	private int score;
 	private int point;
 	private String judge;
 	
-	public Grade() {
+	public Grade1() {
 		
 	}
 
@@ -34,12 +34,12 @@ public class Grade {
 		this.stu = stu;
 	}
 
-	public Subject getSub() {
-		return sub;
+	public Selec getSelec() {
+		return selec;
 	}
 
-	public void setSub(Subject sub) {
-		this.sub = sub;
+	public void setSelec(Selec selec) {
+		this.selec = selec;
 	}
 
 	public int getScore() {
@@ -65,6 +65,5 @@ public class Grade {
 	public void setJudge(String judge) {
 		this.judge = judge;
 	}
-	
 	
 }
