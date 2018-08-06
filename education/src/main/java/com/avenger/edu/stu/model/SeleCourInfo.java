@@ -1,5 +1,6 @@
 package com.avenger.edu.stu.model;
 
+
 public class SeleCourInfo {
 	private int scId;
 	private String scCourName;
