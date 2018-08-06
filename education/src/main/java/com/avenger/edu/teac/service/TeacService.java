@@ -3,6 +3,8 @@ package com.avenger.edu.teac.service;
 import java.util.List;
 
 import com.avenger.edu.teac.model.CourseTable;
+import com.avenger.edu.teac.model.Grade;
+import com.avenger.edu.teac.model.Grade1;
 import com.avenger.edu.teac.model.Student;
 import com.avenger.edu.teac.model.Teacher;
 
@@ -24,7 +26,7 @@ public interface TeacService {
 	 * 修改密码
 	 * @param 教师编号
 	 */
-	public void changePwd(int id);
+	public void changePwd(String pwd,int id);
 	
 	/**
 	 * 登录
@@ -45,18 +47,18 @@ public interface TeacService {
 	/**
 	 * 录入必修成绩
 	 */
-	public void resultInput();
+	public void resultInput(Grade gra);
 	
 	/**
 	 * 录入选修成绩
 	 */
-	public void resultInput2();
+	public void resultInput2(Grade1 gra);
 	
 	/**
 	 * 查看教师课表
 	 * @return
 	 */
-	public List<CourseTable> findTable();
+	public List<CourseTable> findTable(int id);
 	
 	/**
 	 * 查找所有重修的学生
