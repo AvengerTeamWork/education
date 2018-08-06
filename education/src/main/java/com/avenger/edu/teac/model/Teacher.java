@@ -15,7 +15,7 @@ public class Teacher {
 	private String email;
 	private String phone;
 	private String pic;
-	private Course course;
+	private College col;
 	
 	public Teacher() {
 		
@@ -85,12 +85,12 @@ public class Teacher {
 		this.pic = pic;
 	}
 
-	public Course getCourse() {
-		return course;
+	public College getCol() {
+		return col;
 	}
 
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setCol(College col) {
+		this.col = col;
 	}
 	
 	
