@@ -43,9 +43,9 @@ public interface TeacherMapper {
 	 */
 	public List<CourseTable> findTable();
 	
-	@Select(value = {"select * from restudy"})
+	@Select(value = {"select * from re_study"})
 	public List<Student> queryStudent();
 	
-	@Select(value = {"select * from restudy where stu_id=#{id}"})
+	@Select(value = {"select * from re_study where stu_id=#{id}"})
 	public Student queryOne(int id);
 }
