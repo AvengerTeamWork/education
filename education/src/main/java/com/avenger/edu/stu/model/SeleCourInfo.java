@@ -1,13 +1,21 @@
 package com.avenger.edu.stu.model;
 
-
 public class SeleCourInfo {
 	private int scId;
 	private String scCourName;
 	private String scTeacName;
-	private String scCourCredit;
-	private String scCourPeriod;
+	private int scCourCredit;
+	private String scCourNature;
+	private int scCourPeriod;
 	private String scTeacTitle;
+
+	public String getScCourNature() {
+		return scCourNature;
+	}
+
+	public void setScCourNature(String scCourNature) {
+		this.scCourNature = scCourNature;
+	}
 
 	public int getScId() {
 		return scId;
@@ -33,19 +41,19 @@ public class SeleCourInfo {
 		this.scTeacName = scTeacName;
 	}
 
-	public String getScCourCredit() {
+	public int getScCourCredit() {
 		return scCourCredit;
 	}
 
-	public void setScCourCredit(String scCourCredit) {
+	public void setScCourCredit(int scCourCredit) {
 		this.scCourCredit = scCourCredit;
 	}
 
-	public String getScCourPeriod() {
+	public int getScCourPeriod() {
 		return scCourPeriod;
 	}
 
-	public void setScCourPeriod(String scCourPeriod) {
+	public void setScCourPeriod(int scCourPeriod) {
 		this.scCourPeriod = scCourPeriod;
 	}
 

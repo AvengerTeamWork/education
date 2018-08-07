@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.avenger.edu.stu.model.Grade;
 import com.avenger.edu.stu.model.MajoCourInfo;
 import com.avenger.edu.stu.model.Schedule;
 import com.avenger.edu.stu.model.SeleCourInfo;
@@ -77,25 +78,36 @@ public interface StuMapper {
 	 * @param id
 	 * @return
 	 */
-	@Select("select scId,scCourName,scTeacName,scCourCredit,scCourPeriod,scTeacTitle"
+	@Select("select scId,scCourName,scTeacName,scCourCredit,scCourNature,scCourPeriod,scTeacTitle"
 			+ " from selec as s inner join v_selecourinfo as v on  s.selecour_id=v.scId where s.stu_id=#{id};")
 	public List<SeleCourInfo> findSeleCourByStu(int id);
-	
+
 	/**
 	 * 获得一个学生的主修课程信息
+	 * 
 	 * @return id
 	 */
-	@Select("select mcCourName,mcCourCredit,mcCourPeriod,mcTeacName,mcTeacTitle"
+	@Select("select mcCourName,mcCourCredit,mcCourNature,mcCourPeriod,mcTeacName,mcTeacTitle"
 			+ " from student as s inner join v_maincourinfo as vm on s.clas_id=vm.clas_id where s.stu_id=#{id};")
 	public List<SeleCourInfo> findMainCourByStu(int id);
-	
+
 	/**
 	 * 获得一个学生的课表信息
+	 * 
 	 * @param id
 	 * @return
 	 */
 	@Select("Select courName, teacName , day, week, part, site from v_persche as vp where vp.stu_id=#{id}"
 			+ " Union Select courName, teacName , day, week, part, site from v_schedule as vs inner join student s"
 			+ " on s.clas_id=vs.clas_id where s.stu_id=#{id};")
-	public List<Schedule> getSchedule(int id);
+	public List<Schedule> getScheduleById(int id);
+
+	/**
+	 * 获得一个学生的成绩
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@Select("select * from v_grade where stuId=#{id}")
+	public List<Grade> getGradeById(int id);
 }
