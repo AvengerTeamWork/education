@@ -1,5 +1,10 @@
 package com.avenger.edu.stu.model;
 
+/**
+ * 专业课程
+ * @author YiXin
+ *
+ */
 public class MajoCourInfo {
 	private int mcSubId;
 	private String mcMajorName;

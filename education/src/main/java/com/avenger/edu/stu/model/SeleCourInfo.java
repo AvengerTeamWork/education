@@ -1,5 +1,10 @@
 package com.avenger.edu.stu.model;
 
+/**
+ * 选修课程
+ * @author YiXin
+ *
+ */
 public class SeleCourInfo {
 	private int scId;
 	private String scCourName;

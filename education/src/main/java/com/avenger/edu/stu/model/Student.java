@@ -4,9 +4,9 @@ import com.avenger.edu.common.Clazz;
 import com.avenger.edu.common.Major;
 
 /**
- * 学生类
- * 
- * @author zc 2018年8月4日16:18:33
+ * 学生
+ * @author YiXin
+ *
  */
 public class Student {
 

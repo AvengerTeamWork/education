@@ -1,5 +1,10 @@
 package com.avenger.edu.stu.model;
 
+/**
+ * 课表
+ * @author YiXin
+ *
+ */
 public class Schedule {
 
 	private String courName;

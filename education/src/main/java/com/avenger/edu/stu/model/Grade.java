@@ -1,5 +1,10 @@
 package com.avenger.edu.stu.model;
 
+/**
+ * 成绩
+ * @author YiXin
+ *
+ */
 public class Grade {
 	private String stuId;
 	private String courName;

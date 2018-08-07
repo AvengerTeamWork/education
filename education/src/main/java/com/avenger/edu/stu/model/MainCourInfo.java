@@ -1,5 +1,10 @@
 package com.avenger.edu.stu.model;
 
+/**
+ * 主修课程
+ * @author YiXin
+ *
+ */
 public class MainCourInfo {
 	private String mcCourName;
 	private String mcTeacName;
