@@ -2,13 +2,14 @@ package com.avenger.edu.stu.model;
 
 /**
  * 专业课程
+ * 
  * @author YiXin
  *
  */
 public class MajoCourInfo {
 	private int mcSubId;
 	private String mcMajorName;
-	private String mcMajorTime;
+	private int mcMajorTime;
 	private String mcCourName;
 	private String mcCourNature;
 	private int mcCourCredit;
@@ -30,11 +31,11 @@ public class MajoCourInfo {
 		this.mcMajorName = mcMajorName;
 	}
 
-	public String getMcMajorTime() {
+	public int getMcMajorTime() {
 		return mcMajorTime;
 	}
 
-	public void setMcMajorTime(String mcMajorTime) {
+	public void setMcMajorTime(int mcMajorTime) {
 		this.mcMajorTime = mcMajorTime;
 	}
 

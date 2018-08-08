@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.avenger.edu.stu.model.Grade;
 import com.avenger.edu.stu.model.MajoCourInfo;
+import com.avenger.edu.stu.model.PoinScor;
 import com.avenger.edu.stu.model.Schedule;
 import com.avenger.edu.stu.model.SeleCourInfo;
 import com.avenger.edu.stu.model.Student;
@@ -30,7 +31,7 @@ public interface StuMapper {
 	/**
 	 * 通过学号获得学生个人信息
 	 * 
-	 * @param id
+	 * @param id 学生Id
 	 * @return
 	 */
 	@Select("select stu_id,stu_name,stu_sex,stu_addr,stu_phone,"
@@ -48,21 +49,21 @@ public interface StuMapper {
 	/**
 	 * 修改学生密码
 	 * 
-	 * @param id
-	 * @param password
+	 * @param id 学生Id
+	 * @param password 新密码
 	 */
 	@Update("update student set stu_password=#{password} where stu_id=#{id}")
 	public void updateStuPW(int id, String password);
 
 	/**
-	 * 通过专业和入学时间查看大学期间所需学的必修课程
+	 * 通过专业和开课时间查看大学期间所需学的必修课程
 	 * 
-	 * @param major
-	 * @param time
+	 * @param major 专业名
+	 * @param time	开课时间
 	 * @return
 	 */
 	@Select("select * from v_majocourinfo where mcMajorName=#{major} and mcMajorTime=#{time}")
-	public List<MajoCourInfo> findMCInfo(String major, String time);
+	public List<MajoCourInfo> findMCInfo(String major, int time);
 
 	/**
 	 * 查看可选修课程，进行选课
@@ -75,7 +76,7 @@ public interface StuMapper {
 	/**
 	 * 获得一个学生的选修课程信息
 	 * 
-	 * @param id
+	 * @param id 学生Id
 	 * @return
 	 */
 	@Select("select scId,scCourName,scTeacName,scCourCredit,scCourNature,scCourPeriod,scTeacTitle"
@@ -85,7 +86,7 @@ public interface StuMapper {
 	/**
 	 * 获得一个学生的主修课程信息
 	 * 
-	 * @return id
+	 * @return id 学生Id
 	 */
 	@Select("select mcCourName,mcCourCredit,mcCourNature,mcCourPeriod,mcTeacName,mcTeacTitle"
 			+ " from student as s inner join v_maincourinfo as vm on s.clas_id=vm.clas_id where s.stu_id=#{id};")
@@ -94,7 +95,7 @@ public interface StuMapper {
 	/**
 	 * 获得一个学生的课表信息
 	 * 
-	 * @param id
+	 * @param id 学生Id
 	 * @return
 	 */
 	@Select("Select courName, teacName , day, week, part, site from v_persche as vp where vp.stu_id=#{id}"
@@ -105,9 +106,29 @@ public interface StuMapper {
 	/**
 	 * 获得一个学生的成绩
 	 * 
-	 * @param id
+	 * @param id 学生Id
 	 * @return
 	 */
 	@Select("select * from v_grade where stuId=#{id}")
 	public List<Grade> getGradeById(int id);
+
+	/**
+	 * 获得班级排名
+	 * 
+	 * @param clasId 班级Id
+	 * @return
+	 */
+	@Select("select * from v_poinscor vp where clasId=#{clasId} order by sum desc;")
+
+	public List<PoinScor> getRankByclas(int clasId);
+
+	/**
+	 * 获得专业排名
+	 * @param majoId 专业Id
+	 * @param period 届
+	 * @return
+	 */
+	@Select("select * from v_poinscor vp where majoId=#{majoId} and period=#{period} order by sum desc;")
+
+	public List<PoinScor> getRankBymajo(int majoId,int period);
 }
