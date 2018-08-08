@@ -9,7 +9,7 @@ package com.avenger.edu.stu.model;
 public class MajoCourInfo {
 	private int mcSubId;
 	private String mcMajorName;
-	private int mcMajorTime;
+	private String mcSubTime;
 	private String mcCourName;
 	private String mcCourNature;
 	private int mcCourCredit;
@@ -31,12 +31,12 @@ public class MajoCourInfo {
 		this.mcMajorName = mcMajorName;
 	}
 
-	public int getMcMajorTime() {
-		return mcMajorTime;
+	public String getMcSubTime() {
+		return mcSubTime;
 	}
 
-	public void setMcMajorTime(int mcMajorTime) {
-		this.mcMajorTime = mcMajorTime;
+	public void setMcSubTime(String mcSubTime) {
+		this.mcSubTime = mcSubTime;
 	}
 
 	public String getMcCourName() {

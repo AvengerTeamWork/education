@@ -11,9 +11,19 @@ public class Grade {
 	private int courCredit;
 	private String courNature;
 	private String teacName;
+	private String SubTime;
 	private int score;
 	private int point;
 	private String judge;
+
+	
+	public String getSubTime() {
+		return SubTime;
+	}
+
+	public void setSubTime(String subTime) {
+		SubTime = subTime;
+	}
 
 	public String getStuId() {
 		return stuId;

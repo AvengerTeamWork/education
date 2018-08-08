@@ -3,9 +3,18 @@ package com.avenger.edu.stu.model;
 public class PoinScor {
 	private int stuId;
 	private int sum;
+	private String subTime;
 	private int clasId;
 	private int period;
 	private int majoId;
+
+	public String getSubTime() {
+		return subTime;
+	}
+
+	public void setSubTime(String subTime) {
+		this.subTime = subTime;
+	}
 
 	public int getStuId() {
 		return stuId;

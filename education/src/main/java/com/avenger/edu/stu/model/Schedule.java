@@ -9,10 +9,20 @@ public class Schedule {
 
 	private String courName;
 	private String teacName;
+	private String subTime;
 	private int day;
 	private int week;
 	private int part;
 	private String site;
+
+	
+	public String getSubTime() {
+		return subTime;
+	}
+
+	public void setSubTime(String subTime) {
+		this.subTime = subTime;
+	}
 
 	public String getCourName() {
 		return courName;
