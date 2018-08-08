@@ -86,7 +86,7 @@ public interface StuMapper {
 	 * @return
 	 */
 	@Select("select scId,scCourName,scTeacName,scCourCredit,scCourNature,scCourPeriod,scSubTime,scTeacTitle"
-			+ " from selec as s inner join v_selecourinfo as v on  s.selecour_id=v.scId where s.stu_id=#{id};")
+			+ " from selec as s inner join v_selecourinfo as v on  s.selecour_id=v.scId where s.stu_id=#{id}")
 	public List<SeleCourInfo> findSeleCourByStu(int id);
 
 	/**
@@ -94,13 +94,13 @@ public interface StuMapper {
 	 * 
 	 * @param id
 	 *            学生Id
-	 * @param Time
+	 * @param time
 	 *            学期
 	 * @return
 	 */
 	@Select("select scId,scCourName,scTeacName,scCourCredit,scCourNature,scCourPeriod,scSubTime,scTeacTitle"
-			+ " from selec as s inner join v_selecourinfo as v on  s.selecour_id=v.scId where s.stu_id=#{id} and v.scTime=#{Time};")
-	public List<SeleCourInfo> findSeleCourByStu(int id, String Time);
+			+ " from selec as s inner join v_selecourinfo as v on  s.selecour_id=v.scId where s.stu_id=#{id} and v.scTime=#{time}")
+	public List<SeleCourInfo> findSeleCourByStu(int id, String time);
 
 	/**
 	 * 获得一个学生的主修课程信息
@@ -110,7 +110,7 @@ public interface StuMapper {
 	 * @return
 	 */
 	@Select("select mcCourName,mcCourCredit,mcCourNature,mcCourPeriod,mcSubTime,mcTeacName,mcTeacTitle"
-			+ " from student as s inner join v_maincourinfo as vm on s.clas_id=vm.clas_id where s.stu_id=#{id};")
+			+ " from student as s inner join v_maincourinfo as vm on s.clas_id=vm.clas_id where s.stu_id=#{id}")
 	public List<SeleCourInfo> findMainCourByStu(int id);
 
 	/**
@@ -118,13 +118,13 @@ public interface StuMapper {
 	 * 
 	 * @param id
 	 *            学生Id
-	 * @param Time
+	 * @param time
 	 *            学期
 	 * @return
 	 */
 	@Select("select mcCourName,mcCourCredit,mcCourNature,mcCourPeriod,mcSubTime,mcTeacName,mcTeacTitle"
-			+ " from student as s inner join v_maincourinfo as vm on s.clas_id=vm.clas_id where s.stu_id=#{id} and vm.mcSubTime=#{Time};")
-	public List<SeleCourInfo> findMainCourByStu(int id, String Time);
+			+ " from student as s inner join v_maincourinfo as vm on s.clas_id=vm.clas_id where s.stu_id=#{id} and vm.mcSubTime=#{time}")
+	public List<SeleCourInfo> findMainCourByStu(int id, String time);
 
 	/**
 	 * 获得一个学生的课表信息
@@ -135,7 +135,7 @@ public interface StuMapper {
 	 */
 	@Select("Select courName, teacName ,subTime, day, week, part, site from v_persche as vp where vp.stu_id=#{id}"
 			+ " Union Select courName, teacName ,subTime, day, week, part, site from v_schedule as vs inner join student s"
-			+ " on s.clas_id=vs.clas_id where s.stu_id=#{id};")
+			+ " on s.clas_id=vs.clas_id where s.stu_id=#{id}")
 	public List<Schedule> getScheduleById(int id);
 
 	/**
@@ -143,14 +143,14 @@ public interface StuMapper {
 	 * 
 	 * @param id
 	 *            学生Id
-	 * @param Time
+	 * @param time
 	 *            学期
 	 * @return
 	 */
-	@Select("Select courName, teacName ,subTime, day, week, part, site from v_persche as vp where vp.stu_id=#{id} and vp.subTime=#{Time}"
+	@Select("Select courName, teacName ,subTime, day, week, part, site from v_persche as vp where vp.stu_id=#{id} and vp.subTime=#{time}"
 			+ " Union Select courName, teacName ,subTime, day, week, part, site from v_schedule as vs inner join student s"
-			+ " on s.clas_id=vs.clas_id where s.stu_id=#{id} and vs.subTime=#{Time};")
-	public List<Schedule> getScheduleById(int id, String Time);
+			+ " on s.clas_id=vs.clas_id where s.stu_id=#{id} and vs.subTime=#{time}")
+	public List<Schedule> getScheduleById(int id, String time);
 
 	/**
 	 * 获得一个学生的成绩
@@ -171,33 +171,55 @@ public interface StuMapper {
 	 *            学期
 	 * @return
 	 */
-	@Select("select * from v_grade where stuId=#{id} and subTime=#{Time}")
+	@Select("select * from v_grade where stuId=#{id} and subTime=#{time}")
 	public List<Grade> getGradeById(int id, String time);
 
 	/**
-	 * Time学期的班级排名
+	 * time学期的班级排名
 	 * 
 	 * @param clasId
 	 *            班级Id
-	 * @param Time
+	 * @param time
 	 *            学期
 	 * @return
 	 */
-	@Select("select * from v_poinscor vp where clasId=#{clasId} and subTime=#{Time}  order by sum desc;")
-
-	public List<PoinScor> getRankByclas(int clasId, String Time);
+	@Select("select * from v_poinscor vp where clasId=#{clasId} and subTime=#{time}  order by sum desc")
+	public List<PoinScor> getRankByclas(int clasId, String time);
 
 	/**
-	 * Time学期的专业排名
+	 * period届majoId专业的排名
 	 * 
 	 * @param majoId
 	 *            专业Id
-	 * @param Time
-	 *            学期
+	 * @param period
+	 *            届
 	 * @return
 	 */
-	@Select("select * from v_poinscor vp where majoId=#{majoId} and period=#{period} order by sum desc;")
+	@Select("select * from v_poinscor vp where majoId=#{majoId} and period=#{period} order by sum desc")
+	public List<PoinScor> getRankBymajo(int majoId, int period);
 
-	public List<PoinScor> getRankBymajo(int majoId, String Time);
+	/**
+	 * period届majoId专业time学期的排名
+	 * 
+	 * @param majoId
+	 *            专业Id
+	 * @param time
+	 *            学期
+	 * @param period
+	 *            届
+	 * @return
+	 */
+	@Select("select * from v_poinscor vp where majoId=#{majoId} and period=#{period} and subTime=#{time} order by sum desc")
+	public List<PoinScor> getRankBymajo(int majoId, String time, int period);
+
+	/**
+	 * 获得一个学生的挂科情况
+	 * 
+	 * @param id
+	 *            学生Id
+	 * @return
+	 */
+	@Select("select * from v_grade where stuId=#{id} and judge='没过' or judge='重修过'")
+	public List<Grade> getFailCour(int id);
 
 }
