@@ -163,6 +163,18 @@ public interface StuMapper {
 	public List<Grade> getGradeById(int id);
 
 	/**
+	 * 在time学期的一个学生成绩
+	 * 
+	 * @param id
+	 *            学生Id
+	 * @param time
+	 *            学期
+	 * @return
+	 */
+	@Select("select * from v_grade where stuId=#{id} and subTime=#{Time}")
+	public List<Grade> getGradeById(int id, String time);
+
+	/**
 	 * Time学期的班级排名
 	 * 
 	 * @param clasId
@@ -187,4 +199,5 @@ public interface StuMapper {
 	@Select("select * from v_poinscor vp where majoId=#{majoId} and period=#{period} order by sum desc;")
 
 	public List<PoinScor> getRankBymajo(int majoId, String Time);
+
 }
