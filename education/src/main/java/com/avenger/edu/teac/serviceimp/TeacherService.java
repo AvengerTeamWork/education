@@ -3,6 +3,7 @@ package com.avenger.edu.teac.serviceimp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.avenger.edu.teac.mapper.TeacherMapper;
 import com.avenger.edu.teac.model.CourseTable;
@@ -12,6 +13,7 @@ import com.avenger.edu.teac.model.Student;
 import com.avenger.edu.teac.model.Teacher;
 import com.avenger.edu.teac.service.TeacService;
 
+@Service
 public class TeacherService implements TeacService{
 
 	@Autowired

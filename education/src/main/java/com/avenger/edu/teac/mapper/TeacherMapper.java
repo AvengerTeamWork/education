@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Result;
@@ -13,6 +14,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.avenger.edu.teac.model.Clazz;
 import com.avenger.edu.teac.model.College;
+import com.avenger.edu.teac.model.Course;
 import com.avenger.edu.teac.model.CourseTable;
 import com.avenger.edu.teac.model.Grade;
 import com.avenger.edu.teac.model.Grade1;
@@ -24,6 +26,11 @@ import com.avenger.edu.teac.model.Teacher;
 @Mapper
 public interface TeacherMapper {
 
+	/**
+	 * 根据编号查找指定的老师
+	 * @param id
+	 * @return
+	 */
 	@Select(value = { "select * from teacher where teac_id=#{id}" })
 	@Results(value = {
 			@Result(property="id",column="teac_id"),
@@ -38,6 +45,10 @@ public interface TeacherMapper {
 	})
 	public Teacher findOne(int id);
 	
+	/**
+	 * 查找所有老师的信息
+	 * @return
+	 */
 	@Select(value = {"select * from teacher"})
 	@Results(value = {
 			@Result(property="id",column="teac_id"),
@@ -52,6 +63,11 @@ public interface TeacherMapper {
 	})
 	public List<Teacher> findAll();
 	
+	/**
+	 * 通过学院编号查找学院
+	 * @param id
+	 * @return
+	 */
 	@Select(value = {"select * from college where col_id=#{id}"})
 	@Results(value = {
 			@Result(property="id",column="col_id"),
@@ -61,11 +77,20 @@ public interface TeacherMapper {
 	})
 	public College loadCollegeById(int id);
 	
-	
+	/**
+	 * 老师修改密码
+	 * @param 新密码
+	 * @param 修改密码的老师的编号
+	 */
 	@Update(value = {"update teacher set teac_password=#{pwd} where teac_id=#{id}"})
 	public void changePwd(String pwd,int id);
 	
-	
+	/**
+	 * 教师登录
+	 * @param id
+	 * @param pwd
+	 * @return
+	 */
 	@Select(value = {"select * from teacher where teac_id=#{id} and teac_password=#{pwd}"})
 	@Results(value = {
 			@Result(property="id",column="teac_id"),
@@ -80,25 +105,59 @@ public interface TeacherMapper {
 	})
 	public Teacher adminTeac(int id,String pwd);
 
-	
+	/**
+	 * 录入必修成绩单
+	 * @param gra
+	 */
 	@Insert(value = {"insert into grade(stu_id,tea_id,gra_score,gra_point,gra_judge) values(#{stu.id},#{sub.id},#{score},#{point},#{judge})"})
 	public void resultInput(Grade gra);
 	
-	
+	/**
+	 * 录入选修成绩单
+	 * @param gra
+	 */
 	@Insert(value = {"insert into grade1(stu_id,sele_id,gra1_score,gra1_point,gra1_judge) values(#{stu.id}),#{selec.id},#{score},#{point},#{judge}"})
 	public void resultInput2(Grade1 gra);
 	
-	
+	/**
+	 * 查看教师课表
+	 * @param 教师编号
+	 * @return
+	 */
 	@Select(value = {"select * from teaching where teac_id=#{id}"})
 	@Results(value = {
 			@Result(property="id",column="tea_id"),
-			@Result(property="clazz",column="cla_id",javaType=Clazz.class,many = @Many(select="loadClazzById")),
+			@Result(property="clazz",column="clas_id",javaType=Clazz.class,many = @Many(select="loadClazzById")),
 			@Result(property="sub",column="sub_id",javaType=Subject.class,many = @Many(select="loadSubjectById")),
-			@Result(property="teac",column="teac_id",javaType=Teacher.class,many = @Many(select="loadTeacherById"))
+			@Result(property="teac",column="teac_id",javaType=Teacher.class,many = @Many(select="findOne"))
 	})
 	public List<CourseTable> findTable(int id);
 	
-	@Select(value = {"select * from clazz where id=#{id}"})
+	@Select(value = {"select * from subject where sub_id=#{id}"})
+	@Results(value= {
+			@Result(property="id",column="sub_id"),
+			@Result(property="majorId",column="majo_id"),
+			@Result(property="courseId",column="cour_id"),
+			@Result(property="time",column="sub_time")
+	})
+	public Subject loadSubjectById(int id);
+	
+	@Select(value = {"select * from course where cour_id=#{id}"})
+	@Results(value = {
+			@Result(property="id",column="cour_id"),
+			@Result(property="name",column="cour_name"),
+			@Result(property="nature",column="cour_nature"),
+			@Result(property="credit",column="cour_credit"),
+			@Result(property="period",column="cour_period")
+	})
+	public Course loadCourseById(int id);
+	
+	/**
+	 * 通过班级编号查找班级
+	 * @param id
+	 * @return
+	 */
+	@Select(value = {"select * from clazz where clas_id=#{id}"})
 	@Results(value = {
 			@Result(property="id",column="clas_id"),
 			@Result(property="name",column="clas_name"),
@@ -107,7 +166,12 @@ public interface TeacherMapper {
 	})
 	public Clazz loadClazzById(int id);
 	
-	@Select(value = {"select * from major where id = #{id}"})
+	/**
+	 * 通过专业编号查找专业
+	 * @param id
+	 * @return
+	 */
+	@Select(value = {"select * from major where majo_id = #{id}"})
 	@Results(value = {
 			@Result(property="id",column="majo_id"),
 			@Result(property="name",column="majo_name"),
@@ -116,32 +180,40 @@ public interface TeacherMapper {
 	})
 	public Major loadMajorById(int id);
 	
-	
+	/**
+	 * 查看所有重修学生的信息
+	 * @return
+	 */
 	@Select(value = {"select * from re_study"})
 	@Results(value = {
-			@Result(property="id",column="teac_id"),
-			@Result(property="name",column="teac_name"),
-			@Result(property="sex",column="teac_sex"),
-			@Result(property="password",column="teac_password"),
-			@Result(property="address",column="teac_addr"),
-			@Result(property="phone",column="teac_phone"),
-			@Result(property="email",column="teac_email"),
-			@Result(property="pic",column="teac_pic"),
+			@Result(property="id",column="stu_id"),
+			@Result(property="name",column="stu_name"),
+			@Result(property="sex",column="stu_sex"),
+			@Result(property="password",column="stu_password"),
+			@Result(property="address",column="stu_addr"),
+			@Result(property="phone",column="stu_phone"),
+			@Result(property="email",column="stu_email"),
+			@Result(property="pic",column="stu_pic"),
 			@Result(property="clazz",column="clas_id",javaType=Clazz.class,one=@One(select="loadClazzById")),
 			@Result(property="major",column="majo_id",javaType=Major.class,one=@One(select="loadMajorById"))
 			})
 	public List<Student> queryStudent();
 	
+	/**
+	 * 查看指定学号的重修学生的信息
+	 * @param id
+	 * @return
+	 */
 	@Select(value = {"select * from re_study where stu_id=#{id}"})
 	@Results(value = {
-			@Result(property="id",column="teac_id"),
-			@Result(property="name",column="teac_name"),
-			@Result(property="sex",column="teac_sex"),
-			@Result(property="password",column="teac_password"),
-			@Result(property="address",column="teac_addr"),
-			@Result(property="phone",column="teac_phone"),
-			@Result(property="email",column="teac_email"),
-			@Result(property="pic",column="teac_pic"),
+			@Result(property="id",column="stu_id"),
+			@Result(property="name",column="stu_name"),
+			@Result(property="sex",column="stu_sex"),
+			@Result(property="password",column="stu_password"),
+			@Result(property="address",column="stu_addr"),
+			@Result(property="phone",column="stu_phone"),
+			@Result(property="email",column="stu_email"),
+			@Result(property="pic",column="stu_pic"),
 			@Result(property="clazz",column="clas_id",javaType=Clazz.class,one=@One(select="loadClazzById")),
 			@Result(property="major",column="majo_id",javaType=Major.class,one=@One(select="loadMajorById"))
 			})
