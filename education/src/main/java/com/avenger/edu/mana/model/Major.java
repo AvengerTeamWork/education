@@ -1,51 +1,34 @@
-package com.avenger.edu.stu.model;
+package com.avenger.edu.mana.model;
 
-/**
- * 专业
- * @author zc
- * 2018年8月4日15:58:20
- */
 public class Major {
-
 	private int id;
 	private String name;
-	private College coll;
+	private College collegeId;
 	private String year;
-	
-	public Major() {
-		
-	}
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public College getColl() {
-		return coll;
+	public College getCollegeId() {
+		return collegeId;
 	}
-
-	public void setColl(College coll) {
-		this.coll = coll;
+	public void setCollegeId(College collegeId) {
+		this.collegeId = collegeId;
 	}
-
 	public String getYear() {
 		return year;
 	}
-
 	public void setYear(String year) {
 		this.year = year;
 	}
+	
 	
 }

@@ -1,12 +1,27 @@
 package com.avenger.edu.stu.model;
 
+/**
+ * 主修课程
+ * 
+ * @author YiXin
+ *
+ */
 public class MainCourInfo {
 	private String mcCourName;
 	private String mcTeacName;
 	private int mcCourCredit;
 	private String mcCourNature;
+	private String mcSubTime;
 	private int mcCourPeriod;
 	private String mcTeacTitle;
+
+	public String getMcSubTime() {
+		return mcSubTime;
+	}
+
+	public void setMcSubTime(String mcSubTime) {
+		this.mcSubTime = mcSubTime;
+	}
 
 	public String getMcCourNature() {
 		return mcCourNature;

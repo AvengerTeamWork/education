@@ -1,16 +1,10 @@
-package com.avenger.edu.stu.model;
+package com.avenger.edu.mana.model;
 
-/**
- * 学院类
- * @author zc
- * 2018年8月4日15:57:54
- */
 public class College {
-
-	private int id;
-	private String name;
-	private String president;
-	private String phone;
+	private int id;//学院编号
+	private String name;//学院名称
+	private String president;//学院院长
+	private String phone;//学院电话
 	
 	public College() {
 		

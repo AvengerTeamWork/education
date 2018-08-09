@@ -1,13 +1,28 @@
 package com.avenger.edu.stu.model;
 
+/**
+ * 选修课程
+ * 
+ * @author YiXin
+ *
+ */
 public class SeleCourInfo {
 	private int scId;
 	private String scCourName;
 	private String scTeacName;
 	private int scCourCredit;
 	private String scCourNature;
+	private String scSubTime;
 	private int scCourPeriod;
 	private String scTeacTitle;
+
+	public String getScSubTime() {
+		return scSubTime;
+	}
+
+	public void setScSubTime(String scSubTime) {
+		this.scSubTime = scSubTime;
+	}
 
 	public String getScCourNature() {
 		return scCourNature;

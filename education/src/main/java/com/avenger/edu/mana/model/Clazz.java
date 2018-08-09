@@ -1,16 +1,12 @@
-package com.avenger.edu.stu.model;
+package com.avenger.edu.mana.model;
 
-/**
- * 班级类
- * @author zc
- * 2018年8月4日15:59:41
- */
+import com.avenger.edu.mana.model.Major;
+
 public class Clazz {
-
-	private int id;
-	private String name;
-	private String period;
-	private Major major;
+	private int id;//班级编号
+	private String name;//班级名称
+	private String period;//届
+	private Major major;//专业
 	
 	public Clazz() {
 		
