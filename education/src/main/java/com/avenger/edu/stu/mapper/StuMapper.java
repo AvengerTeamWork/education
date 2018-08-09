@@ -48,6 +48,33 @@ public interface StuMapper {
 	public Student load(int id);
 
 	/**
+	 * 班级编号
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@Select("select clas_id from student where stu_id=#{id}")
+	public int getClasByid(int id);
+
+	/**
+	 * 专业编号
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@Select("select majo_id from student where stu_id=#{id}")
+	public int getMajoByid(int id);
+
+	/**
+	 * 得到学生密码
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@Select("select password from student where stu_id=id")
+	public String getPW(int id);
+
+	/**
 	 * 修改学生密码
 	 * 
 	 * @param id
@@ -90,7 +117,7 @@ public interface StuMapper {
 	public List<SeleCourInfo> findSeleCourByStu(int id);
 
 	/**
-	 * 获得一个学生在Time学期的选修课程信息
+	 * 获得一个学生在time学期的选修课程信息
 	 * 
 	 * @param id
 	 *            学生Id
@@ -114,7 +141,7 @@ public interface StuMapper {
 	public List<SeleCourInfo> findMainCourByStu(int id);
 
 	/**
-	 * 获得一个学生在Time学期的主修课程信息
+	 * 获得一个学生在time学期的主修课程信息
 	 * 
 	 * @param id
 	 *            学生Id
@@ -139,7 +166,7 @@ public interface StuMapper {
 	public List<Schedule> getScheduleById(int id);
 
 	/**
-	 * 获得一个学生在Time学期的课表信息
+	 * 获得一个学生在time学期的课表信息
 	 * 
 	 * @param id
 	 *            学生Id
@@ -185,18 +212,6 @@ public interface StuMapper {
 	 */
 	@Select("select * from v_poinscor vp where clasId=#{clasId} and subTime=#{time}  order by sum desc")
 	public List<PoinScor> getRankByclas(int clasId, String time);
-
-	/**
-	 * period届majoId专业的排名
-	 * 
-	 * @param majoId
-	 *            专业Id
-	 * @param period
-	 *            届
-	 * @return
-	 */
-	@Select("select * from v_poinscor vp where majoId=#{majoId} and period=#{period} order by sum desc")
-	public List<PoinScor> getRankBymajo(int majoId, int period);
 
 	/**
 	 * period届majoId专业time学期的排名
