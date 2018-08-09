@@ -1,5 +1,7 @@
 package com.avenger.edu.stu.service;
 
+import com.avenger.edu.stu.model.Rank;
+
 public interface StuService {
 
 	/**
@@ -19,7 +21,7 @@ public interface StuService {
 	 * @param time
 	 * @return
 	 */
-	public int getClaRank(int id, String time);
+	public Rank getClaRank(int id, String time);
 
 	/**
 	 * 获得专业排名
@@ -28,5 +30,5 @@ public interface StuService {
 	 * @param time
 	 * @return
 	 */
-	public int getMajoRank(int id, String time);
+	public Rank getMajoRank(int id, String time);
 }

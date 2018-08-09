@@ -2,6 +2,7 @@ package com.avenger.edu.stu.model;
 
 /**
  * 成绩
+ * 
  * @author YiXin
  *
  */
@@ -11,18 +12,17 @@ public class Grade {
 	private int courCredit;
 	private String courNature;
 	private String teacName;
-	private String SubTime;
+	private String subTime;
 	private int score;
 	private int point;
 	private String judge;
 
-	
 	public String getSubTime() {
-		return SubTime;
+		return subTime;
 	}
 
 	public void setSubTime(String subTime) {
-		SubTime = subTime;
+		this.subTime = subTime;
 	}
 
 	public String getStuId() {

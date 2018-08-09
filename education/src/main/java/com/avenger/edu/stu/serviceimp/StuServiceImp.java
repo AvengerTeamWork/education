@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.avenger.edu.stu.mapper.StuMapper;
 import com.avenger.edu.stu.model.PoinScor;
+import com.avenger.edu.stu.model.Rank;
 import com.avenger.edu.stu.service.StuService;
 
 @Service
@@ -25,31 +26,45 @@ public class StuServiceImp implements StuService {
 	}
 
 	@Override
-	public int getClaRank(int id, String time) {
+	public Rank getClaRank(int id, String time) {
 		int clasId = stuMapper.getClasByid(id);
 		int rank = 0;
-		List<PoinScor> rankList = stuMapper.getRankByclas(clasId, time);
+		Rank r = null;
+		List<PoinScor> rankList = stuMapper.getClasRank(clasId, time);
 		for (int i = 0; i < rankList.size(); i++) {
 			if (rankList.get(i).getStuId() == id) {
 				rank = i + 1;
+				r = new Rank();
+				r.setRank(rank);
+				r.setSubTime(rankList.get(i).getSubTime());
+				r.setSum(rankList.get(i).getSum());
+				r.setPeriod(rankList.get(i).getPeriod());
 				break;
 			}
 		}
-		return rank;
+		return r;
 	}
 
 	@Override
-	public int getMajoRank(int id, String time) {
+	public Rank getMajoRank(int id, String time) {
 		int majoId = stuMapper.getMajoByid(id);
+		int clasId = stuMapper.getClasByid(id);
+		int period = stuMapper.getperiod(clasId);
 		int rank = 0;
-		List<PoinScor> rankList = stuMapper.getRankByclas(majoId, time);
+		Rank r = null;
+		List<PoinScor> rankList = stuMapper.getMajoRank(majoId, time, period);
 		for (int i = 0; i < rankList.size(); i++) {
 			if (rankList.get(i).getStuId() == id) {
 				rank = i + 1;
+				r = new Rank();
+				r.setRank(rank);
+				r.setSubTime(rankList.get(i).getSubTime());
+				r.setSum(rankList.get(i).getSum());
+				r.setPeriod(rankList.get(i).getPeriod());
 				break;
 			}
 		}
-		return rank;
+		return r;
 	}
 
 }
