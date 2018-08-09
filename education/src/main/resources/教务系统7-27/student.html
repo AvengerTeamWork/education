@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>学生</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+</head>
+
+<body>
+  <div id="student">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <p class="navbar-brand">教务管理中心</p>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <router-link class="nav-link text-info" to="/personinfo">个人信息</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link text-info" to="/leveltest">等级考试报名</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link text-info" to="/timetables">课表查询</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link text-info" to="/choose">学生选课</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link text-info" to="/cover">申请调课</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link text-info" to="/restudy">重修报名</router-link>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-info" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              成绩查询
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <router-link class="dropdown-item text-info" to="/score">课程成绩</router-link>
+              <router-link class="dropdown-item text-info" to="">证书考试成绩</router-link>
+              <router-link class="dropdown-item text-info" to="">专业排名</router-link>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+    <div class="container">
+      <router-view></router-view>
+    </div>
+  </div>
+  <script>
+    //定义组件
+    //首页组件
+    let firstpage = Vue.component("main", {
+      template: `
+<main role="main">
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <h5 class="display-3">welcome username！</h5>
+    <p>教务处（质控中心、考试中心）是在校长和分管教学副校长领导下，负责全校全日制本、专科教学工作的职能部门。</p>
+    <p><a class="btn btn-primary btn-lg" href="http://jwc.csuft.edu.cn/bmgk_2552/gzzz/201709/t20170927_65829.html" role="button">Learn more &raquo;</a></p>
+  </div>
+</div>
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-4">
+      <h2>图片新闻</h2>
+      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+      <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+      <h2>动态新闻</h2>
+      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+      <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+      <h2>通知公告</h2>
+      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+      <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+    </div>
+  </div>
+  <hr>
+
+</div> <!-- /container -->
+
+</main>
+    `})
+    //课程表组件
+    let timetables = Vue.component('timetables', {
+      template: `
+      <div class="table-responsive">
+        <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <router-link to="/timetables/personal"><img src="./images/personal.jpg" style="width:20;height:20px">个人课表</router-link>
+          </li>
+          <li class="nav-item">
+            <p>------</p>
+          </li>
+          <li class="nav-item">
+            <router-link to="/timetables/major"><img src="./images/clazz.jpg" style="width:20;height:20px">专业课表</router-link>
+          </li>
+        </ul>        
+          <router-view></router-view>
+      </div>
+
+  `});
+    //个人课表
+    let personal = Vue.component('timetables-personal', {
+      template: `
+<table class="table text-center">
+  <thead>
+    <tr>
+      <th scope="col">时间</th>
+      <th scope="col">星期一</th>
+      <th scope="col">星期二</th>
+      <th scope="col">星期三</th>
+      <th scope="col">星期四</th>
+      <th scope="col">星期五</th>
+      <th scope="col">星期六</th>
+      <th scope="col">星期天</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1-2</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+    </tr>
+    <tr>
+      <th scope="row">3-4</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+    </tr>
+    <tr>
+      <th scope="row">5-6</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+    </tr>
+    <tr>
+      <th scope="row">7-8</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+    </tr>
+    <tr>
+      <th scope="row">9-10</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+    </tr>
+  </tbody>
+</table>
+
+  `});
+    //专业课表
+    let major = Vue.component('timetables-major', {
+      template: `
+<table class="table text-center">
+  <thead>
+    <tr>
+      <th scope="col">时间</th>
+      <th scope="col">星期一</th>
+      <th scope="col">星期二</th>
+      <th scope="col">星期三</th>
+      <th scope="col">星期四</th>
+      <th scope="col">星期五</th>
+      <th scope="col">星期六</th>
+      <th scope="col">星期天</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1-2</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+    </tr>
+    <tr>
+      <th scope="row">3-4</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+    </tr>
+    <tr>
+      <th scope="row">5-6</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+    </tr>
+    <tr>
+      <th scope="row">7-8</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+    </tr>
+    <tr>
+      <th scope="row">9-10</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Larry</td>
+    </tr>
+  </tbody>
+</table>
+  `});
+    //选课组件
+    let choose = Vue.component('choose', {
+      template: `
+         <div><h1>选课</h1></div>
+      `})
+    //调课组件
+    let cover = Vue.component('cover', {
+      template: `
+         <div><h1>调课组件</h1></div>
+      `})
+    //成绩组件
+    let score = Vue.component('score-test', {
+      template: `
+      <div class="container">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">序号</th>
+      <th scope="col">课程编号</th>
+      <th scope="col">课程名称</th>
+      <th scope="col">开课学院</th>
+      <th scope="col">授课老师</th>
+      <th scope="col">成绩</th>
+      <th scope="col">绩点</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+  </tbody>
+</table>
+      </div>
+      `})
+    //个人信息组件
+    let personinfo = Vue.component('information', {
+      template: `
+      <div>
+        <ul>
+          <li class="list-group-item list-group-item-info">姓名：</li>
+          <li class="list-group-item list-group-item-info">学号：</li>
+          <li class="list-group-item list-group-item-info">学院：</li>
+          <li class="list-group-item list-group-item-info">班级：</li>
+          <li class="list-group-item list-group-item-info">籍贯：</li>
+          <li class="list-group-item list-group-item-info">政治面貌：</li>
+          <li class="list-group-item list-group-item-info">宿舍号：</li>
+        </ul>
+      </div>
+      `})
+    //等级考试报名组件
+    let leveltest = Vue.component('leveltest', {
+      template: `
+         <div><h1>等级考试报名</h1></div>
+      `})
+    //重修报名组件
+    let restudy = Vue.component('restudy', {
+      template: `
+        <div><h1>重修报名</h1></div>
+      `})
+    //定义路由路径
+    const routes = [
+      //首页
+      { path: '*', component: firstpage },
+      //个人信息
+      { path: '/personinfo', component: personinfo },
+      //选课
+      { path: '/choose', component: choose },
+      //调课
+      { path: '/cover', component: cover },
+      //等级考试报名
+      { path: '/leveltest', component: leveltest },
+      //重修报名
+      { path: '/restudy', component: restudy },
+      //查询课表
+      {
+        path: '/timetables', component: timetables,
+        children: [
+          { path: 'personal', component: personal },
+          { path: 'major', component: major }
+        ]
+      },
+      //查成绩
+      { path: '/score', component: score }
+    ]
+    //加载路由
+    const router = new VueRouter({
+      routes
+    })
+
+    //启动路由
+    const app = new Vue({
+      el: '#student',
+      router
+    })
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
