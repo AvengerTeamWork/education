@@ -1,7 +1,6 @@
 package com.avenger.edu.stu.model;
 
-import com.avenger.edu.common.Clazz;
-import com.avenger.edu.common.Major;
+
 
 /**
  * 学生

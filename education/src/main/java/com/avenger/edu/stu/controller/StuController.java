@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.avenger.edu.stu.mapper.StuMapper;
 import com.avenger.edu.stu.model.Rank;
 import com.avenger.edu.stu.model.Student;
 import com.avenger.edu.stu.serviceimp.StuServiceImp;
@@ -18,9 +17,7 @@ import com.avenger.edu.stu.serviceimp.StuServiceImp;
 public class StuController {
 
 	@Autowired
-	StuMapper stuMapper;
-	@Autowired
-	StuServiceImp ssi;
+	StuServiceImp stuServiceimp;
 
 	/**
 	 * 登录
@@ -30,10 +27,8 @@ public class StuController {
 	 */
 	@PostMapping
 	@ResponseBody
-	public Student login(Student s) {
-		Student student = null;
-		student = stuMapper.login(s);
-		return student;
+	public int login(Student s) {
+		return stuServiceimp.login(s);
 	}
 
 	/**
@@ -44,21 +39,40 @@ public class StuController {
 	 */
 	@GetMapping("/{id}")
 	@ResponseBody
-	public Student loadStuInfo(@PathVariable int id) {
-		return stuMapper.load(id);
+	public Student studentInfo(@PathVariable int id) {
+		return stuServiceimp.getStudentInfo(id);
 
 	}
 
-	@GetMapping("/claRank")
+	@PostMapping("/uppw")
 	@ResponseBody
-	public Rank getClaRank(int id, String time) {
-		return ssi.getClaRank(id, time);
+	public boolean updatePassWord(int id, String prePW, String NewPW) {
+		return stuServiceimp.changePassWord(id, prePW, NewPW);
 	}
 
-	@GetMapping("/majoRank")
+	/**
+	 * time学期下的班级排名
+	 * @param id
+	 * @param time
+	 * @return
+	 */
+	@GetMapping("/classRank")
 	@ResponseBody
-	public Rank getMajoRank(int id, String time) {
-		return ssi.getMajoRank(id, time);
+	public Rank classRank(int id, String time) {
+		return stuServiceimp.getClassRank(id, time);
+	}
+
+	/**
+	 * time学期下的专业排名
+	 * 
+	 * @param id
+	 * @param time
+	 * @return
+	 */
+	@GetMapping("/majorRank")
+	@ResponseBody
+	public Rank majorRank(int id, String time) {
+		return stuServiceimp.getMajorRank(id, time);
 	}
 
 }
