@@ -142,11 +142,20 @@ public interface StuService {
 	 * @return
 	 */
 	public Rank getMajorRank(int id, String time);
-	
+
 	/**
 	 * 学生的挂科情况
+	 * 
 	 * @param id
 	 * @return
 	 */
 	public List<Grade> getFailCourse(int id);
+
+	/**
+	 * 需要重修科目
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<String> getAgainCourse(int id);
 }

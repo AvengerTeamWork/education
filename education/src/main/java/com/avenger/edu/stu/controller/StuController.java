@@ -227,5 +227,17 @@ public class StuController {
 	public List<Grade> failCourse(@PathVariable int id) {
 		return stuServiceimp.getFailCourse(id);
 	}
+	
+	/**
+	 * 学生需要重修的课程
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/againCourse/{id}")
+	@ResponseBody
+	public List<String> againCourse(@PathVariable int id) {
+		return stuServiceimp.getAgainCourse(id);
+	}
 
 }

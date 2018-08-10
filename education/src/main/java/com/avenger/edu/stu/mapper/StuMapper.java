@@ -110,6 +110,7 @@ public interface StuMapper {
 
 	/**
 	 * 查看可选修课程，进行选课
+	 * 
 	 * @param time
 	 * @return
 	 */
@@ -246,7 +247,17 @@ public interface StuMapper {
 	 *            学生Id
 	 * @return
 	 */
-	@Select("select * from v_grade where stuId=#{id} and judge='没过' or judge='重修过'")
+	@Select("select * from v_grade where stuId=#{id} and judge='没过'")
 	public List<Grade> findFailCourse(int id);
+
+
+	/**
+	 * 重修过
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@Select("select * from v_grade where stuId=#{id} and judge='重修过'")
+	public List<Grade> findFailCourseOver(int id);
 
 }

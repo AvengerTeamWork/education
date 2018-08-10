@@ -1,5 +1,6 @@
 package com.avenger.edu.stu.serviceimp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,7 +149,37 @@ public class StuServiceImp implements StuService {
 
 	@Override
 	public List<Grade> getFailCourse(int id) {
-		return stuMapper.findFailCourse(id);
+		List<Grade> fail = stuMapper.findFailCourse(id);
+		List<Grade> over = stuMapper.findFailCourseOver(id);
+		List<Grade> again = new ArrayList<>();
+		for (int i = 0; i < fail.size(); i++) {
+			again.add(fail.get(i));
+		}
+		for (int j = 0; j < over.size(); j++) {
+			again.add(over.get(j));
+		}
+		return again;
+	}
+
+	@Override
+	public List<String> getAgainCourse(int id) {
+		List<Grade> fail = stuMapper.findFailCourse(id);
+		List<Grade> over = stuMapper.findFailCourseOver(id);
+		List<String> again = new ArrayList<>();
+		int k = 0;
+		for (int i = 0; i < fail.size(); i++) {
+			for (int j = 0; j < over.size(); j++) {
+				if (fail.get(i).getCourName().equals(over.get(j).getCourName())) {
+					k = 1;
+					break;
+				}
+			}
+			if (k == 0) {
+				again.add(fail.get(i).getCourName());
+			}
+			k = 0;
+		}
+		return again;
 	}
 
 }
