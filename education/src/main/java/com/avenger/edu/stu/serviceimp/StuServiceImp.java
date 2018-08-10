@@ -6,8 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.avenger.edu.stu.mapper.StuMapper;
+import com.avenger.edu.stu.model.Grade;
+import com.avenger.edu.stu.model.MainCourInfo;
+import com.avenger.edu.stu.model.MajoCourInfo;
 import com.avenger.edu.stu.model.PoinScor;
 import com.avenger.edu.stu.model.Rank;
+import com.avenger.edu.stu.model.Schedule;
+import com.avenger.edu.stu.model.SeleCourInfo;
 import com.avenger.edu.stu.model.Student;
 import com.avenger.edu.stu.service.StuService;
 
@@ -89,6 +94,61 @@ public class StuServiceImp implements StuService {
 			}
 		}
 		return r;
+	}
+
+	@Override
+	public List<MajoCourInfo> getMajorCourse(String major, String time) {
+		return stuMapper.findMajorCourseByTime(major, time);
+	}
+
+	@Override
+	public List<SeleCourInfo> getAllSelectCourse(String time) {
+		return stuMapper.findSelectCourse(time);
+	}
+
+	@Override
+	public List<SeleCourInfo> getSelectCourse(int id) {
+		return stuMapper.findSelectCourseById(id);
+	}
+
+	@Override
+	public List<SeleCourInfo> getSelectCourseByTime(int id, String time) {
+		return stuMapper.findSelectCourseByTime(id, time);
+	}
+
+	@Override
+	public List<MainCourInfo> getMainCourse(int id) {
+		return stuMapper.findMainCourseById(id);
+	}
+
+	@Override
+	public List<MainCourInfo> getMainCourseByTime(int id, String time) {
+		return stuMapper.findMainCourseByTime(id, time);
+	}
+
+	@Override
+	public List<Schedule> getSchedule(int id) {
+		return stuMapper.findScheduleById(id);
+	}
+
+	@Override
+	public List<Schedule> getScheduleByTime(int id, String time) {
+		return stuMapper.findScheduleByTime(id, time);
+	}
+
+	@Override
+	public List<Grade> getGrade(int id) {
+		return stuMapper.findGradeById(id);
+	}
+
+	@Override
+	public List<Grade> getGradeByTime(int id, String time) {
+		return stuMapper.findGradeByTime(id, time);
+	}
+
+	@Override
+	public List<Grade> getFailCourse(int id) {
+		return stuMapper.findFailCourse(id);
 	}
 
 }

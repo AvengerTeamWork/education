@@ -110,11 +110,11 @@ public interface StuMapper {
 
 	/**
 	 * 查看可选修课程，进行选课
-	 * 
+	 * @param time
 	 * @return
 	 */
-	@Select("select * from v_selecourinfo")
-	public List<SeleCourInfo> findSelectCourse();
+	@Select("select * from v_selecourinfo scSubTime=#{time}")
+	public List<SeleCourInfo> findSelectCourse(String time);
 
 	/**
 	 * 获得一个学生的选修课程信息
