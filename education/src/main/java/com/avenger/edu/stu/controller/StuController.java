@@ -40,11 +40,33 @@ public class StuController {
 	@PostMapping
 	@ResponseBody
 	public int login(@RequestBody Student s, HttpServletResponse resp) {
-		
-//		Cookie c = new Cookie(name, value);
-//		resp.addCookie(cookie);
+		int i = stuServiceimp.login(s);
+		if(i==2) {
+			Cookie stuId = new Cookie("id", String.valueOf(s.getStuId()));
+			resp.addCookie(stuId);
+		}
+		return i;
+	}
+	
+	/**
+	 * 获得cookie值
+	 * @param req
+	 * @return
+	 */
+	@GetMapping
+	@ResponseBody
+	public String student(HttpServletRequest req) {
+		Cookie[] c = req.getCookies();
+		String str = null;
+		for (int i = 0; i < c.length; i++) {
+			if("id".equals(c[i].getName())) {
+				str = c[i].getValue();
+				System.out.println( c[i].getValue());
+				System.out.println(str);
+			}
+		}
+		return str;
 
-		return stuServiceimp.login(s);
 	}
 
 	/**
