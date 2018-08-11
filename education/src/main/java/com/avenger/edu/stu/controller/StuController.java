@@ -2,11 +2,16 @@ package com.avenger.edu.stu.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,7 +39,11 @@ public class StuController {
 	 */
 	@PostMapping
 	@ResponseBody
-	public int login(Student s) {
+	public int login(@RequestBody Student s, HttpServletResponse resp) {
+		
+//		Cookie c = new Cookie(name, value);
+//		resp.addCookie(cookie);
+
 		return stuServiceimp.login(s);
 	}
 

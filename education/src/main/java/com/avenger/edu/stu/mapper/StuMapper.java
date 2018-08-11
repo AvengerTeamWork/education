@@ -82,7 +82,7 @@ public interface StuMapper {
 	 * @param id
 	 * @return
 	 */
-	@Select("select stu_id from student where stu_id=#{id}")
+	@Select("select count(stu_id) from student where stu_id=#{id}")
 	public int findStudentId(int id);
 
 	/**

@@ -16,46 +16,58 @@
     crossorigin="anonymous">
   <!-- Custom styles for this template -->
   <link href="./css/signin.css" rel="stylesheet">
+  <!-- axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body class="text-center">
   <div class="main">
     <img class="BG3" src="./images/BG3.jpg" alt="中南林业科技大学">
-    <form class="form-signin">
+    <!-- <form class="form-signin"> -->
+    <div class="form-signin">
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       <label for="inputusername" class="sr-only">Username</label>
-      <input v-model="login.username" type="text" id="inputusername" class="form-control" placeholder="Username" required autofocus>
+      <input v-model="id" type="text" id="inputusername" class="form-control" placeholder="Username" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
-      <input v-model="login.password" type="password" id="inputPassword" class="form-control" placeholder="Password" @keyup.enter.native="handleLogin"
+      <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" @keyup.enter.native="handleLogin"
         required>
       <div class="checkbox mb-3">
         <label>
-          <input v-model="login.redio" type="radio" name="remember-me"> administrator
-          <input v-model="login.redio" type="radio" name="remember-me"> teacher
-          <input v-model="login.redio" type="radio" name="remember-me" checked> student
+          <input v-model="sredio" type="radio" name="remember-me"> administrator
+          <input v-model="sredio" type="radio" name="remember-me"> teacher
+          <input v-model="sredio" type="radio" name="remember-me" checked> student
         </label>
       </div>
-      <button @click="handleLogin(" login ")" class="btn btn-lg btn-primary btn-block" type="submit">login</button>
+      <button @click="handleLogin" class="btn btn-lg btn-primary btn-block">login</button>
       <a href="reset.html">
         <h6>忘记密码？</h6>
       </a>
       <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
-    </form>
+      <!-- </form> -->
+
+    </div>
   </div>
   <script>
     let main = new Vue({
       el: '.main',
-      data = {
-      const validataPass = (rule, value, callback) => {
-        if (value.length < 6) {
-          callback(new Error(''))
-        }
-      }
-    },
-    methods: {
-
-    }
-  })
+      data: {
+        id: undefined,
+        password: undefined,
+        sredio: undefined,
+      },
+      methods: {
+        handleLogin() {
+          axios.post("/stu", {
+            'stuId': this.id, 'stuPassword': this.password
+          }).then((resp) => {
+            if (resp.data == 0) { console.log("用户名不存在");alert("用户名不存在") };
+            if (resp.data == 1) { console.log("密码错误");alert("密码错误") };
+            if (resp.data == 2) { window.location = '/student.html' };
+          })
+            .catch((resp) => console.log("传输失败"))
+        },
+      },
+    })
 
 
   </script>

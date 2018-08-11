@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Service;
 
 import com.avenger.edu.stu.mapper.StuMapper;
@@ -25,7 +26,7 @@ public class StuServiceImp implements StuService {
 
 	@Override
 	public int login(Student s) {
-		if (stuMapper.findStudentId(s.getStuId()) != s.getStuId()) {
+		if (stuMapper.findStudentId(s.getStuId()) == 0) {
 			// 用户名不存在
 			return 0;
 		} else if (!s.getStuPassword().equals(stuMapper.findPassWordById(s.getStuId()))) {
