@@ -49,23 +49,21 @@ public class StuController {
 	}
 	
 	/**
-	 * 获得cookie值
+	 * 获得cookie值并放回student信息
 	 * @param req
 	 * @return
 	 */
 	@GetMapping
 	@ResponseBody
-	public String student(HttpServletRequest req) {
+	public Student student(HttpServletRequest req) {
 		Cookie[] c = req.getCookies();
 		String str = null;
 		for (int i = 0; i < c.length; i++) {
 			if("id".equals(c[i].getName())) {
 				str = c[i].getValue();
-				System.out.println( c[i].getValue());
-				System.out.println(str);
 			}
 		}
-		return str;
+		return stuServiceimp.getStudentInfo(Integer.valueOf(str));
 
 	}
 
