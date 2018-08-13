@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.avenger.edu.stu.model.Grade;
+import com.avenger.edu.stu.model.IdTime;
 import com.avenger.edu.stu.model.MainCourInfo;
 import com.avenger.edu.stu.model.MajoCourInfo;
 import com.avenger.edu.stu.model.Rank;
@@ -215,8 +217,8 @@ public class StuController {
 	 */
 	@PostMapping("/gradeByTime")
 	@ResponseBody
-	public List<Grade> gradeByTime(int id, String time) {
-		return stuServiceimp.getGradeByTime(id, time);
+	public List<Grade> gradeByTime(@RequestBody IdTime it) {
+		return stuServiceimp.getGradeByTime(it.getId(), it.getTime());
 	}
 
 	/**
