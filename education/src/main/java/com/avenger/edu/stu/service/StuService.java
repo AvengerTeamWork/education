@@ -43,11 +43,11 @@ public interface StuService {
 	/**
 	 * 专业的必修课程
 	 * 
-	 * @param major
+	 * @param id
 	 * @param time
 	 * @return
 	 */
-	public List<MajoCourInfo> getMajorCourse(String major, String time);
+	public List<MajoCourInfo> getMajorCourse(int id, String time);
 
 	/**
 	 * 可选修的课程
@@ -61,69 +61,39 @@ public interface StuService {
 	 * 学生的选修课程信息
 	 * 
 	 * @param id
-	 * @return
-	 */
-	public List<SeleCourInfo> getSelectCourse(int id);
-
-	/**
-	 * 学生在time学期的选修课程信息
-	 * 
-	 * @param id
 	 * @param time
 	 * @return
 	 */
-	public List<SeleCourInfo> getSelectCourseByTime(int id, String time);
+	public List<SeleCourInfo> getSelectCourse(int id, String time);
 
 	/**
 	 * 学生的主修课程信息
 	 * 
 	 * @param id
-	 * @return
-	 */
-	public List<MainCourInfo> getMainCourse(int id);
-
-	/**
-	 * 学生在time学期的主修课程信息
-	 * 
-	 * @param id
 	 * @param time
 	 * @return
 	 */
-	public List<MainCourInfo> getMainCourseByTime(int id, String time);
+	public List<MainCourInfo> getMainCourse(int id, String time);
 
 	/**
 	 * 学生的课表信息
 	 * 
 	 * @param id
+	 * @param time
+	 * @param week
+	 * @param day
 	 * @return
 	 */
-	public List<Schedule> getSchedule(int id);
+	public List<Schedule> getSchedule(int id, String time, int week, int day);
 
 	/**
-	 * 学生在time学期的课表信息
+	 * 学生成绩信息
 	 * 
 	 * @param id
 	 * @param time
 	 * @return
 	 */
-	public List<Schedule> getScheduleByTime(int id, String time);
-
-	/**
-	 * 学生的成绩信息
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public List<Grade> getGrade(int id);
-
-	/**
-	 * 学生在time学期下的成绩信息
-	 * 
-	 * @param id
-	 * @param time
-	 * @return
-	 */
-	public List<Grade> getGradeByTime(int id, String time);
+	public List<Grade> getGrade(int id, String time);
 
 	/**
 	 * 获得班级排名

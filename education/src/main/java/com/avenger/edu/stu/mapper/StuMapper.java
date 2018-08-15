@@ -114,7 +114,7 @@ public interface StuMapper {
 	 * @param time
 	 * @return
 	 */
-	@Select("select * from v_selecourinfo scSubTime=#{time}")
+	@Select("select * from v_selecourinfo where scSubTime=#{time}")
 	public List<SeleCourInfo> findSelectCourse(String time);
 
 	/**
@@ -191,6 +191,18 @@ public interface StuMapper {
 			+ " on s.clas_id=vs.clas_id where s.stu_id=#{id} and vs.subTime=#{time}")
 	public List<Schedule> findScheduleByTime(@Param("id") int id, @Param("time") String time);
 
+	@Select("Select courName, teacName ,subTime, day, week, part, site from v_persche as vp where vp.stu_id=#{id} and vp.subTime=#{time} and vp.week=#{week} and vp.day=#{day}"
+			+ " Union Select courName, teacName ,subTime, day, week, part, site from v_schedule as vs inner join student s"
+			+ " on s.clas_id=vs.clas_id where s.stu_id=#{id} and vs.subTime=#{time} and vs.week=#{week} and vs.day=#{day}")
+	public List<Schedule> findSchedule(@Param("id") int id, @Param("time") String time, @Param("week") int week,
+			@Param("day") int day);
+
+	@Select("Select courName, teacName ,subTime, day, week, part, site from v_persche as vp where vp.stu_id=#{id} and vp.subTime=#{time} and vp.week=#{week}"
+			+ " Union Select courName, teacName ,subTime, day, week, part, site from v_schedule as vs inner join student s"
+			+ " on s.clas_id=vs.clas_id where s.stu_id=#{id} and vs.subTime=#{time} and vs.week=#{week}")
+	public List<Schedule> findScheduleByTimeWeek(@Param("id") int id, @Param("time") String time,
+			@Param("week") int week);
+
 	/**
 	 * 获得一个学生的成绩
 	 * 
@@ -249,7 +261,6 @@ public interface StuMapper {
 	 */
 	@Select("select * from v_grade where stuId=#{id} and judge='没过'")
 	public List<Grade> findFailCourse(int id);
-
 
 	/**
 	 * 重修过

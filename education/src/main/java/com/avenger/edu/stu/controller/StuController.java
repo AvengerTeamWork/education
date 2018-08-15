@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.avenger.edu.stu.model.ChangePW;
 import com.avenger.edu.stu.model.Grade;
 import com.avenger.edu.stu.model.IdTime;
 import com.avenger.edu.stu.model.MainCourInfo;
 import com.avenger.edu.stu.model.MajoCourInfo;
 import com.avenger.edu.stu.model.Rank;
+import com.avenger.edu.stu.model.ScheSite;
 import com.avenger.edu.stu.model.Schedule;
 import com.avenger.edu.stu.model.SeleCourInfo;
 import com.avenger.edu.stu.model.Student;
@@ -43,15 +45,16 @@ public class StuController {
 	@ResponseBody
 	public int login(@RequestBody Student s, HttpServletResponse resp) {
 		int i = stuServiceimp.login(s);
-		if(i==2) {
+		if (i == 2) {
 			Cookie stuId = new Cookie("id", String.valueOf(s.getStuId()));
 			resp.addCookie(stuId);
 		}
 		return i;
 	}
-	
+
 	/**
 	 * 获得cookie值并放回student信息
+	 * 
 	 * @param req
 	 * @return
 	 */
@@ -61,7 +64,7 @@ public class StuController {
 		Cookie[] c = req.getCookies();
 		String str = null;
 		for (int i = 0; i < c.length; i++) {
-			if("id".equals(c[i].getName())) {
+			if ("id".equals(c[i].getName())) {
 				str = c[i].getValue();
 			}
 		}
@@ -92,21 +95,8 @@ public class StuController {
 	 */
 	@PostMapping("/uppw")
 	@ResponseBody
-	public boolean updatePassWord(int id, String prePW, String NewPW) {
-		return stuServiceimp.changePassWord(id, prePW, NewPW);
-	}
-
-	/**
-	 * 专业的必修课程
-	 * 
-	 * @param major
-	 * @param time
-	 * @return
-	 */
-	@PostMapping("/majorCourse")
-	@ResponseBody
-	public List<MajoCourInfo> majorCourse(String major, String time) {
-		return stuServiceimp.getMajorCourse(major, time);
+	public boolean updatePassWord(@RequestBody ChangePW cpw) {
+		return stuServiceimp.changePassWord(cpw.getId(), cpw.getPrePW(), cpw.getNewPW());
 	}
 
 	/**
@@ -117,108 +107,73 @@ public class StuController {
 	 */
 	@PostMapping("/allSelectCourse")
 	@ResponseBody
-	public List<SeleCourInfo> allSelectCourse(String time) {
-		return stuServiceimp.getAllSelectCourse(time);
+	public List<SeleCourInfo> allSelectCourse(@RequestBody IdTime it) {
+		System.out.println(it.getTime());
+		return stuServiceimp.getAllSelectCourse(it.getTime());
+	}
+
+	/**
+	 * 专业的必修课程信息
+	 * 
+	 * @param major
+	 * @param time
+	 * @return
+	 */
+	@PostMapping("/majorCourse")
+	@ResponseBody
+	public List<MajoCourInfo> majorCourse(@RequestBody IdTime it) {
+		return stuServiceimp.getMajorCourse(it.getId(), it.getTime());
 	}
 
 	/**
 	 * 学生的选修课程信息
 	 * 
 	 * @param id
-	 * @return
-	 */
-	@GetMapping("/selectCourse/{id}")
-	@ResponseBody
-	public List<SeleCourInfo> selectCourse(@PathVariable int id) {
-		return stuServiceimp.getSelectCourse(id);
-	}
-
-	/**
-	 * 学生在time学期的选修课程信息
-	 * 
-	 * @param id
 	 * @param time
 	 * @return
 	 */
-	@PostMapping("/selectCourseByTime")
+	@PostMapping("/selectCourse")
 	@ResponseBody
-	public List<SeleCourInfo> selectCourseByTime(int id, String time) {
-		return stuServiceimp.getSelectCourseByTime(id, time);
+	public List<SeleCourInfo> selectCourse(@RequestBody IdTime it) {
+		return stuServiceimp.getSelectCourse(it.getId(), it.getTime());
 	}
 
 	/**
 	 * 学生的主修课程信息
 	 * 
 	 * @param id
-	 * @return
-	 */
-	@GetMapping("/mainCourse/{id}")
-	@ResponseBody
-	public List<MainCourInfo> mainCourse(@PathVariable int id) {
-		return stuServiceimp.getMainCourse(id);
-	}
-
-	/**
-	 * 学生在time学期的主修课程信息
-	 * 
-	 * @param id
 	 * @param time
 	 * @return
 	 */
-	@PostMapping("/mainCourseByTime")
+	@PostMapping("/mainCourse")
 	@ResponseBody
-	public List<MainCourInfo> mainCourseByTime(int id, String time) {
-		return stuServiceimp.getMainCourseByTime(id, time);
+	public List<MainCourInfo> mainCourse(@RequestBody IdTime it) {
+		return stuServiceimp.getMainCourse(it.getId(), it.getTime());
 	}
 
 	/**
-	 * 学生的课表信息
+	 * 学生课表
 	 * 
-	 * @param id
+	 * @param ss
 	 * @return
 	 */
-	@GetMapping("/schedule/{id}")
+	@PostMapping("/schedule")
 	@ResponseBody
-	public List<Schedule> schedule(@PathVariable int id) {
-		return stuServiceimp.getSchedule(id);
-	}
-
-	/**
-	 * 学生在time学期的课表信息
-	 * 
-	 * @param id
-	 * @param time
-	 * @return
-	 */
-	@PostMapping("/scheduleByTime")
-	@ResponseBody
-	public List<Schedule> scheduleByTime(int id, String time) {
-		return stuServiceimp.getScheduleByTime(id, time);
+	public List<Schedule> schedule(@RequestBody ScheSite ss) {
+		return stuServiceimp.getSchedule(ss.getId(), ss.getTime(), ss.getWeek(), ss.getDay());
 	}
 
 	/**
 	 * 学生的成绩信息
 	 * 
 	 * @param id
-	 * @return
-	 */
-	@GetMapping("/grade/{id}")
-	@ResponseBody
-	public List<Grade> grade(@PathVariable int id) {
-		return stuServiceimp.getGrade(id);
-	}
-
-	/**
-	 * 学生在time学期下的成绩信息
-	 * 
-	 * @param id
 	 * @param time
 	 * @return
 	 */
-	@PostMapping("/gradeByTime")
+	@PostMapping("/grade")
 	@ResponseBody
-	public List<Grade> gradeByTime(@RequestBody IdTime it) {
-		return stuServiceimp.getGradeByTime(it.getId(), it.getTime());
+	public List<Grade> grade(@RequestBody IdTime it) {
+		return stuServiceimp.getGrade(it.getId(), it.getTime());
 	}
 
 	/**
@@ -230,8 +185,8 @@ public class StuController {
 	 */
 	@PostMapping("/classRank")
 	@ResponseBody
-	public Rank classRank(int id, String time) {
-		return stuServiceimp.getClassRank(id, time);
+	public Rank classRank(@RequestBody IdTime it) {
+		return stuServiceimp.getClassRank(it.getId(), it.getTime());
 	}
 
 	/**
@@ -243,8 +198,8 @@ public class StuController {
 	 */
 	@PostMapping("/majorRank")
 	@ResponseBody
-	public Rank majorRank(int id, String time) {
-		return stuServiceimp.getMajorRank(id, time);
+	public Rank majorRank(@RequestBody IdTime it) {
+		return stuServiceimp.getMajorRank(it.getId(), it.getTime());
 	}
 
 	/**
@@ -258,7 +213,7 @@ public class StuController {
 	public List<Grade> failCourse(@PathVariable int id) {
 		return stuServiceimp.getFailCourse(id);
 	}
-	
+
 	/**
 	 * 学生需要重修的课程
 	 * 
