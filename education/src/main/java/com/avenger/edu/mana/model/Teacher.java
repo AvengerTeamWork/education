@@ -1,110 +1,123 @@
 package com.avenger.edu.mana.model;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Teacher {
-	private int id;//教职工号
-	private String name;//姓名
-	private String sex;//性别
-	private String password;//密码
-	private String address;//地址
-	private String email;//邮箱
-	private String phone;//电话
-	private String pic;//头像
-	private College college;//学院
-	private String title;
-	private String time;
+	private int teac_id;//教职工号
+	private String teac_name;//姓名
+	private String teac_sex;//性别
+	private String teac_password;//密码
+	private String teac_addr;//地址
+	private String teac_email;//邮箱
+	private String teac_phone;//电话
+	private String teac_pic;//头像
+	private int col_id;//学院
+	private String teac_title;
+	private String teac_time;
+	
+	private List<Course> courseList;
+	
 	public Teacher() {
-		
+		courseList=new ArrayList<>();
 	}
 
-	public int getId() {
-		return id;
+	public int getTeac_id() {
+		return teac_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setTeac_id(int teac_id) {
+		this.teac_id = teac_id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTeac_name() {
+		return teac_name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTeac_name(String teac_name) {
+		this.teac_name = teac_name;
 	}
 
-	public String getSex() {
-		return sex;
+	public String getTeac_sex() {
+		return teac_sex;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setTeac_sex(String teac_sex) {
+		this.teac_sex = teac_sex;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getTeac_password() {
+		return teac_password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setTeac_password(String teac_password) {
+		this.teac_password = teac_password;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getTeac_addr() {
+		return teac_addr;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setTeac_addr(String teac_addr) {
+		this.teac_addr = teac_addr;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getTeac_email() {
+		return teac_email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setTeac_email(String teac_email) {
+		this.teac_email = teac_email;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getTeac_phone() {
+		return teac_phone;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setTeac_phone(String teac_phone) {
+		this.teac_phone = teac_phone;
 	}
 
-	public String getPic() {
-		return pic;
+	public String getTeac_pic() {
+		return teac_pic;
 	}
 
-	public void setPic(String pic) {
-		this.pic = pic;
+	public void setTeac_pic(String teac_pic) {
+		this.teac_pic = teac_pic;
 	}
 
-	public College getCollege() {
-		return college;
+	public int getCol_id() {
+		return col_id;
 	}
 
-	public void setCollege(College college) {
-		this.college = college;
+	public void setCol_id(int col_id) {
+		this.col_id = col_id;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getTeac_title() {
+		return teac_title;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setTeac_title(String teac_title) {
+		this.teac_title = teac_title;
 	}
 
-	public String getTime() {
-		return time;
+	public String getTeac_time() {
+		return teac_time;
 	}
 
-	public void setTime(String time) {
-		this.time = time;
+	public void setTeac_time(String teac_time) {
+		this.teac_time = teac_time;
 	}
 
+	public List<Course> getCourseList() {
+		return courseList;
+	}
+
+	public void setCourseList(List<Course> courseList) {
+		this.courseList = courseList;
+	}
+	
 	
 	
 }
