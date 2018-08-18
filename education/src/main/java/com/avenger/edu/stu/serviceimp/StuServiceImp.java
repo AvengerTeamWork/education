@@ -58,6 +58,9 @@ public class StuServiceImp implements StuService {
 
 	@Override
 	public Rank getClassRank(int id, String time) {
+		if (time.equals("")) {
+			time = "第一学期";
+		}
 		int clasId = stuMapper.findClassByid(id);
 		int rank = 0;
 		Rank r = null;
@@ -78,6 +81,9 @@ public class StuServiceImp implements StuService {
 
 	@Override
 	public Rank getMajorRank(int id, String time) {
+		if (time.equals("")) {
+			time = "第一学期";
+		}
 		int majoId = stuMapper.findMajorByid(id);
 		int clasId = stuMapper.findClassByid(id);
 		int period = stuMapper.findPeriodByClassId(clasId);
@@ -99,52 +105,43 @@ public class StuServiceImp implements StuService {
 	}
 
 	@Override
-	public List<MajoCourInfo> getMajorCourse(String major, String time) {
+	public List<MajoCourInfo> getMajorCourse(int id, String time) {
+		if (time.equals("")) {
+			time = "第一学期";
+		}
+		String major = stuMapper.findStudentById(id).getStuMajor();
 		return stuMapper.findMajorCourseByTime(major, time);
 	}
 
 	@Override
 	public List<SeleCourInfo> getAllSelectCourse(String time) {
+		if (time.equals("")) {
+			time = "第一学期";
+		}
 		return stuMapper.findSelectCourse(time);
 	}
 
 	@Override
-	public List<SeleCourInfo> getSelectCourse(int id) {
-		return stuMapper.findSelectCourseById(id);
-	}
-
-	@Override
-	public List<SeleCourInfo> getSelectCourseByTime(int id, String time) {
+	public List<SeleCourInfo> getSelectCourse(int id, String time) {
+		if (time.equals("")) {
+			time = "第一学期";
+		}
 		return stuMapper.findSelectCourseByTime(id, time);
 	}
 
 	@Override
-	public List<MainCourInfo> getMainCourse(int id) {
-		return stuMapper.findMainCourseById(id);
-	}
-
-	@Override
-	public List<MainCourInfo> getMainCourseByTime(int id, String time) {
+	public List<MainCourInfo> getMainCourse(int id, String time) {
+		if (time.equals("")) {
+			time = "第一学期";
+		}
 		return stuMapper.findMainCourseByTime(id, time);
 	}
 
 	@Override
-	public List<Schedule> getSchedule(int id) {
-		return stuMapper.findScheduleById(id);
-	}
-
-	@Override
-	public List<Schedule> getScheduleByTime(int id, String time) {
-		return stuMapper.findScheduleByTime(id, time);
-	}
-
-	@Override
-	public List<Grade> getGrade(int id) {
-		return stuMapper.findGradeById(id);
-	}
-
-	@Override
-	public List<Grade> getGradeByTime(int id, String time) {
+	public List<Grade> getGrade(int id, String time) {
+		if (time.equals("")) {
+			return stuMapper.findGradeById(id);
+		}
 		return stuMapper.findGradeByTime(id, time);
 	}
 
@@ -181,6 +178,18 @@ public class StuServiceImp implements StuService {
 			k = 0;
 		}
 		return again;
+	}
+
+	@Override
+	public List<Schedule> getSchedule(int id, String time, int week, int day) {
+		if (week == 0 & day == 0 & time.equals("")) {
+			return stuMapper.findScheduleById(id);
+		} else if (week == 0 & day == 0) {
+			return stuMapper.findScheduleByTime(id, time);
+		} else if (day == 0) {
+			return stuMapper.findScheduleByTimeWeek(id, time, week);
+		}
+		return stuMapper.findSchedule(id, time, week, day);
 	}
 
 }
