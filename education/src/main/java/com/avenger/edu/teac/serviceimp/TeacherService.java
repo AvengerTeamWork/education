@@ -9,6 +9,8 @@ import com.avenger.edu.teac.mapper.TeacherMapper;
 import com.avenger.edu.teac.model.CourseTable;
 import com.avenger.edu.teac.model.Grade;
 import com.avenger.edu.teac.model.Grade1;
+import com.avenger.edu.teac.model.Notice;
+import com.avenger.edu.teac.model.ReStudy;
 import com.avenger.edu.teac.model.Student;
 import com.avenger.edu.teac.model.Teacher;
 import com.avenger.edu.teac.service.TeacService;
@@ -18,6 +20,18 @@ public class TeacherService implements TeacService{
 
 	@Autowired
 	TeacherMapper mapper;
+	
+	public int findStuId(int id) {
+		return this.mapper.findStuId(id);
+	}
+	
+	public int findTeaId(int id) {
+		return this.mapper.findTeaId(id);
+	}
+	
+	public Notice[] findNotice() {
+		return this.mapper.findNotice();
+	}
 	
 	@Override
 	public Teacher findOne(int id) {
@@ -38,7 +52,12 @@ public class TeacherService implements TeacService{
 
 	@Override
 	public Teacher adminTeac(int id, String pwd) {
-
+		if(id<=0||"".equals(id)) {
+			return null;
+		}
+		if(pwd==null||"".equals(pwd)) {
+			return null;
+		}
 		return this.mapper.adminTeac(id, pwd);
 	}
 	
@@ -60,12 +79,12 @@ public class TeacherService implements TeacService{
 	}
 
 	@Override
-	public List<Student> queryStudent() {
+	public List<ReStudy> queryStudent() {
 		return this.mapper.queryStudent();
 	}
 
 	@Override
-	public Student queryOne(int id) {
+	public ReStudy queryOne(int id) {
 		return this.mapper.queryOne(id);
 	}
 	

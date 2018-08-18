@@ -2,62 +2,67 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 
-  <title>欢迎使用教务系统</title>
-  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
-  <script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
+<title>欢迎使用教务系统</title>
+<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-    crossorigin="anonymous">
-  <!-- Custom styles for this template -->
-  <link href="./css/signin.css" rel="stylesheet">
-  <!-- axios -->
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<!-- Custom styles for this template -->
+<link href="./css/signin.css" rel="stylesheet">
+<!-- axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body class="text-center">
-  <div class="main">
-    <img class="BG3" src="./images/BG3.jpg" alt="中南林业科技大学">
-    <!-- <form class="form-signin"> -->
-    <div class="form-signin">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label for="inputusername" class="sr-only">Username</label>
-      <input v-model="id" type="text" id="inputusername" class="form-control" placeholder="Username" required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" @keyup.enter.native="handleLogin"
-        required>
-      <div class="checkbox mb-3">
-        <label>
-          <input v-model="sredio" type="radio" name="remember-me" value="admin"> administrator
-          <input v-model="sredio" type="radio" name="remember-me" value="teacher"> teacher
-          <input v-model="sredio" type="radio" name="remember-me" value="student"> student
-        </label>
-      </div>
-      <button @click="handleLogin" class="btn btn-lg btn-primary btn-block">login</button>
-      <a href="reset.html">
-        <h6>忘记密码？</h6>
-      </a>
-      <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
-      <!-- </form> -->
+	<div class="main">
+		<img class="BG3" src="./images/BG3.jpg" alt="中南林业科技大学">
+		<!-- <form class="form-signin"> -->
+		<div class="form-signin">
+			<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+			<label for="inputusername" class="sr-only">Username</label> <input
+				v-model="id" type="text" id="inputusername" class="form-control"
+				placeholder="Username" required autofocus> <label
+				for="inputPassword" class="sr-only">Password</label> <input
+				v-model="password" type="password" id="inputPassword"
+				class="form-control" placeholder="Password"
+				@keyup.enter.native="handleLogin" required>
+			<div class="checkbox mb-3">
+				<label> <input v-model="sredio" type="radio"
+					name="remember-me" value="admin"> administrator <input
+					v-model="sredio" type="radio" name="remember-me" value="teacher">
+					teacher <input v-model="sredio" type="radio" name="remember-me"
+					value="student"> student
+				</label>
+			</div>
+			<button @click="handleLogin" class="btn btn-lg btn-primary btn-block">login</button>
+			<a href="reset.html">
+				<h6>忘记密码？</h6>
+			</a>
+			<p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
+			<!-- </form> -->
 
-    </div>
-  </div>
-  <script>
+		</div>
+	</div>
+	<script>
     let main = new Vue({
       el: '.main',
       data: {
         id: undefined,
         password: undefined,
-        sredio: undefined,
+        sredio: undefined
       },
       methods: {
         handleLogin() {
-			
         	if("student"===this.sredio){
         		//学生
         		axios.post("/stu", {
@@ -68,24 +73,41 @@
                     if (resp.data === 2) { window.location = '/student.html' };
                   })
                     .catch((resp) => console.log("传输失败"));
-        	}else if("admin"===this.sredio){
-        		//老师
         	}else if("teacher"===this.sredio){
+        		//老师
+        		axios.get("/teacher/v1/login?id="+this.id+"&pwd="+this.password)
+        		.then(function(req){
+        			if(req.data==null){
+        				alert("登录失败！教师编号或密码输入错误");
+        			}
+        			if(req.data!=null){
+        				window.location="/teacher.html";
+        			
+    				}
+        		})
+        		.catch(function(){
+        			console.log("登录失败")
+        		});
+        	}else if("admin"===this.sredio){
         		//管理员
         	}
-        	
-      },
-      },
+        }
+      }
     })
 
 
   </script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
 </body>
 
 </html>

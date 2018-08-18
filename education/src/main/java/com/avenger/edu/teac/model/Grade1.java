@@ -8,8 +8,8 @@ package com.avenger.edu.teac.model;
 public class Grade1 {
 
 	private int id;
-	private Student stu;
-	private Selec selec;
+	private int stuId;
+	private int selectId;
 	private int score;
 	private int point;
 	private String judge;
@@ -25,21 +25,21 @@ public class Grade1 {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public Student getStu() {
-		return stu;
+	
+	public int getStuId() {
+		return stuId;
 	}
 
-	public void setStu(Student stu) {
-		this.stu = stu;
+	public void setStuId(int stuId) {
+		this.stuId = stuId;
 	}
 
-	public Selec getSelec() {
-		return selec;
+	public int getSelectId() {
+		return selectId;
 	}
 
-	public void setSelec(Selec selec) {
-		this.selec = selec;
+	public void setSelectId(int selectId) {
+		this.selectId = selectId;
 	}
 
 	public int getScore() {

@@ -1,25 +1,20 @@
 package com.avenger.edu.teac.model;
 
-/**
- * 教师类
- * @author zc
- * 2018年8月4日12:03:27
- */
-public class Teacher {
+public class ReStudy {
 
 	private int id;
 	private String name;
 	private String sex;
 	private String password;
 	private String address;
-	private String email;
 	private String phone;
+	private String email;
 	private String pic;
-	private String title;
-	private String time;
-	private College col;
+	private Clazz clazz;
+	private Major major;
+	private Teacher teacher;
 	
-	public Teacher() {
+	public ReStudy() {
 		
 	}
 
@@ -63,20 +58,20 @@ public class Teacher {
 		this.address = address;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getPhone() {
 		return phone;
 	}
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPic() {
@@ -86,30 +81,29 @@ public class Teacher {
 	public void setPic(String pic) {
 		this.pic = pic;
 	}
-	
-	public String getTitle() {
-		return title;
+
+	public Clazz getClazz() {
+		return clazz;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setClazz(Clazz clazz) {
+		this.clazz = clazz;
 	}
 
-	public String getTime() {
-		return time;
+	public Major getMajor() {
+		return major;
 	}
 
-	public void setTime(String time) {
-		this.time = time;
+	public void setMajor(Major major) {
+		this.major = major;
 	}
 
-	public College getCol() {
-		return col;
+	public Teacher getTeacher() {
+		return teacher;
 	}
 
-	public void setCol(College col) {
-		this.col = col;
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
-	
 	
 }

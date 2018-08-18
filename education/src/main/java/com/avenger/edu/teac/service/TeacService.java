@@ -5,6 +5,7 @@ import java.util.List;
 import com.avenger.edu.teac.model.CourseTable;
 import com.avenger.edu.teac.model.Grade;
 import com.avenger.edu.teac.model.Grade1;
+import com.avenger.edu.teac.model.ReStudy;
 import com.avenger.edu.teac.model.Student;
 import com.avenger.edu.teac.model.Teacher;
 
@@ -64,13 +65,13 @@ public interface TeacService {
 	 * 查找所有重修的学生
 	 * @return
 	 */
-	public List<Student> queryStudent();
+	public List<ReStudy> queryStudent();
 	
 	/**
 	 * 根据id查找某个重修的学生
 	 * @param id
 	 * @return
 	 */
-	public Student queryOne(int id);
+	public ReStudy queryOne(int id);
 	
 }

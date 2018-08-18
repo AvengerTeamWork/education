@@ -19,13 +19,31 @@ import com.avenger.edu.teac.model.CourseTable;
 import com.avenger.edu.teac.model.Grade;
 import com.avenger.edu.teac.model.Grade1;
 import com.avenger.edu.teac.model.Major;
+import com.avenger.edu.teac.model.Notice;
+import com.avenger.edu.teac.model.ReStudy;
 import com.avenger.edu.teac.model.Student;
 import com.avenger.edu.teac.model.Subject;
 import com.avenger.edu.teac.model.Teacher;
 
 @Mapper
 public interface TeacherMapper {
-
+	
+	@Select(value = {"select count(stu_id) from student where stu_id=#{id}"})
+	public int findStuId(int id);
+	
+	@Select(value = {"select count(tea_id) from teaching where tea_id=#{id}"})
+	public int findTeaId(int id);
+	
+	@Select(value = {"select * from notice order by noti_id desc limit 2 offset 0"})
+	@Results(value= {
+			@Result(property="id",column="noti_id"),
+			@Result(property="title",column="noti_title"),
+			@Result(property="content",column="noti_content"),
+			@Result(property="editor",column="noti_editor"),
+			@Result(property="time",column="noti_time")
+	})
+	public Notice[] findNotice();
+	
 	/**
 	 * 根据编号查找指定的老师
 	 * @param id
@@ -41,6 +59,8 @@ public interface TeacherMapper {
 			@Result(property="phone",column="teac_phone"),
 			@Result(property="email",column="teac_email"),
 			@Result(property="pic",column="teac_pic"),
+			@Result(property="title",column="teac_title"),
+			@Result(property="time",column="teac_time"),
 			@Result(property="col",column="col_id",javaType=College.class,one=@One(select="loadCollegeById"))
 	})
 	public Teacher findOne(int id);
@@ -59,6 +79,8 @@ public interface TeacherMapper {
 			@Result(property="phone",column="teac_phone"),
 			@Result(property="email",column="teac_email"),
 			@Result(property="pic",column="teac_pic"),
+			@Result(property="title",column="teac_title"),
+			@Result(property="time",column="teac_time"),
 			@Result(property="col",column="col_id",javaType=College.class,one=@One(select="loadCollegeById"))
 	})
 	public List<Teacher> findAll();
@@ -83,7 +105,7 @@ public interface TeacherMapper {
 	 * @param 修改密码的老师的编号
 	 */
 	@Update(value = {"update teacher set teac_password=#{pwd} where teac_id=#{id}"})
-	public void changePwd(String pwd,int id);
+	public void changePwd(@Param("pwd") String pwd,@Param("id") int id);
 	
 	/**
 	 * 教师登录
@@ -103,13 +125,13 @@ public interface TeacherMapper {
 			@Result(property="pic",column="teac_pic"),
 			@Result(property="col",column="col_id",javaType=College.class,one=@One(select="loadCollegeById"))
 	})
-	public Teacher adminTeac(int id,String pwd);
+	public Teacher adminTeac(@Param("id") int id,@Param("pwd") String pwd);
 
 	/**
 	 * 录入必修成绩单
 	 * @param gra
 	 */
-	@Insert(value = {"insert into grade(stu_id,tea_id,gra_score,gra_point,gra_judge) values(#{stu.id},#{sub.id},#{score},#{point},#{judge})"})
+	@Insert(value = {"insert into grade(stu_id,tea_id,gra_score,gra_point,gra_judge) values(#{stuId},#{teaId},#{score},#{point},#{judge})"})
 	public void resultInput(Grade gra);
 	
 	/**
@@ -195,9 +217,10 @@ public interface TeacherMapper {
 			@Result(property="email",column="stu_email"),
 			@Result(property="pic",column="stu_pic"),
 			@Result(property="clazz",column="clas_id",javaType=Clazz.class,one=@One(select="loadClazzById")),
-			@Result(property="major",column="majo_id",javaType=Major.class,one=@One(select="loadMajorById"))
+			@Result(property="major",column="majo_id",javaType=Major.class,one=@One(select="loadMajorById")),
+			@Result(property="teacher",column="teac_id",javaType=Teacher.class,many=@Many(select="loadTeacherById"))
 			})
-	public List<Student> queryStudent();
+	public List<ReStudy> queryStudent();
 	
 	/**
 	 * 查看指定学号的重修学生的信息
@@ -215,7 +238,8 @@ public interface TeacherMapper {
 			@Result(property="email",column="stu_email"),
 			@Result(property="pic",column="stu_pic"),
 			@Result(property="clazz",column="clas_id",javaType=Clazz.class,one=@One(select="loadClazzById")),
-			@Result(property="major",column="majo_id",javaType=Major.class,one=@One(select="loadMajorById"))
-			})
-	public Student queryOne(int id);
+			@Result(property="major",column="majo_id",javaType=Major.class,one=@One(select="findOne")),
+			@Result(property="teacher",column="teac_id",javaType=Teacher.class,many=@Many(select="loadTeacherById"))
+	})
+	public ReStudy queryOne(int id);
 }
