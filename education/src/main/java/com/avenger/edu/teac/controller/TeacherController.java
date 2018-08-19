@@ -22,7 +22,7 @@ import com.avenger.edu.teac.model.Grade;
 import com.avenger.edu.teac.model.Grade1;
 import com.avenger.edu.teac.model.Notice;
 import com.avenger.edu.teac.model.ReStudy;
-import com.avenger.edu.teac.model.Student;
+import com.avenger.edu.teac.model.TeacTable;
 import com.avenger.edu.teac.model.Teacher;
 import com.avenger.edu.teac.serviceimp.TeacherService;
 
@@ -32,6 +32,27 @@ public class TeacherController {
 
 	@Autowired
 	TeacherService service;
+	
+	@GetMapping("/findMajorName")
+	@ResponseBody
+	public String[] findMajorName() {
+		return this.service.findMajorName();
+	}
+	
+	@GetMapping("/findGradeNum")
+	@ResponseBody
+	public String[] findGradeNum() {
+		return this.service.findGradeNum();
+	}
+	
+	@PostMapping("/teacTable")
+	@ResponseBody
+	public TeacTable[] findTable(@RequestBody TeacTable t) {
+		String v1=t.getGradeNum();
+		int v2=t.getTerm();
+		String v3=t.getMajor();
+		return this.service.findTeacTable(v1, v2, v3);
+	}
 	
 	@GetMapping("/notice")
 	@ResponseBody
@@ -145,24 +166,36 @@ public class TeacherController {
 	}
 	
 	/**
-	 * 查找重修学生
-	 * @return
-	 */
-	@GetMapping("/re_study")
-	@ResponseBody
-	public List<ReStudy> query(){
-		return this.service.queryStudent();
-	}
-	
-	/**
 	 * 查找指定id的重修学生
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("/re_study/{id}")
+	@GetMapping("/re_study/{off}")
 	@ResponseBody
-	public ReStudy queryOne(@PathVariable int id) {
-		return this.service.queryOne(id);
+	public ReStudy[] queryStudy(HttpServletRequest req,@PathVariable int off) {
+		
+		Cookie[] cookies = req.getCookies();
+		String id=null;
+		for(Cookie c:cookies) {
+			if("teacherId".equals(c.getName())) {
+				id=c.getValue();
+			}
+		}
+		return this.service.queryStudy(Integer.parseInt(id),off);
+	}
+	
+	@GetMapping("/getLength")
+	@ResponseBody
+	public int getLength(HttpServletRequest req) {
+		
+		Cookie[] cookies = req.getCookies();
+		String id=null;
+		for(Cookie c:cookies) {
+			if("teacherId".equals(c.getName())) {
+				id=c.getValue();
+			}
+		}
+		return this.service.getLength(Integer.parseInt(id));
 	}
 	
 }

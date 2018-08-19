@@ -12,6 +12,7 @@ import com.avenger.edu.teac.model.Grade1;
 import com.avenger.edu.teac.model.Notice;
 import com.avenger.edu.teac.model.ReStudy;
 import com.avenger.edu.teac.model.Student;
+import com.avenger.edu.teac.model.TeacTable;
 import com.avenger.edu.teac.model.Teacher;
 import com.avenger.edu.teac.service.TeacService;
 
@@ -20,6 +21,18 @@ public class TeacherService implements TeacService{
 
 	@Autowired
 	TeacherMapper mapper;
+	
+	public String[] findMajorName() {
+		return this.mapper.findMajorName();
+	}
+	
+	public String[] findGradeNum() {
+		return this.mapper.findGradeNum();
+	}
+	
+	public TeacTable[] findTeacTable(String gradeNum,int period,String major) {
+		return this.mapper.findTeacTable(gradeNum, period, major);
+	}
 	
 	public int findStuId(int id) {
 		return this.mapper.findStuId(id);
@@ -77,15 +90,14 @@ public class TeacherService implements TeacService{
 	public List<CourseTable> findTable(int id) {
 		return this.mapper.findTable(id);
 	}
-
+	
 	@Override
-	public List<ReStudy> queryStudent() {
-		return this.mapper.queryStudent();
+	public ReStudy[] queryStudy(int id,int off) {
+		return this.mapper.queryStudy(id,off);
 	}
-
-	@Override
-	public ReStudy queryOne(int id) {
-		return this.mapper.queryOne(id);
+	
+	public int getLength(int id) {
+		return this.mapper.getLength(id);
 	}
 	
 }

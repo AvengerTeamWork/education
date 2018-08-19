@@ -62,16 +62,10 @@ public interface TeacService {
 	public List<CourseTable> findTable(int id);
 	
 	/**
-	 * 查找所有重修的学生
-	 * @return
-	 */
-	public List<ReStudy> queryStudent();
-	
-	/**
 	 * 根据id查找某个重修的学生
 	 * @param id
 	 * @return
 	 */
-	public ReStudy queryOne(int id);
+	public ReStudy[] queryStudy(int id,int off);
 	
 }

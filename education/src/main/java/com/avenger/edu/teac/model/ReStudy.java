@@ -3,16 +3,10 @@ package com.avenger.edu.teac.model;
 public class ReStudy {
 
 	private int id;
-	private String name;
-	private String sex;
-	private String password;
-	private String address;
-	private String phone;
-	private String email;
-	private String pic;
-	private Clazz clazz;
-	private Major major;
+	private Student student;
 	private Teacher teacher;
+	private Course course;
+	private Address address;
 	
 	public ReStudy() {
 		
@@ -26,76 +20,12 @@ public class ReStudy {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public Student getStudent() {
+		return student;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPic() {
-		return pic;
-	}
-
-	public void setPic(String pic) {
-		this.pic = pic;
-	}
-
-	public Clazz getClazz() {
-		return clazz;
-	}
-
-	public void setClazz(Clazz clazz) {
-		this.clazz = clazz;
-	}
-
-	public Major getMajor() {
-		return major;
-	}
-
-	public void setMajor(Major major) {
-		this.major = major;
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	public Teacher getTeacher() {
@@ -104,6 +34,22 @@ public class ReStudy {
 
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 	
 }
