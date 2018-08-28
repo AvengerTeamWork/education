@@ -2,12 +2,11 @@ package com.avenger.edu.stu.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.avenger.edu.stu.model.Grade;
 import com.avenger.edu.stu.model.MainCourInfo;
 import com.avenger.edu.stu.model.MajoCourInfo;
 import com.avenger.edu.stu.model.Rank;
+import com.avenger.edu.stu.model.Sche;
 import com.avenger.edu.stu.model.Schedule;
 import com.avenger.edu.stu.model.SeleCourInfo;
 import com.avenger.edu.stu.model.Student;
@@ -81,11 +80,13 @@ public interface StuService {
 	 * @param id
 	 * @param time
 	 * @param week
-	 * @param day
+	 * 
 	 * @return
 	 */
-	public List<Schedule> getSchedule(int id, String time, int week, int day);
+	public List<Sche> getSchedule(int id, String time, int week);
 
+	public Schedule getScheduleInfo(int id, String time, int week,int day,String part);
+	
 	/**
 	 * 学生成绩信息
 	 * 
