@@ -19,10 +19,19 @@ public class Student {
 	private int majo_id;
 	private String majo_name;
 	private String clas_name;
+	private String col_name;
 	
 	private List<Grade> gradeList;
 	private List<Course> courseList;
 	
+	public String getCol_name() {
+		return col_name;
+	}
+
+	public void setCol_name(String col_name) {
+		this.col_name = col_name;
+	}
+
 	public Student() {
 		gradeList=new ArrayList<>();
 		courseList=new ArrayList<>();
