@@ -39,26 +39,26 @@ public class ManagerController {
 	
 	@PostMapping("/selects")
 	@ResponseBody
-	public void selectT(@RequestBody Student student) {
-		mmaper.selectStudent(student);
+	public Student selectT(@RequestBody Student student) {
+		return mmaper.selectStudent(student);
 	}
 	
 	@PostMapping("/registert")
 	@ResponseBody
 	public void registerT(@RequestBody Teacher teacher) {
-		mmaper.registerTeacher(teacher);;
+		mmaper.registerTeacher(teacher);
 	}
 	
 	@PostMapping("/altert")
 	@ResponseBody
 	public void updateS(@RequestBody Teacher teacher) {
-		mmaper.alterTeacher(teacher);;
+		mmaper.alterTeacher(teacher);
 	}
 	
 	@PostMapping("/selectt")
 	@ResponseBody
-	public void selectS(@RequestBody Teacher teacher) {
-		mmaper.selectTeacher(teacher);
+	public Teacher selectS(@RequestBody Teacher teacher) {
+		return mmaper.selectTeacher(teacher);
 	}
 
 }

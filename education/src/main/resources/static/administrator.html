@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>教师</title>
+  <title>管理员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
   <script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
@@ -12,11 +12,25 @@
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-  <div id="administrator">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+   <div id="manager">
+     <mnav :s=manager></mnav>
+     <router-view></router-view>
+     <mfooter></mfooter>
+   </div>
+
+  <script>
+    
+    //导航栏组件
+    Vue.component('mnav',{
+      props: ["s"],
+      template: ` <div id="administrator">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
       <p class="navbar-brand">教务管理中心</p>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
         aria-expanded="false" aria-label="Toggle navigation">
@@ -25,55 +39,514 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item">
+            <router-link class="nav-link text-info" to="/main">首页</router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link text-info" to="/student">学生信息管理</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link text-info" to="/teacher">教师信息管理</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link text-info" to="/notice">发布公告</router-link>
+            <router-link class="nav-link text-info" to="/studentr">学生注册</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link text-info" to="/timetables">编写课表</router-link>
+            <router-link class="nav-link text-info" to="/teacherr">教师注册</router-link>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <a class="text-dark " href="/">管理员:{{s.mana_id}}，退出</a>
       </div>
     </nav>
-    <div class="container">
-      <router-view></router-view>
-    </div>
-  </div>
-  <script>
+  </div>`
+    })
+
+    //底部组件
+    Vue.component('mfooter',{
+      template:`
+      <div class="container mt-4 ">
+			<footer class="pt-4 mt-md-5 pt-md-5 border-top">
+				<div class="row">
+					<div class="col-12 col-md">
+						<img class="mb-2" src="../images/student/code.png" alt="">
+						<small class="d-block mb-3 text-muted">&copy; 中南林科大新闻网</small>
+					</div>
+					<div class="col-6 col-md">
+						<ul class="list-unstyled text-small">
+							<li><a class="text-muted">地址：湖南省长沙市韶山南路498号</a></li>
+							<li><a class="text-muted"> 邮编：410004</a></li>
+							<li><a class="text-muted">电话：0731-85623096</a></li>
+						</ul>
+					</div>
+					<div class="col-6 col-md">
+						<ul class="list-unstyled text-small">
+							<li><a class="text-muted">中南林业科技大学教务处版权所有</a></li>
+							<li><a class="text-muted">湘ICP备09017705号</a></li>
+							<li><a class="text-muted">湘教Q4_201212_010022</a></li>
+						</ul>
+					</div>
+					<div class="col-6 col-md">
+						<ul class="list-unstyled text-small">
+							<li><a class="text-muted"
+								href="http://www.hep.com.cn/service/xuanshu">高教出版社产品信息检索</a></li>
+							<li><a class="text-muted" href="http://www.moe.edu.cn/">国家教育部</a></li>
+							<li><a class="text-muted" href="http://www.csuft.edu.cn">中南林业科技大学</a></li>
+							<li><a class="text-muted" href="http://zjc.csuft.edu.cn/f">中南林业科技大学招生网</a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+		</div>
+      `
+    })
+
     //学生信息管理组件
     let student = Vue.component('student', {
-      template: `
-         <div><h1>学生信息管理组件</h1></div>
+
+      data:function(){
+        return{
+          s:{},
+          stu_id:null,
+          stu_name:null,
+					col_name:null,
+					majo_name:null,
+          clas_name:null,
+					stu_addr:null,
+					stu_phone:null,
+          stu_email:null,
+        }
+      },
+
+      methods:{
+
+        updateStudent(){
+          axios
+          .post('/manager/alters',{"stu_id":this.stu_id,"stu_name":this.stu_name,"col_name":this.col_name,"majo_name":this.majo_name,
+          "stu_addr":this.stu_addr,"stu_phone":this.stu_phone,"stu_email":this.stu_email})
+          .then((r) => window.location.href="/administrator.html#/student")
+          .catch((r)=>console.log("输入成功"));
+        },
+
+        findStudent(){
+          axios
+          .post('/manager/selects',{"stu_id":this.stu_id})
+          .then((r) => {this.s=r.data})
+          .then((r)=>console.log(stu_id))
+          .catch((r)=>window.location.href="/administrator.html#/student")
+          ;
+        },
+
+        edit(s){
+          this.stu_id=s.stu_id,
+          this.stu_name=s.stu_name,
+					this.col_name=s.col_name,
+					this.majo_name=s.majo_name,
+          this.clas_name=s.clas_name
+					this.stu_addr=s.stu_addr,
+					this.stu_phone=s.stu_phone,
+          this.stu_email=s.stu_email
+        }
+        
+
+      },
+
+      template: ` <div class="container mt-4">
+      <div class="row">
+      <div class="col-2">
+      <img class="d-block w-100 mt-5" :src="s.stu_pic" alt="First slide">
+	  </div>
+      <div class="col-8">
+        <ul>
+          <li class="list-group-item ">学号：<input class="text" v-model="stu_id"><button type="button" class="btn btn-primary ml-5" @click="findStudent">查找</button></li>
+          <li class="list-group-item ">姓名：{{s.stu_name}}</li>
+          <li class="list-group-item ">学院：{{s.col_name}}	</li>
+          <li class="list-group-item ">专业：{{s.majo_name}}</li>
+          <li class="list-group-item ">班级：{{s.clas_name}}</li>
+          <li class="list-group-item ">籍贯：{{s.stu_addr}}</li>
+          <li class="list-group-item ">电话：{{s.stu_phone}}</li>
+          <li class="list-group-item ">邮箱：{{s.stu_email}}</li>
+        </ul>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-4 offset-5 ">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary ml-5" data-toggle="modal" data-target="#exampleModal" @click="edit(s)">
+          修改信息
+        </button>
+        <button type="button" class="btn btn-primary ml-5" >
+          删除信息
+        </button>
+        </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">修改信息</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+              <div class="form-group">
+              <label for="exampleInputPassword1">姓名</label>
+              <input type="text" class="form-control"  v-model="stu_name">
+            </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">学院</label>
+                <input type="text" class="form-control"   v-model="col_name">
+              </div>
+              <div class="form-group">
+              <label for="exampleInputPassword1">专业</label>
+              <input type="text" class="form-control"   v-model="majo_name">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">班级</label>
+              <input type="text" class="form-control"   v-model="clas_name">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">籍贯</label>
+              <input type="text" class="form-control"   v-model="stu_addr">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">电话</label>
+              <input type="text" class="form-control"   v-model="stu_phone">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">邮箱</label>
+              <input type="text" class="form-control"   v-model="stu_email">
+            </div>
+              
+              </div>
+              <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"
+               @click="updateStudent()">提交</button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
       `})
+
+      
+
     //教师信息管理组件
     let teacher = Vue.component('teacher', {
+
+      data:function(){
+        return{
+          s:{},
+          teac_id:null,
+          teac_name:null,
+					col_name:null,
+					teac_title:null,
+          teac_time:null,
+					teac_addr:null,
+					teac_phone:null,
+          teac_email:null,
+        }
+      },
+
+      methods:{
+
+updateTeacher(){
+  axios
+  .post('/manager/altert',{"teac_name":this.teac_name,"col_name":this.col_name,"teac_title":this.teac_title,
+  "teac_addr":this.teac_addr,"teac_phone":this.teac_phone,"teac_email":this.teac_email,"teac_time":this.teac_time})
+  .then((r) => window.location.href="/administrator.html#/teacher")
+  .catch((r)=>console.log("输入成功"));
+},
+
+findTeacher(){
+  axios
+  .post('/manager/selectt',{"teac_id":this.teac_id})
+  .then((r) => {this.s=r.data})
+  .then((r)=>console.log(stu_id))
+  .catch((r)=>window.location.href="/administrator.html#/teacher")
+  ;
+},
+
+edit(s){
+  this.teac_id=s.teac_id,
+  this.teac_name=s.teac_name,
+  this.col_name=s.col_name,
+  this.teac_title=s.teac_title,
+  this.teac_time=s.teac_time
+  this.teac_addr=s.teac_addr,
+  this.teac_phone=s.teac_phone,
+  this.teac_email=s.teac_email
+}
+
+
+},
+
       template: `
-         <div><h1>教师信息管理组件</h1></div>
+      <div class="container mt-4">
+      <div class="row">
+      <div class="col-2">
+      <img class="d-block w-100 mt-5" :src="s.teac_pic" alt="First slide">
+	  </div>
+      <div class="col-8">
+        <ul>
+          <li class="list-group-item ">工号：<input class="text" v-model="teac_id"><button type="button" class="btn btn-primary ml-5" @click="findTeacher">查找</buton></li>
+          <li class="list-group-item ">姓名：{{s.teac_name}}</li>
+          <li class="list-group-item ">学院：{{s.col_name}}	</li>
+          <li class="list-group-item ">职位：{{s.teac_title}}</li>
+          <li class="list-group-item ">入职时间：{{s.teac_time}}</li>
+          <li class="list-group-item ">籍贯：{{s.teac_addr}}</li>
+          <li class="list-group-item ">电话：{{s.teac_phone}}</li>
+          <li class="list-group-item ">邮箱：{{s.teac_email}}</li>
+        </ul>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-4 offset-5 ">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary ml-5" data-toggle="modal" data-target="#exampleModal" @click="edit(s)">
+          修改信息
+        </button>
+        <button type="button" class="btn btn-primary ml-5" >
+          删除信息
+        </button>
+        </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">修改信息</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+              <div class="form-group">
+              <label for="exampleInputPassword1">姓名</label>
+              <input type="text" class="form-control" placeholder="姓名" v-model="teac_name">
+            </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">学院</label>
+                <input type="text" class="form-control"  placeholder="学院" v-model="col_name">
+              </div>
+              <div class="form-group">
+              <label for="exampleInputPassword1">职位</label>
+              <input type="text" class="form-control"  placeholder="职位" v-model="teac_title">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">入职时间</label>
+              <input type="text" class="form-control"  placeholder="入职时间" v-model="teac_time">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">籍贯</label>
+              <input type="text" class="form-control"  placeholder="籍贯" v-model="teac_addr">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">电话</label>
+              <input type="text" class="form-control"  placeholder="电话" v-model="teac_phone">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">邮箱</label>
+              <input type="text" class="form-control"  placeholder="邮箱" v-model="teac_email">
+            </div>
+              
+              </div>
+              <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="updateTeacher">关闭</button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
       `})
-    //发布公告组件
-    let notice = Vue.component('notice', {
-      template: `
-         <div><h1>发布公告组件</h1></div>
+
+      //首页组件
+	  let firstpage = Vue.component("main", {
+			template: `
+		<div>
+    	  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    	  <ol class="carousel-indicators">
+    	    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    	    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    	    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    	  </ol>
+    	  <div class="carousel-inner">
+    	    <div class="carousel-item active">
+    	      <img class="d-block w-100" src="../images/student/main1.png" alt="First slide">
+    	    </div>
+    	    <div class="carousel-item">
+    	      <img class="d-block w-100" src="../images/student/main2.png" alt="Second slide">
+    	    </div>
+    	    <div class="carousel-item">
+    	      <img class="d-block w-100" src="../images/student/main3.png" alt="Third slide">
+    	    </div>
+    	  </div>
+    	  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    	    <span class="sr-only">Previous</span>
+    	  </a>
+    	  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    	    <span class="sr-only">Next</span>
+    	  </a>
+      </div>
+ <div class="container mt-4">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-lg-4">
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="../images/student/main4.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">我校学子在第九届服务外包创新创业大赛中荣获团体二、三等奖</h5>
+      <p class="card-text">六月的中南林科大艳阳高照，清风习习，绿树成荫。在计算机与信息工程学院黄洪旭、谭云等老师的组织下，由计算机与信息工程学院、林学院、班戈学院等多个学院学生组成的5支参赛队伍，首次参加第九届中国大学生服务外包创新创业大赛，就荣获团体二等奖和三等奖各一项。</p>
+      <a href="#" class="btn btn-primary">详细信息</a>
+    </div>
+  </div>
+    </div>
+    <div class="col-lg-4">
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="../images/student/main5.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">学校召开本科教学工作例会</h5>
+      <p class="card-text">7月16日下午，本科教学工作例会在崇德楼（行政楼）四楼3会议室召开，副校长朱道弘主持会议，教务处班子成员，各学院教学副院长及部分教务办主任与会。副校长朱道弘在会上强调了本科教学工作的重要性，肯定了本学期各学院在本科教学工作方面的付出与成绩。对全国本科教学工作大会精神的学习与贯彻进行了深入动员，要求各学院领导班子要带头读懂悟透。</p>
+      <a href="#" class="btn btn-primary">详细信息</a>
+    </div>
+  </div>
+    </div>
+    <div class="col-lg-4">
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="../images/student/main6.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">教务处党支部获评为学校2017-2018年度先进党支部</h5>
+      <p class="card-text">学校纪念建党97年暨“七一”表彰大会于6月29日上午在雅韵楼召开,教务处党支部获评为学校2017-2018年度先进党支部。2017-2018年度，教务处支部在学校党委和机关二党委正确领导下，高度重视党建工作，充分发挥党员模范带头作用，全处同志坚持理论学习，狠抓作风建设，牢固树立服务意识，攻坚克难，奋力前行。</p>
+      <a href="#" class="btn btn-primary">详细信息</a>
+    </div>
+  </div>
+    </div>
+    </div>
+  </div>
+</div> <!-- /container -->
+</div>
+    `});
+
+    //学生注册
+    let studentr = Vue.component('studentr', {
+      data:function(){
+        return{
+          s:{},
+          stu_id:null,
+          stu_name:null,
+					col_name:null,
+					majo_name:null,
+          clas_name:null,
+					stu_addr:null,
+					stu_phone:null,
+          stu_email:null,
+        }
+      },
+
+      methods:{
+        insert(){
+       axios
+       .post('/manager/registers',{"stu_id":this.stu_id,"stu_name":this.stu_name,"col_name":this.col_name,"majo_name":this.majo_name,
+       "clas_name":this.clas_name,"stu_addr":this.stu_addr,"stu_phone":this.stu_phone,"stu_email":this.stu_email})
+       .then((r) => window.location.href="/administrator.html#/studentr")
+       .catch((r)=>console.log("输入成功"));
+          },
+      },
+
+      template: ` <div class="container mt-4">
+      <div class="row">
+      <div class="col-2">
+      <img class="d-block w-100 mt-5" :src="s.stu_pic" alt="First slide">
+	  </div>
+      <div class="col-8">
+        <ul>
+          <li class="list-group-item ">学号：<input class="text" v-model="stu_id"></li>
+          <li class="list-group-item ">姓名：<input class="text" v-model="stu_name"></li>
+          <li class="list-group-item ">学院：<input class="text" v-model="col_name">	</li>
+          <li class="list-group-item ">专业：<input class="text" v-model="majo_name"></li>
+          <li class="list-group-item ">班级：<input class="text" v-model="clas_name"></li>
+          <li class="list-group-item ">籍贯：<input class="text" v-model="stu_addr"></li>
+          <li class="list-group-item ">电话：<input class="text" v-model="stu_phone"></li>
+          <li class="list-group-item ">邮箱：<input class="text" v-model="stu_email"></li>
+        </ul>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-4 offset-5 ">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary ml-5" @click="insert">
+          注册
+        </button>
+        </div>
+        </div>
+      </div>
       `})
-    //编写课表组件
-    let timetables = Vue.component('timetables', {
-      template: `
-         <div><h1>编写课表组件</h1></div>
+
+    //老师注册
+    let teacherr = Vue.component('teacherr', {
+      data:function(){
+        return{
+          s:{},
+          teac_id:null,
+          teac_name:null,
+					col_name:null,
+					teac_title:null,
+          teac_time:null,
+					teac_addr:null,
+					teac_phone:null,
+          teac_email:null,
+        }
+      },
+
+      method:{
+        insert(){
+        axios
+        .post('/manager/registert',{"teac_id":this.teac_id,"teac_name":this.teac_name,"col_name":this.col_name,"teac_title":this.teac_title,
+        "teac_addr":this.teac_addr,"teac_phone":this.teac_phone,"teac_email":this.teac_email,"teac_time":this.teac_time})
+        .then((r) => window.location.href="/administrator.html#/teacherr")
+        .catch((r)=>console.log("输入成功"));
+       },
+      },
+      template: ` <div class="container mt-4">
+      <div class="row">
+      <div class="col-2">
+      <img class="d-block w-100 mt-5" :src="s.stu_pic" alt="First slide">
+	  </div>
+      <div class="col-8">
+        <ul>
+          <li class="list-group-item ">工号：<input class="text" v-model="teac_id"></li>
+          <li class="list-group-item ">姓名：<input class="text" v-model="teac_name"></li>
+          <li class="list-group-item ">学院：<input class="text" v-model="col_name">	</li>
+          <li class="list-group-item ">职位：<input class="text" v-model="teac_title"></li>
+          <li class="list-group-item ">入职时间：<input class="text" v-model="teac_time"></li>
+          <li class="list-group-item ">籍贯：<input class="text" v-model="teac_addr"></li>
+          <li class="list-group-item ">电话：<input class="text" v-model="teac_phone"></li>
+          <li class="list-group-item ">邮箱：<input class="text" v-model="teac_email"></li>
+        </ul>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-4 offset-5 ">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary ml-5" @click="insert">
+          注册
+        </button>
+        </div>
+        </div>
+      </div>
       `})
 
     const routes = [
       { path: '/student', component: student },
       { path: '/teacher', component: teacher },
-      { path: '/notice', component: notice },
-      { path: '/timetables', component: timetables }
+      { path: '/studentr', component: studentr },
+      { path: '/teacherr', component: teacherr },
+      { path: '/main', component: firstpage }
     ];
 
     const router = new VueRouter({
@@ -81,7 +554,7 @@
     })
 
     const app = new Vue({
-      el: '#administrator',
+      el: '#manager',
       router
     })
 
