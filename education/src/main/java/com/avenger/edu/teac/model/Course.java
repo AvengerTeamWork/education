@@ -12,6 +12,7 @@ public class Course {
 	private String nature;
 	private int credit;
 	private int period;
+	private Address address;
 	
 	public Course() {
 		
@@ -55,6 +56,14 @@ public class Course {
 
 	public void setPeriod(int period) {
 		this.period = period;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 	
 }

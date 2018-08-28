@@ -9,7 +9,10 @@ import com.avenger.edu.teac.mapper.TeacherMapper;
 import com.avenger.edu.teac.model.CourseTable;
 import com.avenger.edu.teac.model.Grade;
 import com.avenger.edu.teac.model.Grade1;
+import com.avenger.edu.teac.model.Notice;
+import com.avenger.edu.teac.model.ReStudy;
 import com.avenger.edu.teac.model.Student;
+import com.avenger.edu.teac.model.TeacTable;
 import com.avenger.edu.teac.model.Teacher;
 import com.avenger.edu.teac.service.TeacService;
 
@@ -18,6 +21,30 @@ public class TeacherService implements TeacService{
 
 	@Autowired
 	TeacherMapper mapper;
+	
+	public String[] findMajorName() {
+		return this.mapper.findMajorName();
+	}
+	
+	public String[] findGradeNum() {
+		return this.mapper.findGradeNum();
+	}
+	
+	public TeacTable[] findTeacTable(String gradeNum,int period,String major) {
+		return this.mapper.findTeacTable(gradeNum, period, major);
+	}
+	
+	public int findStuId(int id) {
+		return this.mapper.findStuId(id);
+	}
+	
+	public int findTeaId(int id) {
+		return this.mapper.findTeaId(id);
+	}
+	
+	public Notice[] findNotice() {
+		return this.mapper.findNotice();
+	}
 	
 	@Override
 	public Teacher findOne(int id) {
@@ -38,7 +65,12 @@ public class TeacherService implements TeacService{
 
 	@Override
 	public Teacher adminTeac(int id, String pwd) {
-
+		if(id<=0||"".equals(id)) {
+			return null;
+		}
+		if(pwd==null||"".equals(pwd)) {
+			return null;
+		}
 		return this.mapper.adminTeac(id, pwd);
 	}
 	
@@ -58,15 +90,14 @@ public class TeacherService implements TeacService{
 	public List<CourseTable> findTable(int id) {
 		return this.mapper.findTable(id);
 	}
-
+	
 	@Override
-	public List<Student> queryStudent() {
-		return this.mapper.queryStudent();
+	public ReStudy[] queryStudy(int id,int off) {
+		return this.mapper.queryStudy(id,off);
 	}
-
-	@Override
-	public Student queryOne(int id) {
-		return this.mapper.queryOne(id);
+	
+	public int getLength(int id) {
+		return this.mapper.getLength(id);
 	}
 	
 }

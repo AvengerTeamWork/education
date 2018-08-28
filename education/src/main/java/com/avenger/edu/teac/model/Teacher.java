@@ -15,6 +15,8 @@ public class Teacher {
 	private String email;
 	private String phone;
 	private String pic;
+	private String title;
+	private String time;
 	private College col;
 	
 	public Teacher() {
@@ -83,6 +85,22 @@ public class Teacher {
 
 	public void setPic(String pic) {
 		this.pic = pic;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 	public College getCol() {
