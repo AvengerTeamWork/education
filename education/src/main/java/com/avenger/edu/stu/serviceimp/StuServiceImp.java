@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Service;
 
 import com.avenger.edu.stu.mapper.StuMapper;
@@ -13,6 +12,7 @@ import com.avenger.edu.stu.model.MainCourInfo;
 import com.avenger.edu.stu.model.MajoCourInfo;
 import com.avenger.edu.stu.model.PoinScor;
 import com.avenger.edu.stu.model.Rank;
+import com.avenger.edu.stu.model.Sche;
 import com.avenger.edu.stu.model.Schedule;
 import com.avenger.edu.stu.model.SeleCourInfo;
 import com.avenger.edu.stu.model.Student;
@@ -181,15 +181,168 @@ public class StuServiceImp implements StuService {
 	}
 
 	@Override
-	public List<Schedule> getSchedule(int id, String time, int week, int day) {
-		if (week == 0 & day == 0 & time.equals("")) {
-			return stuMapper.findScheduleById(id);
-		} else if (week == 0 & day == 0) {
-			return stuMapper.findScheduleByTime(id, time);
-		} else if (day == 0) {
-			return stuMapper.findScheduleByTimeWeek(id, time, week);
-		}
-		return stuMapper.findSchedule(id, time, week, day);
-	}
+	public List<Sche> getSchedule(int id, String time, int week) {
 
+		List<Schedule> scheduleList = stuMapper.findScheduleByTimeWeek(id, time, week);
+		List<Sche> scheList = new ArrayList<>();
+		Sche sche1 = new Sche();
+		Sche sche2 = new Sche();
+		Sche sche3 = new Sche();
+		Sche sche4 = new Sche();
+		Sche sche5 = new Sche();
+
+
+		for (Schedule schedule : scheduleList) {
+			switch (schedule.getPart()) {
+			case "1-2":
+				switch (schedule.getDay()) {
+				case 1:
+					sche1.setMonday(schedule.getCourName());
+					break;
+				case 2:
+					sche1.setTuesday(schedule.getCourName());
+					break;
+				case 3:
+					sche1.setWednesday(schedule.getCourName());
+					break;
+				case 4:
+					sche1.setThursday(schedule.getCourName());
+					break;
+				case 5:
+					sche1.setFriday(schedule.getCourName());
+					break;
+				case 6:
+					sche1.setSaturday(schedule.getCourName());
+					break;
+				case 7:
+					sche1.setSunday(schedule.getCourName());
+					break;
+				}
+
+				break;
+			case "3-4":
+				switch (schedule.getDay()) {
+				case 1:
+					sche2.setMonday(schedule.getCourName());
+					break;
+				case 2:
+					sche2.setTuesday(schedule.getCourName());
+					break;
+				case 3:
+					sche2.setWednesday(schedule.getCourName());
+					break;
+				case 4:
+					sche2.setThursday(schedule.getCourName());
+					break;
+				case 5:
+					sche2.setFriday(schedule.getCourName());
+					break;
+				case 6:
+					sche2.setSaturday(schedule.getCourName());
+					break;
+				case 7:
+					sche2.setSunday(schedule.getCourName());
+					break;
+				}
+				
+				break;
+			case "5-6":
+				switch (schedule.getDay()) {
+				case 1:
+					sche3.setMonday(schedule.getCourName());
+					break;
+				case 2:
+					sche3.setTuesday(schedule.getCourName());
+					break;
+				case 3:
+					sche3.setWednesday(schedule.getCourName());
+					break;
+				case 4:
+					sche3.setThursday(schedule.getCourName());
+					break;
+				case 5:
+					sche3.setFriday(schedule.getCourName());
+					break;
+				case 6:
+					sche3.setSaturday(schedule.getCourName());
+					break;
+				case 7:
+					sche3.setSunday(schedule.getCourName());
+					break;
+				}
+				
+				break;
+			case "7-8":
+				switch (schedule.getDay()) {
+				case 1:
+					sche4.setMonday(schedule.getCourName());
+					break;
+				case 2:
+					sche4.setTuesday(schedule.getCourName());
+					break;
+				case 3:
+					sche4.setWednesday(schedule.getCourName());
+					break;
+				case 4:
+					sche4.setThursday(schedule.getCourName());
+					break;
+				case 5:
+					sche4.setFriday(schedule.getCourName());
+					break;
+				case 6:
+					sche4.setSaturday(schedule.getCourName());
+					break;
+				case 7:
+					sche4.setSunday(schedule.getCourName());
+					break;
+				}
+		
+				break;
+			case "9-10":
+				switch (schedule.getDay()) {
+				case 1:
+					sche5.setMonday(schedule.getCourName());
+					break;
+				case 2:
+					sche5.setTuesday(schedule.getCourName());
+					break;
+				case 3:
+					sche5.setWednesday(schedule.getCourName());
+					break;
+				case 4:
+					sche5.setThursday(schedule.getCourName());
+					break;
+				case 5:
+					sche5.setFriday(schedule.getCourName());
+					break;
+				case 6:
+					sche5.setSaturday(schedule.getCourName());
+					break;
+				case 7:
+					sche5.setSunday(schedule.getCourName());
+					break;
+				}
+				
+				break;
+			}
+		}
+		sche1.setPart("1-2");
+		sche2.setPart("3-4");
+		sche3.setPart("5-6");
+		sche4.setPart("7-8");
+		sche5.setPart("9-10");
+			scheList.add(sche1);
+			scheList.add(sche2);
+			scheList.add(sche3);
+			scheList.add(sche4);
+			scheList.add(sche5);
+			
+			return scheList;
+	}
+	
+	@Override
+	public Schedule getScheduleInfo(int id, String time, int week,int day,String part) {
+		return stuMapper.findScheduleBy(id, time, week, day, part);
+	}
+		
 }

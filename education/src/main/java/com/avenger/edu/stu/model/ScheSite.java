@@ -5,6 +5,16 @@ public class ScheSite {
 	private String time;
 	private int week;
 	private int day;
+	private String part;
+	
+
+	public String getPart() {
+		return part;
+	}
+
+	public void setPart(String part) {
+		this.part = part;
+	}
 
 	public int getId() {
 		return id;

@@ -12,13 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.avenger.edu.stu.model.ChangePW;
@@ -27,6 +25,7 @@ import com.avenger.edu.stu.model.IdTime;
 import com.avenger.edu.stu.model.MainCourInfo;
 import com.avenger.edu.stu.model.MajoCourInfo;
 import com.avenger.edu.stu.model.Rank;
+import com.avenger.edu.stu.model.Sche;
 import com.avenger.edu.stu.model.ScheSite;
 import com.avenger.edu.stu.model.Schedule;
 import com.avenger.edu.stu.model.SeleCourInfo;
@@ -165,8 +164,14 @@ public class StuController {
 	 */
 	@PostMapping("/schedule")
 	@ResponseBody
-	public List<Schedule> schedule(@RequestBody ScheSite ss) {
-		return stuServiceimp.getSchedule(ss.getId(), ss.getTime(), ss.getWeek(), ss.getDay());
+	public List<Sche> schedule(@RequestBody ScheSite ss) {
+		return stuServiceimp.getSchedule(ss.getId(), ss.getTime(), ss.getWeek());
+	}
+	
+	@PostMapping("/scheduleInfo")
+	@ResponseBody
+	public Schedule scheduleInfo(@RequestBody ScheSite ss) {
+		return stuServiceimp.getScheduleInfo(ss.getId(), ss.getTime(), ss.getWeek(), ss.getDay(), ss.getPart());
 	}
 
 	/**

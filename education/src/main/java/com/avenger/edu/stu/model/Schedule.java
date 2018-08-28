@@ -12,7 +12,7 @@ public class Schedule {
 	private String subTime;
 	private int day;
 	private int week;
-	private int part;
+	private String part;
 	private String site;
 
 	
@@ -56,11 +56,13 @@ public class Schedule {
 		this.week = week;
 	}
 
-	public int getPart() {
+
+
+	public String getPart() {
 		return part;
 	}
 
-	public void setPart(int part) {
+	public void setPart(String part) {
 		this.part = part;
 	}
 
