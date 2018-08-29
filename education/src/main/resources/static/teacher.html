@@ -38,6 +38,9 @@
           <li class="nav-item">
             <router-link class="nav-link text-info" to="/restydyinfo">重修学生信息</router-link>
           </li>
+          <li class="nav-item ml-lg-5">
+            <a class="nav-link text-info" href="index.html" v-on:click="exitMethod()">退出登录</a>
+          </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -77,13 +80,13 @@
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
 <div class="carousel-inner">
   <div class="carousel-item active">
-    <img class="d-block w-100" src="/images/teacher/教务.jpg?auto=yes&bg=777&fg=555&text=First slide" alt="First slide" height=160>
+    <img class="d-block w-100" src="/images/teacher/教务.jpg?auto=yes&bg=777&fg=555&text=First slide" alt="First slide" height=190>
   </div>
   <div class="carousel-item">
-    <img class="d-block w-100" src="/images/teacher/教务2.jpg?auto=yes&bg=666&fg=444&text=Second slide" alt="Second slide" height=160>
+    <img class="d-block w-100" src="/images/teacher/教务2.jpg?auto=yes&bg=666&fg=444&text=Second slide" alt="Second slide" height=190>
   </div>
   <div class="carousel-item">
-    <img class="d-block w-100" src="/images/teacher/教务3.jpg?auto=yes&bg=555&fg=333&text=Third slide" alt="Third slide"height=160>
+    <img class="d-block w-100" src="/images/teacher/教务3.jpg?auto=yes&bg=555&fg=333&text=Third slide" alt="Third slide"height=190>
   </div>
 </div>
 </div>
@@ -151,8 +154,30 @@
       data:function(){
     	  return{
     		  teacher:{},
+    		  pwd:'',
+    		  pwd1:'',
+    		  pwd2:''
     	  }
     	  
+      },
+      methods:{
+    	updatePwd:function(pwd,pwd1,pwd2){
+    		if(pwd==this.teacher.password){
+    			axios.get("teacher/v1/change?pwd1="+pwd1+"&pwd2="+pwd2+"&id="+this.teacher.id)
+        		.then((r)=>{
+        			window.alert(r.data);
+        			this.pwd='';
+            		this.pwd1='';
+            		this.pwd2='';
+        		})
+    		}else{
+    			window.alert("原密码输入错误");
+    			this.pwd='';
+        		this.pwd1='';
+        		this.pwd2='';
+    		}
+    		
+    	}  
       },
       mounted:function(){
     	  axios.get("/teacher/v1/findOne")
@@ -165,7 +190,45 @@
           <div class="row">
           <div class="col-2">
           <img class="d-block w-100 mt-5" :src="teacher.pic" alt="First slide">
-    	  </div>
+          <br>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#newExampleModalLong" style="margin-left:20px">
+          	修改密码  	
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="newExampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <div class="form-group">
+                <label for="">请输入原密码</label>
+                <input type="password" name="name" id="i1" class="form-control" placeholder="" aria-describedby="helpId" v-model="pwd" />
+              </div>
+              <div class="form-group">
+                <label for="">请输入新密码</label>
+                <input type="password" name="" id="i2" class="form-control" placeholder="" aria-describedby="helpId" v-model="pwd1">
+              </div>
+              <div class="form-group">
+              <label for="">请确认新密码</label>
+              <input type="password" name="" id="i3" class="form-control" placeholder="" aria-describedby="helpId" v-model="pwd2">
+            </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" v-on:click="updatePwd(pwd,pwd1,pwd2)">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          </div>
       <div class="col-8">
         <ul>
           <li class="list-group-item list-group-item-info">工号：{{teacher.id}}</li>
@@ -178,6 +241,7 @@
           <li class="list-group-item list-group-item-light">职称：{{teacher.title}}</li>
           <li class="list-group-item list-group-item-info">入职时间：{{teacher.time}}</li>
         </ul>
+               
       </div>
       </div>
       </div>
@@ -518,15 +582,6 @@
          </li>
        </ul>
      </nav>
-       
-       
-       
-       
-       
-       
-       
-       
-            
          </div>
       `})
 
@@ -535,7 +590,8 @@
       { path: '/personinfo', component: personinfo },
       { path: '/timetables', component: timetables },
       { path: '/score', component: score },
-      { path: '/restydyinfo', component: restydyinfo }
+      { path: '/restydyinfo', component: restydyinfo },
+      
     ];
 
     const router = new VueRouter({
@@ -544,6 +600,14 @@
 
     const app = new Vue({
       el: '#teacher',
+      methods:{
+    	  exitMethod:function(){
+    		  axios.get("teacher/v1/exit")
+    		  .then((req) => {
+    			  console.log(req.data);
+    		  })
+    	  }
+      },
       router
     })
 
