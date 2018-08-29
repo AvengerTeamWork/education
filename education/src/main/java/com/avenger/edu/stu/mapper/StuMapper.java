@@ -202,6 +202,12 @@ public interface StuMapper {
 			+ " on s.clas_id=vs.clas_id where s.stu_id=#{id} and vs.subTime=#{time} and vs.week=#{week}")
 	public List<Schedule> findScheduleByTimeWeek(@Param("id") int id, @Param("time") String time,
 			@Param("week") int week);
+	
+	@Select("Select courName, teacName ,subTime, day, week, part, site from v_persche as vp where vp.stu_id=#{id} and vp.subTime=#{time} and vp.week=#{week} and vp.day=#{day} and vp.part=#{part}"
+			+ " Union Select courName, teacName ,subTime, day, week, part, site from v_schedule as vs inner join student s"
+			+ " on s.clas_id=vs.clas_id where s.stu_id=#{id} and vs.subTime=#{time} and vs.week=#{week} and vs.day=#{day} and vs.part=#{part}")
+	public Schedule findScheduleBy(@Param("id") int id, @Param("time") String time, @Param("week") int week,
+			@Param("day") int day,@Param("part") String part);
 
 	/**
 	 * 获得一个学生的成绩

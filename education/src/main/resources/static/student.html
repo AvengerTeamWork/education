@@ -23,8 +23,8 @@
 	</div>
 
 	<script>
-	  //nav
-	  Vue.component('cnav', {
+		//nav
+		Vue.component('cnav', {
 			props: ["s"],
 			template: `
 			<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
@@ -79,8 +79,8 @@
 		`
 		})
 
-	  //footer
-	  Vue.component('cfooter', {
+		//footer
+		Vue.component('cfooter', {
 			template: `
 			<div class="container mt-4">
 			<footer class="pt-4 mt-md-5 pt-md-5 border-top">
@@ -118,8 +118,8 @@
 		`
 		})
 
-	  //首页组件
-	  let firstpage = Vue.component("main", {
+		//首页组件
+		let firstpage = Vue.component("main", {
 			template: `
 		<div>
     	  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -187,31 +187,31 @@
 </div>
     `});
 
-	  //个人信息组件
-	  let personinfo = Vue.component('information', {
+		//个人信息组件
+		let personinfo = Vue.component('information', {
 			data: function () {
 				return {
 					s: {},
-					prepw:null,
-					newpw:null,
-					againnewpw:null,
+					prepw: null,
+					newpw: null,
+					againnewpw: null,
 				}
 			},
-			methods:{
-				submit(){
-					if(this.newpw===this.againnewpw){
-						axios.post("/stu/uppw",{
-							'id':this.s.stuId,'prePW':this.prepw,'newPW':this.newpw
+			methods: {
+				submit() {
+					if (this.newpw === this.againnewpw) {
+						axios.post("/stu/uppw", {
+							'id': this.s.stuId, 'prePW': this.prepw, 'newPW': this.newpw
 						})
-						.then((resp) => { 
-							if(resp.data){alert("密码修改成功");} 
-							else{alert("原密码错误");}
+							.then((resp) => {
+								if (resp.data) { alert("密码修改成功"); }
+								else { alert("原密码错误"); }
 							})
-						.catch((resp) => { console.log("失败") });
+							.catch((resp) => { console.log("失败") });
 					}
-					else{
+					else {
 						alert("两次密码不匹配");
-						
+
 					}
 				}
 			},
@@ -228,19 +228,19 @@
 	  </div>
       <div class="col-8">
         <ul>
-          <li class="list-group-item ">学号：{{s.stuId}}</li>
-          <li class="list-group-item ">姓名：{{s.stuName}}</li>
-          <li class="list-group-item ">学院：{{s.stuCollege}}	</li>
-          <li class="list-group-item ">专业：{{s.stuMajor}}</li>
-          <li class="list-group-item ">班级：{{s.stuClazz}}</li>
-          <li class="list-group-item ">籍贯：{{s.stuAddress}}</li>
-          <li class="list-group-item ">电话：{{s.stuPhone}}</li>
-          <li class="list-group-item ">邮箱：{{s.stuEmail}}</li>
+          <li class="list-group-item "><img src="./images/student/per6.png" width="30" height="30">学号：{{s.stuId}}</li>
+          <li class="list-group-item "><img src="./images/student/per4.png" width="30" height="30">姓名：{{s.stuName}}</li>
+          <li class="list-group-item "><img src="./images/student/per1.png" width="30" height="30">学院：{{s.stuCollege}}	</li>
+          <li class="list-group-item "><img src="./images/student/per2.png" width="30" height="30">专业：{{s.stuMajor}}</li>
+          <li class="list-group-item "><img src="./images/student/per5.png" width="30" height="30">班级：{{s.stuClazz}}</li>
+          <li class="list-group-item "><img src="./images/student/per3.png" width="30" height="30">籍贯：{{s.stuAddress}}</li>
+          <li class="list-group-item "><img src="./images/student/per7.png" width="30" height="30">电话：{{s.stuPhone}}</li>
+          <li class="list-group-item "><img src="./images/student/per8.png" width="30" height="30">邮箱：{{s.stuEmail}}</li>
         </ul>
         </div>
         </div>
         <div class="row">
-        <div class="col-4 offset-5 ">
+        <div class="col-4 offset-5 offset-4">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary ml-5" data-toggle="modal" data-target="#exampleModal">
           修改密码
@@ -282,34 +282,34 @@
         </div>
       </div>
       `});
-	
-	  //选课组件
-	  let choose = Vue.component('choose', {
-						data: function () {
-							return {
-								scs: undefined,
-								selected: "",
-								tf: false,
-							}
-						},
-						methods: {
-							selectCourse() {
-								axios.post("stu/allSelectCourse", {
-									'time': this.selected
-								}).then((resp) => { this.scs = resp.data; this.tf = true; })
-									.catch((resp) => { console.log("失败") })
-							},
-							select() {
-								alert("选课成功");
-								window.location = '/student.html';
-							}
-						},
-						mounted() {
 
-							this.tf = false;
+		//选课组件
+		let choose = Vue.component('choose', {
+			data: function () {
+				return {
+					scs: undefined,
+					selected: "",
+					tf: false,
+				}
+			},
+			methods: {
+				selectCourse() {
+					axios.post("stu/allSelectCourse", {
+						'time': this.selected
+					}).then((resp) => { this.scs = resp.data; this.tf = true; })
+						.catch((resp) => { console.log("失败") })
+				},
+				select() {
+					alert("选课成功");
+					window.location = '/student.html';
+				}
+			},
+			mounted() {
 
-						},
-						template: `
+				this.tf = false;
+
+			},
+			template: `
     	  <div class="container mt-4">
     	  <table class="table table-striped" v-if="tf">
     	    <thead>
@@ -355,25 +355,31 @@
 
     	        </div>
       `})
-				
-	  //课程表组件
-	  let timetables = Vue.component('time-tables', {
+
+		//课程表组件
+		let timetables = Vue.component('time-tables', {
 			data: function () {
 				return {
 					schedules: undefined,
 					selected: "",
 					tf: false,
 					week: "",
-					day: ""
+					a:"1",
 				}
 			},
 			methods: {
 				sche() {
 					axios.post("stu/schedule", {
-						'id': this.$route.params.id, 'time': this.selected, 'week': this.week, 'day': this.day
+						'id': this.$route.params.id, 'time': this.selected, 'week': this.week
 					}).then((resp) => { this.schedules = resp.data; this.tf = true; })
 						.catch((resp) => { console.log("失败") })
 				},
+				info(day,part){
+					axios.post("stu/scheduleInfo", {
+						'id': this.$route.params.id, 'time': this.selected, 'week': this.week,'day':day,'part':part
+					}).then((resp) => { this.a = resp.data; console.log(resp.data); })
+						.catch((resp) => { console.log("失败") })
+				}
 			},
 			mounted() {
 
@@ -382,30 +388,57 @@
 			},
 			template: `
     	  <div class="container mt-4">
-    	  <table class="table text-center" v-if="tf">
-    	  <thead>
-    	    <tr>
-    	      <th scope="col">周</th>
-    	      <th scope="col">星期</th>
-    	      <th scope="col">节</th>
-    	      <th scope="col">地点</th>
-    	      <th scope="col">课程</th>
-    	      <th scope="col">老师</th>
-    	      <th scope="col">学期</th>
-    	    </tr>
-    	  </thead>
-    	  <tbody>
-    	  <tr v-for="(sche,key) in schedules" :key="key">
-          <td>{{sche.week}}</td>
-          <td>{{sche.day}}</td>
-          <td>{{sche.part}}</td>
-          <td>{{sche.site}}</td>
-          <td>{{sche.courName}}</td>
-          <td>{{sche.teacName}}</td>
-          <td>{{sche.subTime}}</td>
-        </tr>
-    	  </tbody>
-    	</table>
+<div class="row"><div class="col-12">
+			<table class="table table-hover" v-if="tf">
+  <thead>
+    <tr>
+      <th scope="col">第{{week}}周</th>
+      <th scope="col">星期一</th>
+      <th scope="col">星期二</th>
+      <th scope="col">星期三</th>
+			<th scope="col">星期四</th>
+      <th scope="col">星期五</th>
+      <th scope="col">星期六</th>
+			<th scope="col">星期日</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(sche,key) in schedules" :key="key">
+      <th scope="row" >{{sche.part}}</th>
+      <td><button type="button" class="btn  btn-outline-primary" v-if="sche.monday!=null" @click="info(1,sche.part)" data-toggle="modal" data-target="#exampleModal">{{sche.monday}}</button></td>
+      <td><button type="button" class="btn  btn-outline-primary" v-if="sche.tuesday!=null"  @click="info(2,sche.part)" data-toggle="modal" data-target="#exampleModal">{{sche.tuesday}}</button></td>
+      <td><button type="button" class="btn  btn-outline-primary" v-if="sche.wednesday!=null"  @click="info(3,sche.part)" data-toggle="modal" data-target="#exampleModal">{{sche.wednesday}}</button></td>
+	  <td><button type="button" class="btn  btn-outline-primary" v-if="sche.thursday!=null"  @click="info(4,sche.part)" data-toggle="modal" data-target="#exampleModal">{{sche.thursday}}</button></td>
+      <td><button type="button" class="btn  btn-outline-primary" v-if="sche.friday!=null"  @click="info(5,sche.part)" data-toggle="modal" data-target="#exampleModal">{{sche.friday}}</button></td>
+      <td><button type="button" class="btn  btn-outline-primary" v-if="sche.saturday!=null"  @click="info(6,sche.part)" data-toggle="modal" data-target="#exampleModal">{{sche.saturday}}</button></td>
+	  <td><button type="button" class="btn  btn-outline-primary" v-if="sche.sunday!=null"  @click="info(7,sche.part)" data-toggle="modal" data-target="#exampleModal">{{sche.sunday}}</button></td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{a.courName}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+					<div class="alert alert-light" role="alert"> <img src="./images/student/1.png" width="30" height="30">教师：{{a.site}}</div>
+					<div class="alert alert-light" role="alert"><img src="./images/student/2.png" width="30" height="30">周数：{{a.week}}</div>
+					<div class="alert alert-light" role="alert"><img src="./images/student/3.png" width="30" height="30">节数：{{a.part}}</div>
+					<div class="alert alert-light" role="alert"><img src="./images/student/4.png" width="30" height="30">老师：{{a.teacName}}</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     	<div class="row" v-if="!tf"><div class="col-4 offset-4">
     	  <div class="form-group">
     	    <label for="exampleFormControlSelect1">学期</label>
@@ -424,47 +457,35 @@
   	      <option :value="i" v-for="i,index in 30" :key="index">第{{i}}周</option>
   	    </select>
   	  </div>
-  	<div class="form-group">
-    <label for="exampleFormControlSelect1">星期</label>
-    <select class="form-control" id="exampleFormControlSelect1" v-model="day">
-    <option disabled value="">请选择</option>
-      <option value="1">星期一</option>
-      <option value="2">星期二</option>
-      <option value="3">星期三</option>
-      <option value="4">星期四</option>
-      <option value="5">星期五</option>
-      <option value="6">星期六</option>
-      <option value="7">星期七</option>
-    </select>
-  </div>
+
     	  <button class="btn btn-primary" type="submit" @click="sche">查找</button>
     	</div></div></div>
   `});
 
-	  //重修报名组件
-	  let restudy = Vue.component('restudy', {
-		data() {
-			return {
-				failCourse: [],
-				reCourse: [],
-			}
+		//重修报名组件
+		let restudy = Vue.component('restudy', {
+			data() {
+				return {
+					failCourse: [],
+					reCourse: [],
+				}
 
-		},
-		methods: {
-			apply() {
-				alert("报名成功，请及时缴费");
-				window.location = "/student.html";
 			},
-		},
-		mounted() {
-			axios.get("stu/failCourse/" + this.$route.params.id)
-				.then((resp) => { this.failCourse = resp.data; })
-				.catch((resp) => console.log("失败"));
-			axios.get("stu/againCourse/" + this.$route.params.id)
-				.then((resp) => { this.reCourse = resp.data; })
-				.catch((resp) => console.log("失败"));
-		},
-		template: `
+			methods: {
+				apply() {
+					alert("报名成功，请及时缴费");
+					window.location = "/student.html";
+				},
+			},
+			mounted() {
+				axios.get("stu/failCourse/" + this.$route.params.id)
+					.then((resp) => { this.failCourse = resp.data; })
+					.catch((resp) => console.log("失败"));
+				axios.get("stu/againCourse/" + this.$route.params.id)
+					.then((resp) => { this.reCourse = resp.data; })
+					.catch((resp) => console.log("失败"));
+			},
+			template: `
         <div class="container">
     	  <h2 class="mt-3"><span class="badge badge-secondary">挂科情况</span></h2>
     	<table class="table table-striped" >
@@ -487,7 +508,7 @@
     	      <td>{{f.teacName}}</td>
     	      <td>{{f.subTime}}</td>
     	      <td>{{f.score}}</td>
-    	      <td>{{f.judge}}</td>
+    	      <td class="text-danger">{{f.judge}}</td>
     	    </tr>
     	  </tbody>
     	</table>
@@ -512,8 +533,8 @@
     	</div>
       `});
 
-	  //专业课程
-	  let major = Vue.component('major', {
+		//专业课程
+		let major = Vue.component('major', {
 			data: function () {
 				return {
 					mcs: undefined,
@@ -637,7 +658,7 @@
     	  </div></div>
     	        </div>
       `})
-		
+
 		//选修课程
 		let selec = Vue.component('selec', {
 			data: function () {
@@ -752,7 +773,7 @@
       <td>{{grade.courCredit}}</td>
       <td>{{grade.score}}</td>
       <td>{{grade.point}}</td>
-      <td>{{grade.judge}}</td>
+      <td v-bind:class="[grade.judge=='没过' ? 'text-danger' : '',grade.judge=='重修过' ? 'text-danger' : '']" >{{grade.judge}}</td>
     </tr>
   </tbody>
 </table>
@@ -890,7 +911,7 @@
 
       </div>
       `});
-		
+
 		//定义路由路径
 		const routes = [
 			//首页
@@ -903,7 +924,7 @@
 			{ path: '/choose', component: choose },
 
 			//查询课表
-			{path: '/timetables/:id', component: timetables},
+			{ path: '/timetables/:id', component: timetables },
 
 			//重修报名
 			{ path: '/restudy/:id', component: restudy },
