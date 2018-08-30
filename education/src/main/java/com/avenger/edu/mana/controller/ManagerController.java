@@ -62,6 +62,9 @@ public class ManagerController {
         i=student.getStu_clas();
         a=i.split("[(]");
 		int clas_id=Integer.parseInt(a[0]);
+		String stu_pic=student.getStu_pic();
+		stu_pic="../images/student/"+stu_pic;
+		student.setStu_pic(stu_pic);
 		student.setMajo_id(majo_id);
 		student.setClas_id(clas_id);
 		mmaper.registerStudent(student);
@@ -112,7 +115,7 @@ public class ManagerController {
 	        }
 	        try {
 	            byte[] bytes = file.getBytes();
-	            Path path = Paths.get("C:\\Users\\liulei\\Desktop\\quiz\\education\\education\\src\\main\\resources\\static\\images\\" + file.getOriginalFilename());
+	            Path path = Paths.get("C:\\Users\\liulei\\Desktop\\quiz\\education\\education\\src\\main\\resources\\static\\images\\student\\" + file.getOriginalFilename());
 	            //文件写入指定路径
 	            Files.write(path, bytes);
 	            logger.debug("文件写入成功...");

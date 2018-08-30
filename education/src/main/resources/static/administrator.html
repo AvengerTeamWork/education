@@ -457,7 +457,8 @@ edit(s){
           src:'',
           classes:[],
           majors:[],
-          stu_sex:null
+          stu_sex:null,
+          filename:''
         }
       },
 
@@ -511,7 +512,7 @@ edit(s){
   
        axios
        .post('/manager/registers',{"stu_id":this.stu_id,"stu_name":this.stu_name,"stu_majo":this.majo_name,
-       "stu_clas":this.clas_name,"stu_addr":this.stu_addr,"stu_phone":this.stu_phone,"stu_email":this.stu_email,"stu_sex":this.stu_sex})
+       "stu_clas":this.clas_name,"stu_addr":this.stu_addr,"stu_phone":this.stu_phone,"stu_email":this.stu_email,"stu_sex":this.stu_sex,"stu_pic":this.filename})
        .then((r) => window.location.href="/administrator.html#/studentr")
        .catch((r)=>console.log("输入成功"));
        },
@@ -521,6 +522,7 @@ edit(s){
                     name: file.name,
                     uploadPercentage: 0
                 };
+                this.filename=file.name;
                 this.files.push(file);
                 //console.log(this.files[0]);
                 var fd = new FormData();
@@ -625,7 +627,8 @@ edit(s){
           files:[],
           src:'',
           colleges:[],
-          teac_sex:null
+          teac_sex:null,
+          filename:''
         }
       },
 
@@ -645,7 +648,7 @@ edit(s){
         insert(){
         axios
         .post('/manager/registert',{"teac_id":this.teac_id,"teac_name":this.teac_name,"col_name":this.col_name,"teac_title":this.teac_title,
-        "teac_addr":this.teac_addr,"teac_phone":this.teac_phone,"teac_email":this.teac_email,"teac_time":this.teac_time,"teac_sex":this.teac_sex})
+        "teac_addr":this.teac_addr,"teac_phone":this.teac_phone,"teac_email":this.teac_email,"teac_time":this.teac_time,"teac_sex":this.teac_sex,"teac_pic":this.filename})
         .then((r) => {window.location.href="/administrator.html#/teacherr"})
         .catch((r)=>console.log("输入成功"));
        },
@@ -655,6 +658,7 @@ edit(s){
                     name: file.name,
                     uploadPercentage: 0
                 };
+                this.filename=file.name;
                 this.files.push(file);
                 var fd = new FormData();
                 fd.append('myFile', file);

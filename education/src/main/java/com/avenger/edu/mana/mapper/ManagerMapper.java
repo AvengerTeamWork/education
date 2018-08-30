@@ -21,8 +21,8 @@ public interface  ManagerMapper {
 	@Select("select * from manager where mana_id=#{mana_id}")
 	public Manager login(Manager manager);
 	
-	@Insert("insert into student(stu_id,stu_name,stu_addr,stu_phone,stu_email,clas_id,majo_id,stu_sex) values"
-			+"(#{stu_id},#{stu_name},#{stu_addr},#{stu_phone},#{stu_email},#{clas_id},#{majo_id},#{stu_sex})")
+	@Insert("insert into student(stu_id,stu_name,stu_addr,stu_phone,stu_email,clas_id,majo_id,stu_sex,stu_pic) values"
+			+"(#{stu_id},#{stu_name},#{stu_addr},#{stu_phone},#{stu_email},#{clas_id},#{majo_id},#{stu_sex},#{stu_pic})")
 	public void registerStudent(Student student);
 	
 	@Delete("delete from student where clas_id in(select clas_id from clazz where clas_period=#{clas_period} )")
@@ -37,8 +37,8 @@ public interface  ManagerMapper {
 	@Select("select * from v_stuinfo where stu_id=#{stu_id}")
 	public Student selectStudent(Student student);
 	
-	@Insert("insert into teacher(teac_id,teac_name,teac_addr,teac_phone,teac_email,teac_title,teac_time,col_id,teac_sex) values"
-			+"(#{teac_id},#{teac_name},#{teac_addr},#{teac_phone},#{teac_email},#{teac_title},#{teac_time},#{col_id},#{teac_sex})")
+	@Insert("insert into teacher(teac_id,teac_name,teac_addr,teac_phone,teac_email,teac_title,teac_time,col_id,teac_sex,teac_pic) values"
+			+"(#{teac_id},#{teac_name},#{teac_addr},#{teac_phone},#{teac_email},#{teac_title},#{teac_time},#{col_id},#{teac_sex},#{teac_pic})")
 	public void registerTeacher(Teacher teacher);
 	
 	@Update("update teacher set teac_addr=#{teac_addr},teac_phone=#{teac_phone},teac_email=#{teac_email},teac_title=#{teac_title},teac_time=#{teac_time}")
