@@ -123,6 +123,11 @@ public class TeacherController {
 		if(id==0||pwd==null||"".equals(pwd)) {
 			return null;
 		}
+		int numId = this.service.findTeacId(id);
+		int numPwd = this.service.findTeacPassword(pwd);
+		if(numId<1||numPwd<1) {
+			return null;
+		}
 		Cookie cookie = new Cookie("teacherId", String.valueOf(id));
 		resp.addCookie(cookie);
 		Teacher teacher = this.service.adminTeac(id, pwd);

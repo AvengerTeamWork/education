@@ -30,6 +30,12 @@ import com.avenger.edu.teac.model.Teacher;
 @Mapper
 public interface TeacherMapper {
 	
+	@Select(value = {"select count(teac_id) from teacher where teac_id=#{id}"})
+	public int findTeacId(int id);
+	
+	@Select(value = {"select count(teac_password) from teacher where teac_password=#{pwd}"})
+	public int findTeacPassword(String pwd);
+	
 	@Select(value = {"select distinct clas_period from clazz"})
 	public String[] findGradeNum();
 	

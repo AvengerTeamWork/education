@@ -19,7 +19,7 @@
 <body>
   <div id="teacher">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <p class="navbar-brand">教务管理中心</p>
+      <p class="navbar-brand"><a href="teacher.html" style="color:#FFFFFF">教务管理中心</a></p>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -68,15 +68,6 @@
       },
       template: `
 <main role="main">
-
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<!--<div class="jumbotron">
-  <div class="container">
-    <h5 class="display-3">welcome username！</h5>
-    <p>教务处（质控中心、考试中心）是在校长和分管教学副校长领导下，负责全校全日制本、专科教学工作的职能部门。</p>
-    <p><a class="btn btn-primary btn-lg" href="http://jwc.csuft.edu.cn/bmgk_2552/gzzz/201709/t20170927_65829.html" role="button">Learn more &raquo;</a></p>
-  </div>
-</div> -->
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
 <div class="carousel-inner">
   <div class="carousel-item active">
@@ -96,8 +87,44 @@
   <div class="row">
     <div class="col-md-4">
       <h2>图片新闻</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+      
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+        <router-link class="nav-link text-info" to="/pictureNews"><img class="d-block w-100" src="/images/teacher/tu1.jpg?auto=yes&bg=777&fg=555&text=First slide" alt="First slide" height=180>
+        <div class="carousel-caption d-none d-md-block">
+        <h5>我校在株洲建立省级校企合作创新创业教育基地并举行授牌仪式</h5>
+      </div>
+        </router-link>
+          
+        </div>
+        <div class="carousel-item">
+        <router-link class="nav-link text-info" to="/timetables"><img class="d-block w-100" src="/images/teacher/tu2.jpg?auto=yes&bg=666&fg=444&text=Second slide" alt="Second slide" height=180>
+        <div class="carousel-caption d-none d-md-block">
+        <h5>我校在2017年物联网应用创新设计大赛中获得佳绩</h5>
+      </div>
+        </router-link>
+          
+        </div>
+        <div class="carousel-item">
+        <router-link class="nav-link text-info" to="/timetables"><img class="d-block w-100" src="/images/teacher/tu3.jpg?auto=yes&bg=555&fg=333&text=Third slide" alt="Third slide" height=180>
+        <div class="carousel-caption d-none d-md-block">
+        <h5>我校学子在第九届服务外包创新创业大赛中荣获团体二、三等奖</h5>
+      </div>
+        </router-link>
+          
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    
     </div>
     <div class="col-md-4">
       <h2>动态新闻</h2>
@@ -131,10 +158,6 @@
 		        <p>编辑时间：{{da.time}}</p>
 		        <hr style="height:3px;border:none;border-top:1px dashed #0066CC;" />
 		      </div>
-		      <!-- <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save</button>
-		      </div> -->
 		    </div>
 		  </div>
 		</div>
