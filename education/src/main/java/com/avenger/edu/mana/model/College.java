@@ -1,45 +1,32 @@
 package com.avenger.edu.mana.model;
 
 public class College {
-	private int id;//学院编号
-	private String name;//学院名称
-	private String president;//学院院长
-	private String phone;//学院电话
+	private int col_id;//学院编号
+	private String col_name;//学院名称
+
 	
 	public College() {
 		
 	}
 
-	public int getId() {
-		return id;
+	public int getCol_id() {
+		return col_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setCol_id(int col_id) {
+		this.col_id = col_id;
 	}
 
-	public String getName() {
-		return name;
+	public String getCol_name() {
+		return col_name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCol_name(String col_name) {
+		this.col_name = col_name;
 	}
 
-	public String getPresident() {
-		return president;
-	}
+	
 
-	public void setPresident(String president) {
-		this.president = president;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+	
 	
 }

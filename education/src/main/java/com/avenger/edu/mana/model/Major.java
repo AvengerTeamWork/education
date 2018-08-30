@@ -1,41 +1,23 @@
 package com.avenger.edu.mana.model;
 
 public class Major {
-	private int id;
-	private String name;
-	private College collegeId;
-	private String year;
+	private int majo_id;
+	private String majo_name;
 
-	public int getId() {
-		return id;
+	public int getMajo_id() {
+		return majo_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setMajo_id(int majo_id) {
+		this.majo_id = majo_id;
 	}
 
-	public String getName() {
-		return name;
+	public String getMajo_name() {
+		return majo_name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public College getCollegeId() {
-		return collegeId;
-	}
-
-	public void setCollegeId(College collegeId) {
-		this.collegeId = collegeId;
-	}
-
-	public String getYear() {
-		return year;
-	}
-
-	public void setYear(String year) {
-		this.year = year;
+	public void setMajo_name(String majo_name) {
+		this.majo_name = majo_name;
 	}
 
 }

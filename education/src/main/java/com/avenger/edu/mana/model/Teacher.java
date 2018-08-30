@@ -13,11 +13,22 @@ public class Teacher {
 	private String teac_phone;//电话
 	private String teac_pic;//头像
 	private int col_id;//学院
+	private String col_name;
 	private String teac_title;
 	private String teac_time;
 	
 	private List<Course> courseList;
 	
+	
+	
+	public String getCol_name() {
+		return col_name;
+	}
+
+	public void setCol_name(String col_name) {
+		this.col_name = col_name;
+	}
+
 	public Teacher() {
 		courseList=new ArrayList<>();
 	}

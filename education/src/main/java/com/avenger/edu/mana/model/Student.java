@@ -17,20 +17,16 @@ public class Student {
 	private String stu_pic;//头像
 	private int clas_id;
 	private int majo_id;
-	private String majo_name;
-	private String clas_name;
-	private String col_name;
+	private String stu_majo;
+	private String stu_clas;
+	private String stu_col;
 	
 	private List<Grade> gradeList;
 	private List<Course> courseList;
 	
-	public String getCol_name() {
-		return col_name;
-	}
-
-	public void setCol_name(String col_name) {
-		this.col_name = col_name;
-	}
+	
+	
+	
 
 	public Student() {
 		gradeList=new ArrayList<>();
@@ -133,21 +129,31 @@ public class Student {
 		this.majo_id = majo_id;
 	}
 
-	public String getMajo_name() {
-		return majo_name;
+	public String getStu_majo() {
+		return stu_majo;
 	}
 
-	public void setMajo_name(String majo_name) {
-		this.majo_name = majo_name;
+	public void setStu_majo(String stu_majo) {
+		this.stu_majo = stu_majo;
 	}
 
-	public String getClas_name() {
-		return clas_name;
+	public String getStu_clas() {
+		return stu_clas;
 	}
 
-	public void setClas_name(String clas_name) {
-		this.clas_name = clas_name;
+	public void setStu_clas(String stu_clas) {
+		this.stu_clas = stu_clas;
 	}
+
+	public String getStu_col() {
+		return stu_col;
+	}
+
+	public void setStu_col(String stu_col) {
+		this.stu_col = stu_col;
+	}
+
+
 
 	
 	

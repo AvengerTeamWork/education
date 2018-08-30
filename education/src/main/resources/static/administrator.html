@@ -114,9 +114,9 @@
           s:{},
           stu_id:null,
           stu_name:null,
-					col_name:null,
-					majo_name:null,
-          clas_name:null,
+					stu_col:null,
+					stu_majo:null,
+          stu_clas:null,
 					stu_addr:null,
 					stu_phone:null,
           stu_email:null,
@@ -145,9 +145,9 @@
         edit(s){
           this.stu_id=s.stu_id,
           this.stu_name=s.stu_name,
-					this.col_name=s.col_name,
-					this.majo_name=s.majo_name,
-          this.clas_name=s.clas_name
+					this.stu_col=s.stu_col,
+					this.stu_majo=s.stu_majo,
+          this.stu_clas=s.stuclas,
 					this.stu_addr=s.stu_addr,
 					this.stu_phone=s.stu_phone,
           this.stu_email=s.stu_email
@@ -163,11 +163,11 @@
 	  </div>
       <div class="col-8">
         <ul>
-          <li class="list-group-item ">学号：<input class="text" v-model="stu_id"><button type="button" class="btn btn-primary ml-5" @click="findStudent">查找</button></li>
+          <li class="list-group-item ">学号：<input class="text " v-model="stu_id"><button type="button" class="btn btn-primary ml-5" @click="findStudent">查找</button></li>
           <li class="list-group-item ">姓名：{{s.stu_name}}</li>
-          <li class="list-group-item ">学院：{{s.col_name}}	</li>
-          <li class="list-group-item ">专业：{{s.majo_name}}</li>
-          <li class="list-group-item ">班级：{{s.clas_name}}</li>
+          <li class="list-group-item ">学院：{{s.stu_col}}	</li>
+          <li class="list-group-item ">专业：{{s.stu_majo}}</li>
+          <li class="list-group-item ">班级：{{s.stu_clas}}</li>
           <li class="list-group-item ">籍贯：{{s.stu_addr}}</li>
           <li class="list-group-item ">电话：{{s.stu_phone}}</li>
           <li class="list-group-item ">邮箱：{{s.stu_email}}</li>
@@ -203,15 +203,15 @@
             </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">学院</label>
-                <input type="text" class="form-control"   v-model="col_name">
+                <input type="text" class="form-control"   v-model="stu_col">
               </div>
               <div class="form-group">
               <label for="exampleInputPassword1">专业</label>
-              <input type="text" class="form-control"   v-model="majo_name">
+              <input type="text" class="form-control"   v-model="stu_majo">
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">班级</label>
-              <input type="text" class="form-control"   v-model="clas_name">
+              <input type="text" class="form-control"   v-model="stu_clas">
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">籍贯</label>
@@ -297,7 +297,7 @@ edit(s){
 	  </div>
       <div class="col-8">
         <ul>
-          <li class="list-group-item ">工号：<input class="text" v-model="teac_id"><button type="button" class="btn btn-primary ml-5" @click="findTeacher">查找</buton></li>
+          <li class="list-group-item ">工号：<input class="text " v-model="teac_id"><button type="button" class="btn btn-primary ml-5" @click="findTeacher">查找</buton></li>
           <li class="list-group-item ">姓名：{{s.teac_name}}</li>
           <li class="list-group-item ">学院：{{s.col_name}}	</li>
           <li class="list-group-item ">职位：{{s.teac_title}}</li>
@@ -446,14 +446,18 @@ edit(s){
           s:{},
           stu_id:null,
           stu_name:null,
-					col_name:null,
 					majo_name:null,
+          majo_id:null,
           clas_name:null,
+          clas_id:null,
 					stu_addr:null,
 					stu_phone:null,
           stu_email:null,
           files:[],
-          src:''
+          src:'',
+          classes:[],
+          majors:[],
+          stu_sex:null
         }
       },
 
@@ -462,16 +466,59 @@ edit(s){
             dropbox.addEventListener('dragenter', this.onDrag, false);
             dropbox.addEventListener('dragover', this.onDrag, false);
             dropbox.addEventListener('drop', this.onDrop, false);
+
+            {axios
+             .post('/manager/clazz')
+             .then((response) => {this.classes=response.data})
+             .catch((r)=>console.log("学生数据传入成功"));}
+
+             {axios
+             .post('/manager/major')
+             .then((response) => {this.majors=response.data})
+             .catch((r)=>console.log("班级数据传入成功"));}
+        
+
+        
         },
 
       methods:{
         insert(){
+          console.log(this.files[0]);
+        let formData = new FormData();
+        formData.append("file", this.files[0]);
+//         　let xhr = new XMLHttpRequest();
+
+// 　　// 假设上传文件的接口叫upload
+
+// 　　      xhr.open("POST", "/manager/load");
+
+// 　　      xhr.send(formData);
+
+   
+
+        axios.post('/manager/load', formData,{
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+          .then(function (response) {
+            alert(response.data);
+
+            window.location.reload();
+          })
+          .catch(function (error) {
+            // alert("上传失败");
+            console.log(error);
+            //window.location.reload();
+          }); 
+
+  
        axios
-       .post('/manager/registers',{"stu_id":this.stu_id,"stu_name":this.stu_name,"col_name":this.col_name,"majo_name":this.majo_name,
-       "clas_name":this.clas_name,"stu_addr":this.stu_addr,"stu_phone":this.stu_phone,"stu_email":this.stu_email})
+       .post('/manager/registers',{"stu_id":this.stu_id,"stu_name":this.stu_name,"stu_majo":this.majo_name,
+       "stu_clas":this.clas_name,"stu_addr":this.stu_addr,"stu_phone":this.stu_phone,"stu_email":this.stu_email,"stu_sex":this.stu_sex})
        .then((r) => window.location.href="/administrator.html#/studentr")
        .catch((r)=>console.log("输入成功"));
-          },
+       },
 
            uploadFile: function (file) {
                 var item = {
@@ -479,6 +526,7 @@ edit(s){
                     uploadPercentage: 0
                 };
                 this.files.push(item);
+                //console.log(this.files[0]);
                 var fd = new FormData();
                 fd.append('myFile', file);
                 // this.src="C:/Users/liulei/Desktop/11.jpg";
@@ -490,7 +538,7 @@ edit(s){
                 reader.readAsDataURL(file);  
                     reader.onload = function (e) {
                     this2.src = e.target.result;//将图片base64字符串赋值给img的src
-                    console.log(e.target.result);
+                    //console.log(e.target.result);
                    };
                    
                 }
@@ -535,21 +583,28 @@ edit(s){
 	  </div>
       <div class="col-8">
         <ul>
-          <li class="list-group-item ">学号：<input class="text" v-model="stu_id"></li>
-          <li class="list-group-item ">姓名：<input class="text" v-model="stu_name"></li>
-          <li class="list-group-item ">学院：<input class="text" v-model="col_name">	</li>
-          <li class="list-group-item ">专业：<input class="text" v-model="majo_name"></li>
-          <li class="list-group-item ">班级：<input class="text" v-model="clas_name"></li>
-          <li class="list-group-item ">籍贯：<input class="text" v-model="stu_addr"></li>
-          <li class="list-group-item ">电话：<input class="text" v-model="stu_phone"></li>
-          <li class="list-group-item ">邮箱：<input class="text" v-model="stu_email"></li>
+          <li class="list-group-item ">学号：<input class="text form-control" v-model="stu_id"></li>
+          <li class="list-group-item ">姓名：<input class="text form-control" v-model="stu_name"></li>
+          <li class="list-group-item ">性别<select class="form-control" name="" v-model="stu_sex">
+                    <option >男</option>
+                    <option >女</option>
+                    </li>
+          <li class="list-group-item ">专业：<select class="form-control" name="" v-model="majo_name">
+                    <option v-for="c in majors">{{c.majo_id}}({{c.majo_name}})</option>
+                    </li>
+          <li class="list-group-item ">班级：<select class="form-control" name="" v-model="clas_name">
+                    <option v-for="c in classes">{{c.clas_id}}({{c.clas_name}})</option>
+                    </li>
+          <li class="list-group-item ">籍贯：<input class="text form-control" v-model="stu_addr"></li>
+          <li class="list-group-item ">电话：<input class="text form-control" v-model="stu_phone"></li>
+          <li class="list-group-item ">邮箱：<input class="text form-control" v-model="stu_email"></li>
         </ul>
         </div>
         </div>
         <div class="row">
         <div class="col-4 offset-5 ">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary ml-5" @click="">
+        <button type="button" class="btn btn-primary ml-5" @click="insert">
           注册
         </button>
         </div>
@@ -565,13 +620,16 @@ edit(s){
           teac_id:null,
           teac_name:null,
 					col_name:null,
+          col_id:null,
 					teac_title:null,
           teac_time:null,
 					teac_addr:null,
 					teac_phone:null,
           teac_email:null,
           files:[],
-          src:''
+          src:'',
+          colleges:[],
+          teac_sex:null
         }
       },
 
@@ -580,13 +638,18 @@ edit(s){
             dropbox.addEventListener('dragenter', this.onDrag, false);
             dropbox.addEventListener('dragover', this.onDrag, false);
             dropbox.addEventListener('drop', this.onDrop, false);
+
+            {axios
+             .post('/manager/college')
+             .then((response) => {this.colleges=response.data})
+             .catch((r)=>console.log("班级数据传入成功"));}
         },
 
       methods:{
         insert(){
         axios
         .post('/manager/registert',{"teac_id":this.teac_id,"teac_name":this.teac_name,"col_name":this.col_name,"teac_title":this.teac_title,
-        "teac_addr":this.teac_addr,"teac_phone":this.teac_phone,"teac_email":this.teac_email,"teac_time":this.teac_time})
+        "teac_addr":this.teac_addr,"teac_phone":this.teac_phone,"teac_email":this.teac_email,"teac_time":this.teac_time,"teac_sex":this.teac_sex})
         .then((r) => {window.location.href="/administrator.html#/teacherr"})
         .catch((r)=>console.log("输入成功"));
        },
@@ -652,14 +715,19 @@ edit(s){
 	  </div>
       <div class="col-8">
         <ul>
-          <li class="list-group-item ">工号：<input class="text" v-model="teac_id"></li>
-          <li class="list-group-item ">姓名：<input class="text" v-model="teac_name"></li>
-          <li class="list-group-item ">学院：<input class="text" v-model="col_name">	</li>
-          <li class="list-group-item ">职位：<input class="text" v-model="teac_title"></li>
-          <li class="list-group-item ">入职时间：<input class="text" v-model="teac_time"></li>
-          <li class="list-group-item ">籍贯：<input class="text" v-model="teac_addr"></li>
-          <li class="list-group-item ">电话：<input class="text" v-model="teac_phone"></li>
-          <li class="list-group-item ">邮箱：<input class="text" v-model="teac_email"></li>
+          <li class="list-group-item ">工号：<input class="text form-control" v-model="teac_id"></li>
+          <li class="list-group-item ">姓名：<input class="text form-control" v-model="teac_name"></li>
+          <li class="list-group-item ">性别<select class="form-control" name="" v-model="teac_sex">
+                    <option >男</option>
+                    <option >女</option>
+                    </li>
+          <li class="list-group-item ">学院：<select class="form-control" name="" v-model="col_name">
+                    <option v-for="c in colleges">{{c.col_id}}({{c.col_name}})</option>	</li>
+          <li class="list-group-item ">职位：<input class="text form-control" v-model="teac_title"></li>
+          <li class="list-group-item ">入职时间：<input class="text form-control" v-model="teac_time"></li>
+          <li class="list-group-item ">籍贯：<input class="text form-control" v-model="teac_addr"></li>
+          <li class="list-group-item ">电话：<input class="text form-control" v-model="teac_phone"></li>
+          <li class="list-group-item ">邮箱：<input class="text form-control" v-model="teac_email"></li>
         </ul>
         </div>
         </div>
