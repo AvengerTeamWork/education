@@ -22,6 +22,14 @@ public class TeacherService implements TeacService{
 	@Autowired
 	TeacherMapper mapper;
 	
+	public int findTeacId(int id) {
+		return this.mapper.findTeacId(id);
+	}
+	
+	public int findTeacPassword(String pwd) {
+		return this.mapper.findTeacPassword(pwd);
+	}
+	
 	public String[] findMajorName() {
 		return this.mapper.findMajorName();
 	}

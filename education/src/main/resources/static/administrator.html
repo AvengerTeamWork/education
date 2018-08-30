@@ -496,11 +496,7 @@ edit(s){
 
    
 
-        axios.post('/manager/load', formData,{
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        })
+        axios.post('/manager/load', formData)
           .then(function (response) {
             alert(response.data);
 
@@ -525,7 +521,7 @@ edit(s){
                     name: file.name,
                     uploadPercentage: 0
                 };
-                this.files.push(item);
+                this.files.push(file);
                 //console.log(this.files[0]);
                 var fd = new FormData();
                 fd.append('myFile', file);
@@ -659,7 +655,7 @@ edit(s){
                     name: file.name,
                     uploadPercentage: 0
                 };
-                this.files.push(item);
+                this.files.push(file);
                 var fd = new FormData();
                 fd.append('myFile', file);
                 // this.src="C:/Users/liulei/Desktop/11.jpg";

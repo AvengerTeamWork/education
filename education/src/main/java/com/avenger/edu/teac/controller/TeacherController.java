@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -93,10 +94,21 @@ public class TeacherController {
 	 * @param pwd
 	 * @param id
 	 */
-	@PutMapping("/change")
+	@GetMapping("/change")
 	@ResponseBody
-	public void changePwd(@RequestParam(value="password") String pwd,@RequestParam int id) {
-		this.service.changePwd(pwd, id);
+	public String changePwd(@RequestParam(value="pwd1") String pwd1,@RequestParam("pwd2")String pwd2,@RequestParam("id") int id) {
+		
+		if(pwd1==null||pwd2==null) {
+			return "密码修改失败，密码不能为空";
+		}else if("".equals(pwd1)||"".equals(pwd2)){
+			return "密码修改失败，密码不能为空";
+		}else if(!pwd1.equals(pwd2)) {
+			return "密码修改失败，两次输入的密码不一致";
+		}else {
+			this.service.changePwd(pwd1, id);
+			return "密码修改成功";
+		}
+		
 	}
 	
 	/**
@@ -107,13 +119,29 @@ public class TeacherController {
 	 */
 	@GetMapping("/login")
 	@ResponseBody
-	public Teacher login(@RequestParam int id,@RequestParam String pwd,HttpServletResponse resp) {
+	public Teacher login(@RequestParam int id,@RequestParam String pwd,HttpServletResponse resp,HttpServletRequest req) {
 		if(id==0||pwd==null||"".equals(pwd)) {
+			return null;
+		}
+		int numId = this.service.findTeacId(id);
+		int numPwd = this.service.findTeacPassword(pwd);
+		if(numId<1||numPwd<1) {
 			return null;
 		}
 		Cookie cookie = new Cookie("teacherId", String.valueOf(id));
 		resp.addCookie(cookie);
-		return this.service.adminTeac(id, pwd);
+		Teacher teacher = this.service.adminTeac(id, pwd);
+		HttpSession session = req.getSession();
+		session.setAttribute("teacher", teacher);
+		return teacher;
+	}
+	
+	@GetMapping("/exit")
+	@ResponseBody
+	public String exit(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		session.setAttribute("teacher", null);
+		return "退出登录";
 	}
 	
 	/**
