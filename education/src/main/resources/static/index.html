@@ -8,18 +8,13 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<<<<<<< HEAD
-  <title>欢迎使用教务系统</title>
-  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
-  <script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-=======
 
-  <title>欢迎使用教务系统</title>
-  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
-  <script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
->>>>>>> 31e62109e56e6c4a35d8f75ae01ca0816b70be44
+
+<title>欢迎使用教务系统</title>
+<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 
 
 
@@ -30,10 +25,7 @@
 	crossorigin="anonymous">
 <!-- Custom styles for this template -->
 <link href="./css/signin.css" rel="stylesheet">
-<<<<<<< HEAD
-<!-- axios -->
-=======
->>>>>>> 31e62109e56e6c4a35d8f75ae01ca0816b70be44
+
 </head>
 
 <body class="text-center">
@@ -57,12 +49,33 @@
 					value="student"> student
 				</label>
 			</div>
-			<button @click="handleLogin" class="btn btn-lg btn-primary btn-block">login</button>
+
+			<button type="button" class="btn btn-lg btn-primary btn-block" data-toggle="modal"
+				data-target="#exampleModal" @click="handleLogin" >login</button>
 			<a href="reset.html">
 				<h6>忘记密码？</h6>
 			</a>
 			<p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
 			<!-- </form> -->
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content" v-if="temp">
+						<div class="modal-header">
+							<h5 class="modal-title text-warning font-weight-bold" id="exampleModalLabel">警告</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body font-weight-bold text-warning">{{stu}}</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal" >确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<script>
@@ -71,7 +84,9 @@
       data: {
         id: undefined,
         password: undefined,
-        sredio: undefined
+        sredio: undefined,
+        temp:false,
+        stu:""
       },
       methods: {
         handleLogin() {
@@ -80,8 +95,9 @@
         		axios.post("/stu", {
                     'stuId': this.id, 'stuPassword': this.password
                   }).then((resp) => {
-                    if (resp.data === 0) { console.log("用户名不存在");alert("用户名不存在") };
-                    if (resp.data === 1) { console.log("密码错误");alert("密码错误") };
+                    if (resp.data === 0) { console.log("用户名不存在");this.temp=true;this.stu="用户名不存在！请重新输入！";         id: undefined,
+                    this.password=""; this.id="";};
+                    if (resp.data === 1) { console.log("密码错误");this.temp=true;this.stu="密码错误！请重新输入！";this.password=""; this.id=""; };
                     if (resp.data === 2) { window.location = '/student.html' };
                   })
                     .catch((resp) => console.log("传输失败"));
