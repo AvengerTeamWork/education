@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -106,7 +109,7 @@ public class ManagerController {
 	
 	 @PostMapping("/load")
 	 @ResponseBody
-	    public void singleFileUpload( MultipartFile file) {
+	    public void singleFileUpload( MultipartFile file,HttpServletRequest request) {
 		 System.out.println("开始下载");
 		 logger.debug("传入的文件参数：{}", JSON.toJSONString(file, true));
 
@@ -115,7 +118,7 @@ public class ManagerController {
 	        }
 	        try {
 	            byte[] bytes = file.getBytes();
-	            Path path = Paths.get("C:\\Users\\liulei\\Desktop\\quiz\\education\\education\\src\\main\\resources\\static\\images\\student\\" + file.getOriginalFilename());
+	            Path path = Paths.get("C:/Users/liulei/Desktop/quiz/education/education/src/main/resources/static/images/student/" + file.getOriginalFilename());
 	            //文件写入指定路径
 	            Files.write(path, bytes);
 	            logger.debug("文件写入成功...");
