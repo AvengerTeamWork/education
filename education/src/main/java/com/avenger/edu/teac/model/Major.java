@@ -10,7 +10,7 @@ public class Major {
 	private int id;
 	private String name;
 	private College coll;
-	private int year;
+	private String year;
 	
 	public Major() {
 		
@@ -40,13 +40,12 @@ public class Major {
 		this.coll = coll;
 	}
 
-	public int getYear() {
+	public String getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
-
 	
 }

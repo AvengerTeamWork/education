@@ -16,7 +16,7 @@
     crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-image:url(/images/teacher/11.jpg)">
   <div id="teacher">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <p class="navbar-brand"><a href="teacher.html" style="color:#FFFFFF">教务管理中心</a></p>
@@ -387,10 +387,7 @@
     		  teaId:'',
     		  score:'',
     		  point:'',
-    		  judge:'',
-    		  
-    		  test:false,
-    		  
+    		  judge:''
     	  }
       },
       methods:{
@@ -411,88 +408,13 @@
         		  this.point=undefined;
         		  this.judge=undefined;
         	  })
-    	  },
-    	  changeTest:function(){
-    		  this.test=true;
-    	  },
-    	  
-    	  
+    	  }
       },
       template: `
          <div>
       	  <br><br>
-      	  
-      	<p>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-          	批量上传
-        </button>
-      </p>
-      <div class="collapse" id="collapseExample2">
-        <div class="card card-body">
-        	<div class="input-group mb-3">
-        		<div class="input-group-prepend">
-          		<!--<span class="input-group-text" id="inputGroup-sizing-default">本地文件路径</span>-->
-        		</div>
-        		<form method="POST" action="teacher/v1/file" enctype="multipart/form-data">
-        		  <div class="form-group">
-        		    <label for="exampleFormControlFile1">导入本地文件</label>
-        		    
-        		    <p>
-        		    <button class="mt-3" type="button" data-toggle="collapse" data-target="#collapseExampleTT" aria-expanded="false" aria-controls="collapseExample">
-        		      	查看正确Excel文件模板
-        		    </button>
-        		  </p>
-        		  <div class="collapse" id="collapseExampleTT">
-        		    <div class="card card-body">
-        		    
-        		    <table class="table table-bordered">
-  		    	  <thead>
-  		    	    <tr>
-  		    	      <th scope="col">stuId</th>
-  		    	      <th scope="col">teaId</th>
-  		    	      <th scope="col">score</th>
-  		    	      <th scope="col">point</th>
-  		    	      <th scope="col">judge</th>
-  		    	    </tr>
-  		    	  </thead>
-  		    	  <tbody>
-  		    	    <tr>
-  		    	      <td scope="row">20153696</th>
-  		    	      <td>1</td>
-  		    	      <td>85</td>
-  		    	      <td>5</td>
-  		    	      <td>过</td>
-  		    	    </tr>
-  		    	    <tr>
-  		    	      <td scope="row">20151239</th>
-  		    	      <td>2</td>
-  		    	      <td>96</td>
-  		    	      <td>5</td>
-  		    	      <td>过</td>
-  		    	    </tr>
-  		    	    <tr>
-  		    	      <td scope="row">20163683</th>
-  		    	      <td >2</td>
-  		    	      <td>59</td>
-  		    	      <td>0</td>
-  		    	      <td>未过</td>
-  		    	    </tr>
-  		    	  </tbody>
-  		    	</table>
-        		    </div>
-        		  </div>
-        		  
-        		    
-        		    <input type="file" name="file" class="form-control-file mt-2" id="exampleFormControlFile1" v-on:change="changeTest">
-        		  	<input type="submit" class="mt-1" v-if="test">
-        		  </div>
-        		</form>
-        	</div>
-        </div>
-      </div>
-      	  
     	  <p>
-    	  <button class="btn btn-primary mt-3" type="button" data-toggle="collapse" data-target="#collapseExampleTest" aria-expanded="false" aria-controls="collapseExample">
+    	  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExampleTest" aria-expanded="false" aria-controls="collapseExample">
     	           上传成绩
     	  </button>
     	</p>

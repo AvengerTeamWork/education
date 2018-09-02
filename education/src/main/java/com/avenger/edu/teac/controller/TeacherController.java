@@ -1,6 +1,5 @@
 package com.avenger.edu.teac.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -13,11 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.avenger.edu.teac.model.CourseTable;
 import com.avenger.edu.teac.model.Grade;
@@ -26,7 +25,6 @@ import com.avenger.edu.teac.model.Notice;
 import com.avenger.edu.teac.model.ReStudy;
 import com.avenger.edu.teac.model.TeacTable;
 import com.avenger.edu.teac.model.Teacher;
-import com.avenger.edu.teac.poi.Excel;
 import com.avenger.edu.teac.serviceimp.TeacherService;
 
 @Controller
@@ -35,30 +33,6 @@ public class TeacherController {
 
 	@Autowired
 	TeacherService service;
-	
-	@PostMapping("/file")
-	@ResponseBody
-    public List<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
-		if(file!=null) {
-			return excelInput(file);
-		}
-		return null;
-    }
-	
-	public List<String> excelInput(MultipartFile file) {
-		Excel e = new Excel();
-		List<String> arr = new ArrayList<>();
-		List<Grade> grades = e.getValue(file);
-		int num = 0;
-		for(Grade grade:grades) {
-			num = num+1;
-			if(grade!=null) {
-				String str = this.resultInput(grade);
-				arr.add("第"+num+"个学生记录"+str);
-			}
-		}
-		return arr;
-	}
 	
 	@GetMapping("/findMajorName")
 	@ResponseBody
@@ -182,13 +156,11 @@ public class TeacherController {
 		int stu=this.service.findStuId(gra.getStuId());
 		int tea=this.service.findTeaId(gra.getTeaId());
 		int score=gra.getScore();
-		int point=gra.getPoint();
-		String judge=gra.getJudge();
-		if(stu==1&&tea==1&&score>=0&&score<=100&&point>=0&&point<=5&&!"".equals(judge)&&judge!=null) {
+		if(stu==1&&tea==1&&score>=0&&score<=100) {
 			this.service.resultInput(gra);
 			return "成功录入学生必修成绩";
 		}
-		return "录入成绩失败，学号或科目号不存在或者分数不是在0~100之间的整数或绩点不是在0~5之间的整数或者judge为空";
+		return "录入成绩失败，学号或科目号不存在或者分数不是在0~100之间的整数";
 	}
 	
 	/**
