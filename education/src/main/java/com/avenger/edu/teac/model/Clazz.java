@@ -9,7 +9,7 @@ public class Clazz {
 
 	private int id;
 	private String name;
-	private String period;
+	private int period;
 	private Major major;
 	
 	public Clazz() {
@@ -32,11 +32,12 @@ public class Clazz {
 		this.name = name;
 	}
 
-	public String getPeriod() {
+	
+	public int getPeriod() {
 		return period;
 	}
 
-	public void setPeriod(String period) {
+	public void setPeriod(int period) {
 		this.period = period;
 	}
 
