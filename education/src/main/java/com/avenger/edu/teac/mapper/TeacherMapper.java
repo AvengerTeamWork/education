@@ -181,7 +181,7 @@ public interface TeacherMapper {
 	})
 	public List<CourseTable> findTable(int id);
 	
-	@Select(value = {"select * from subject where sub_id=#{id}"})
+	@Select(value = {"select * from subject1 where sub_id=#{id}"})
 	@Results(value= {
 			@Result(property="id",column="sub_id"),
 			@Result(property="majorId",column="majo_id"),
