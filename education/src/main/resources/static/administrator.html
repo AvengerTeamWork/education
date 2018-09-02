@@ -13,9 +13,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
 
-    <link href="./images/student/docs.min.css" rel="stylesheet">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
 </head>
 
 <style>
@@ -165,14 +163,14 @@
 	  </div>
       <div class="col-8">
         <ul>
-          <li class="list-group-item "><img src="./images/student/per6.png" width="30" height="30" class="mr-2">学号：<input class="text " v-model="stu_id"><button type="button" class="btn btn-primary ml-5" @click="findStudent">查找</button></li>
-          <li class="list-group-item "><img src="./images/student/per4.png" width="30" height="30" class="mr-2">姓名：{{s.stu_name}}</li>
-          <li class="list-group-item "><img src="./images/student/per1.png" width="30" height="30" class="mr-2">学院：{{s.stu_col}}	</li>
-          <li class="list-group-item "><img src="./images/student/per2.png" width="30" height="30" class="mr-2">专业：{{s.stu_majo}}</li>
-          <li class="list-group-item "><img src="./images/student/per5.png" width="30" height="30" class="mr-2">班级：{{s.stu_clas}}</li>
-          <li class="list-group-item "><img src="./images/student/per3.png" width="30" height="30" class="mr-2">籍贯：{{s.stu_addr}}</li>
-          <li class="list-group-item "><img src="./images/student/per7.png" width="30" height="30" class="mr-2">电话：{{s.stu_phone}}</li>
-          <li class="list-group-item "><img src="./images/student/per8.png" width="30" height="30" class="mr-2">邮箱：{{s.stu_email}}</li>
+          <li class="list-group-item ">学号：<input class="text " v-model="stu_id"><button type="button" class="btn btn-primary ml-5" @click="findStudent">查找</button></li>
+          <li class="list-group-item ">姓名：{{s.stu_name}}</li>
+          <li class="list-group-item ">学院：{{s.stu_col}}	</li>
+          <li class="list-group-item ">专业：{{s.stu_majo}}</li>
+          <li class="list-group-item ">班级：{{s.stu_clas}}</li>
+          <li class="list-group-item ">籍贯：{{s.stu_addr}}</li>
+          <li class="list-group-item ">电话：{{s.stu_phone}}</li>
+          <li class="list-group-item ">邮箱：{{s.stu_email}}</li>
         </ul>
         </div>
         </div>
@@ -299,14 +297,14 @@ edit(s){
 	  </div>
       <div class="col-8">
         <ul>
-          <li class="list-group-item "><img src="./images/student/per6.png" width="30" height="30" class="mr-2">工号：<input class="text " v-model="teac_id"><button type="button" class="btn btn-primary ml-5" @click="findTeacher">查找</buton></li>
-          <li class="list-group-item "><img src="./images/student/per4.png" width="30" height="30" class="mr-2">姓名：{{s.teac_name}}</li>
-          <li class="list-group-item "><img src="./images/student/per1.png" width="30" height="30" class="mr-2">学院：{{s.col_name}}	</li>
-          <li class="list-group-item "><img src="./images/student/per2.png" width="30" height="30" class="mr-2">职位：{{s.teac_title}}</li>
-          <li class="list-group-item "><img src="./images/student/per5.png" width="30" height="30" class="mr-2">入职时间：{{s.teac_time}}</li>
-          <li class="list-group-item "><img src="./images/student/per3.png" width="30" height="30" class="mr-2">籍贯：{{s.teac_addr}}</li>
-          <li class="list-group-item "><img src="./images/student/per7.png" width="30" height="30" class="mr-2">电话：{{s.teac_phone}}</li>
-          <li class="list-group-item "><img src="./images/student/per8.png" width="30" height="30" class="mr-2">邮箱：{{s.teac_email}}</li>
+          <li class="list-group-item ">工号：<input class="text " v-model="teac_id"><button type="button" class="btn btn-primary ml-5" @click="findTeacher">查找</buton></li>
+          <li class="list-group-item ">姓名：{{s.teac_name}}</li>
+          <li class="list-group-item ">学院：{{s.col_name}}	</li>
+          <li class="list-group-item ">职位：{{s.teac_title}}</li>
+          <li class="list-group-item ">入职时间：{{s.teac_time}}</li>
+          <li class="list-group-item ">籍贯：{{s.teac_addr}}</li>
+          <li class="list-group-item ">电话：{{s.teac_phone}}</li>
+          <li class="list-group-item ">邮箱：{{s.teac_email}}</li>
         </ul>
         </div>
         </div>
@@ -374,19 +372,8 @@ edit(s){
 
       //首页组件
 	  let firstpage = Vue.component("main", {
-      data: function () {
-				return {
-					tf:false,
-					temp:undefined,
-				}
-			},
-			methods:{
-			},
-			mounted(){
-				this.temp=true;
-			},
 			template: `
-      <div>
+		<div>
     	  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     	  <ol class="carousel-indicators">
     	    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -395,13 +382,13 @@ edit(s){
     	  </ol>
     	  <div class="carousel-inner">
     	    <div class="carousel-item active">
-    	      <img class="d-block w-100" src="../images/student/main1.png" alt="First slide">
+    	      <img class="d-block w-100" src="images/student/main1.png" alt="First slide">
     	    </div>
     	    <div class="carousel-item">
-    	      <img class="d-block w-100" src="../images/student/main2.png" alt="Second slide">
+    	      <img class="d-block w-100" src="images/student/main2.png" alt="Second slide">
     	    </div>
     	    <div class="carousel-item">
-    	      <img class="d-block w-100" src="../images/student/main3.png" alt="Third slide">
+    	      <img class="d-block w-100" src="images/student/main3.png" alt="Third slide">
     	    </div>
     	  </div>
     	  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -413,94 +400,39 @@ edit(s){
     	    <span class="sr-only">Next</span>
     	  </a>
       </div>
-      <transition name="custom-classes-transition"
-  	    enter-active-class="animated flip"
-  	        leave-active-class="animated zoomOut">
- <div class="container-fluid" v-if="temp">
- <main class="bd-masthead" id="content" role="main">
- <button type="button" class="close" aria-label="Close" @click="temp=!temp">
- <span aria-hidden="true">&times;</span>
- </button>
- <div class="container">
-   <div class="row align-items-center">
-     <div class="col-6 mx-auto col-md-6 order-md-2">
-     <transition name="custom-classes-transition"
-    	    enter-active-class="animated wobble"
-    	        leave-active-class="animated hinge">
-     <img v-if="tf" class="img-fluid mb-3 mb-md-0" src="./images/student/caidan.png" alt="" width="1024" height="860">
-   </transition>
-       
-     </div>
-     <div class="col-md-6 order-md-1 text-center text-md-left pr-md-5">
-       <h1 class="mb-3 text-primary">The Avengers</h1>
-       <p class="lead">
-        本教务系统是由本校Avengers学生团队完成
-       </p>
-       <p class="lead mb-4">
-   本系统提供了所有的基本功能，由于该团队是第一次做如此大的项目，还存在诸多问题，请各位师生谅解，如有问题，请反馈给我们，我们将及时做出修改，谢谢！
-       </p>
-       <div class="d-flex flex-column flex-md-row lead mb-3">
-       <button type="button" class="btn btn-outline-primary mb-3 mb-md-0 mr-md-3" @click="console.log('恭喜你获得彩蛋！,前100名有娃娃赠送，谢谢支持（请加qq：1261762904）')">点我有惊喜哦</button>
-       <button type="button" class="btn btn-outline-success mb-3 mb-md-0 mr-md-3" @click="tf= !tf">为我们点赞</button>
-       </div>
-       <p class="text-muted mb-0">
-         Avengers v5.1.3
-       </p>
-     </div>
-   </div>
- </div>
-</main>
-</transition>
+ <div class="container mt-4">
   <!-- Example row of columns -->
   <div class="row">
-    <div class="col-12 col-md-4 p-3 p-md-5 bg-light border border-white">
-    <!-- Icon by Bytesize https://github.com/danklammer/bytesize-icons -->
-    <svg xmlns="http://www.w3.org/2000/svg" focusable="false" width="32" height="32" fill="none" stroke="currentcolor" stroke-width="2" class="text-primary mb-2" viewBox="0 0 32 32" stroke-linecap="round" stroke-linejoin="round"><title>Import icon</title><path d="M28 22v8H4v-8M16 4v20m-8-8l8 8 8-8"/></svg>
-
-    <h3>关于我们</h3>
-    <p>中南林业科技大学的前身之一是成立于1958年的本科院校湖南林学院。是国家林业局与湖南省人民政府共建的省部共建大学、省属重点大学、中西部高校基础能力建设工程、卓越农林人才教育培养计划、湖南省2011计划建设高校，建有湖南北罗霄国家森林公园、湖南绿色发展研究院。</p>
-
-<figure class="highlight mt-0 mb-3 py-2"><pre><code class="language-sh" data-lang="sh">现任校长 <span class="nb">廖小平 </span></code></pre></figure>
-
-<figure class="highlight mt-0 mb-3 py-2"><pre><code class="language-sh" data-lang="sh">校    训 <span class="nb">求是求新 </span>  <span class="nb">树木树人</span></code></pre></figure>
-
-    <hr class="half-rule">
-    <a class="btn btn-outline-primary"  target="_blank" href="https://baike.baidu.com/item/%E4%B8%AD%E5%8D%97%E6%9E%97%E4%B8%9A%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6/163092?fromtitle=%E6%9E%97%E7%A7%91%E5%A4%A7&fromid=15999934&fr=aladdin">想知道更多</a>
+    <div class="col-lg-4">
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="images/student/main4.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">我校学子在第九届服务外包创新创业大赛中荣获团体二、三等奖</h5>
+      <p class="card-text">六月的中南林科大艳阳高照，清风习习，绿树成荫。在计算机与信息工程学院黄洪旭、谭云等老师的组织下，由计算机与信息工程学院、林学院、班戈学院等多个学院学生组成的5支参赛队伍，首次参加第九届中国大学生服务外包创新创业大赛，就荣获团体二等奖和三等奖各一项。</p>
+      <a href="#" class="btn btn-primary">详细信息</a>
+    </div>
   </div>
-    
-  <div class="col-12 col-md-4 p-3 p-md-5 bg-light border border-white">
-  <!-- Icon by Bytesize https://github.com/danklammer/bytesize-icons -->
-  <svg xmlns="http://www.w3.org/2000/svg" focusable="false" width="32" height="32" fill="none" stroke="currentcolor" stroke-width="2" class="text-primary mb-2" viewBox="0 0 32 32" stroke-linecap="round" stroke-linejoin="round"><title>Download icon</title><path d="M9 22c-9 1-8-10 0-9C6 2 23 2 22 10c10-3 10 13 1 12m-12 4l5 4 5-4m-5-10v14"/></svg>
-
-  <h3>相关网址</h3>
-  <p></p>
-
-<h5>本校官网</h5>
-<figure class="highlight mt-0 mb-3 py-2"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;URL</span> <span class="na">href=</span><span class="s"><a href="http://www.csuft.edu.cn/"  target="_blank">"http://www.csuft.edu.cn/"</a></span> <span class="s">中南林业科技大学</span> <span class="nt">&gt;</span></code></pre></figure>
-
-<h5>其他</h5>
-<figure class="highlight mt-0 mb-3 py-2"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;URL </span><span class="na">href=</span><span class="s"><a href="http://www.csfxgw.com/"  target="_blank">"http://www.csfxgw.com/"</span></a> <span class="s">中南林业科技大学学工部</span> <span class="nt">&gt;</span>
-<span class="nt">&lt;URL </span><span class="na">href=</span><span class="s"><a href="http://cwc.csuft.edu.cn/"  target="_blank">"http://cwc.csuft.edu.cn/"</span></a> <span class="s">中南林业科技大学财务处</span> <span class="nt">&gt;</span>
-<span class="nt">&lt;URL </span><span class="na">href=</span><span class="s"><a href="http://zs.csuft.edu.cn/f"  target="_blank">"http://zs.csuft.edu.cn/f"</span></a> <span class="s">中南林业科技大学招生办</span> <span class="nt">&gt;</span></code></pre></figure>
-  <hr class="half-rule">
-  <a class="btn btn-outline-primary" href="http://www.univs.cn/"  target="_blank">更多链接</a>
-</div>
-
-    
-    <div class="col-12 col-md-4 p-3 p-md-5 bg-light border border-white">
-    <!-- Icon by Bytesize https://github.com/danklammer/bytesize-icons -->
-    <svg xmlns="http://www.w3.org/2000/svg" focusable="false" width="32" height="32" fill="none" stroke="currentcolor" stroke-width="2" class="text-primary mb-2" viewBox="0 0 32 32" stroke-linecap="round" stroke-linejoin="round"><title>Lightning icon</title><path d="M18 13l8-11L8 13l6 6-8 11 18-11z"/></svg>
-
-    <h3>每日一报</h3>
-    <p>
-    学校纪念建党97年暨“七一”表彰大会于6月29日上午在雅韵楼召开,教务处党支部获评为学校2017-2018年度先进党支部
-    </p>
-    <img class="img-fluid mt-3 mx-auto" src="./images/student/bootstrap-themes1.png" alt="Bootstrap Themes" width="1024" height="388">
-    <hr class="half-rule">
-    <a href="http://jwc.csuft.edu.cn/gzdt_2556/201807/t20180702_78271.html"  target="_blank" class="btn btn-outline-primary">深入了解</a>
+    </div>
+    <div class="col-lg-4">
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="images/student/main5.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">学校召开本科教学工作例会</h5>
+      <p class="card-text">7月16日下午，本科教学工作例会在崇德楼（行政楼）四楼3会议室召开，副校长朱道弘主持会议，教务处班子成员，各学院教学副院长及部分教务办主任与会。副校长朱道弘在会上强调了本科教学工作的重要性，肯定了本学期各学院在本科教学工作方面的付出与成绩。对全国本科教学工作大会精神的学习与贯彻进行了深入动员，要求各学院领导班子要带头读懂悟透。</p>
+      <a href="#" class="btn btn-primary">详细信息</a>
+    </div>
   </div>
-    
-    
+    </div>
+    <div class="col-lg-4">
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="images/student/main6.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">教务处党支部获评为学校2017-2018年度先进党支部</h5>
+      <p class="card-text">学校纪念建党97年暨“七一”表彰大会于6月29日上午在雅韵楼召开,教务处党支部获评为学校2017-2018年度先进党支部。2017-2018年度，教务处支部在学校党委和机关二党委正确领导下，高度重视党建工作，充分发挥党员模范带头作用，全处同志坚持理论学习，狠抓作风建设，牢固树立服务意识，攻坚克难，奋力前行。</p>
+      <a href="#" class="btn btn-primary">详细信息</a>
+    </div>
+  </div>
+    </div>
     </div>
   </div>
 </div> <!-- /container -->
@@ -649,21 +581,21 @@ edit(s){
 	  </div>
       <div class="col-8">
         <ul>
-          <li class="list-group-item "><img src="./images/student/per6.png" width="30" height="30" class="mr-2">学号：<input class="text form-control" v-model="stu_id"></li>
-          <li class="list-group-item "><img src="./images/student/per4.png" width="30" height="30" class="mr-2">姓名：<input class="text form-control" v-model="stu_name"></li>
-          <li class="list-group-item "><img src="./images/student/per1.png" width="30" height="30" class="mr-2">性别<select class="form-control" name="" v-model="stu_sex">
+          <li class="list-group-item ">学号：<input class="text form-control" v-model="stu_id"></li>
+          <li class="list-group-item ">姓名：<input class="text form-control" v-model="stu_name"></li>
+          <li class="list-group-item ">性别<select class="form-control" name="" v-model="stu_sex">
                     <option >男</option>
                     <option >女</option>
                     </li>
-          <li class="list-group-item "><img src="./images/student/per2.png" width="30" height="30" class="mr-2">专业：<select class="form-control" name="" v-model="majo_name">
+          <li class="list-group-item ">专业：<select class="form-control" name="" v-model="majo_name">
                     <option v-for="c in majors">{{c.majo_id}}({{c.majo_name}})</option>
                     </li>
-          <li class="list-group-item "><img src="./images/student/per5.png" width="30" height="30" class="mr-2">班级：<select class="form-control" name="" v-model="clas_name">
+          <li class="list-group-item ">班级：<select class="form-control" name="" v-model="clas_name">
                     <option v-for="c in classes">{{c.clas_id}}({{c.clas_name}})</option>
                     </li>
-          <li class="list-group-item "><img src="./images/student/per3.png" width="30" height="30" class="mr-2">籍贯：<input class="text form-control" v-model="stu_addr"></li>
-          <li class="list-group-item "><img src="./images/student/per7.png" width="30" height="30" class="mr-2">电话：<input class="text form-control" v-model="stu_phone"></li>
-          <li class="list-group-item "><img src="./images/student/per8.png" width="30" height="30" class="mr-2">邮箱：<input class="text form-control" v-model="stu_email"></li>
+          <li class="list-group-item ">籍贯：<input class="text form-control" v-model="stu_addr"></li>
+          <li class="list-group-item ">电话：<input class="text form-control" v-model="stu_phone"></li>
+          <li class="list-group-item ">邮箱：<input class="text form-control" v-model="stu_email"></li>
         </ul>
         </div>
         </div>
@@ -783,19 +715,19 @@ edit(s){
 	  </div>
       <div class="col-8">
         <ul>
-          <li class="list-group-item "><img src="./images/student/per6.png" width="30" height="30" class="mr-2">工号：<input class="text form-control" v-model="teac_id"></li>
-          <li class="list-group-item "><img src="./images/student/per4.png" width="30" height="30" class="mr-2">姓名：<input class="text form-control" v-model="teac_name"></li>
-          <li class="list-group-item "><img src="./images/student/per1.png" width="30" height="30" class="mr-2">性别<select class="form-control" name="" v-model="teac_sex">
+          <li class="list-group-item ">工号：<input class="text form-control" v-model="teac_id"></li>
+          <li class="list-group-item ">姓名：<input class="text form-control" v-model="teac_name"></li>
+          <li class="list-group-item ">性别<select class="form-control" name="" v-model="teac_sex">
                     <option >男</option>
                     <option >女</option>
                     </li>
-          <li class="list-group-item "><img src="./images/student/per2.png" width="30" height="30" class="mr-2">学院：<select class="form-control" name="" v-model="col_name">
+          <li class="list-group-item ">学院：<select class="form-control" name="" v-model="col_name">
                     <option v-for="c in colleges">{{c.col_id}}({{c.col_name}})</option>	</li>
-          <li class="list-group-item "><img src="./images/student/per5.png" width="30" height="30" class="mr-2">职位：<input class="text form-control" v-model="teac_title"></li>
-          <li class="list-group-item "><img src="./images/student/per3.png" width="30" height="30" class="mr-2">入职时间：<input class="text form-control" v-model="teac_time"></li>
-          <li class="list-group-item "><img src="./images/student/per7.png" width="30" height="30" class="mr-2">籍贯：<input class="text form-control" v-model="teac_addr"></li>
-          <li class="list-group-item "><img src="./images/student/per8.png" width="30" height="30" class="mr-2">电话：<input class="text form-control" v-model="teac_phone"></li>
-          <li class="list-group-item "><img src="./images/student/per4.png" width="30" height="30" class="mr-2">邮箱：<input class="text form-control" v-model="teac_email"></li>
+          <li class="list-group-item ">职位：<input class="text form-control" v-model="teac_title"></li>
+          <li class="list-group-item ">入职时间：<input class="text form-control" v-model="teac_time"></li>
+          <li class="list-group-item ">籍贯：<input class="text form-control" v-model="teac_addr"></li>
+          <li class="list-group-item ">电话：<input class="text form-control" v-model="teac_phone"></li>
+          <li class="list-group-item ">邮箱：<input class="text form-control" v-model="teac_email"></li>
         </ul>
         </div>
         </div>
