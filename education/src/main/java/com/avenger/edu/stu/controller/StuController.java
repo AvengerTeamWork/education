@@ -1,10 +1,19 @@
 package com.avenger.edu.stu.controller;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.util.EntityUtils;
 
 //import javax.servlet.http.Cookie;
 //import javax.servlet.http.HttpServletRequest;
@@ -31,6 +40,10 @@ import com.avenger.edu.stu.model.Schedule;
 import com.avenger.edu.stu.model.SeleCourInfo;
 import com.avenger.edu.stu.model.Student;
 import com.avenger.edu.stu.serviceimp.StuServiceImp;
+import com.avenger.edu.stu.tools.HttpUtils;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/stu")
@@ -87,6 +100,42 @@ public class StuController {
 	@ResponseBody
 	public Student studentInfo(@PathVariable int id) {
 		return stuServiceimp.getStudentInfo(id);
+
+	}
+
+	/**
+	 * 封装诗词api接口
+	 * 本来想做个机器人，来实现诗词的回答
+	 * @return
+	 */
+	@GetMapping("/poem")
+	@ResponseBody
+	public String st() {
+	    String host = "https://jisutssbs.market.alicloudapi.com";
+	    String path = "/tangshi/search";
+	    String method = "GET";
+	    String appcode = "3016782f6e734c848ed9aabda196bb56";
+	    Map<String, String> headers = new HashMap<String, String>();
+	    headers.put("Authorization", "APPCODE " + appcode);
+	    Map<String, String> querys = new HashMap<String, String>();
+	    querys.put("keyword", "青青");
+	    HttpResponse response = null;
+	    JSONObject json3 = null;
+	    try {
+	    	response = HttpUtils.doGet(host, path, method, headers, querys);
+	    	System.out.println(response.toString());
+//	    	System.out.println(EntityUtils.toString(response.getEntity()));
+		    JSONObject json =JSONObject.fromObject(EntityUtils.toString(response.getEntity()));
+
+		    JSONObject json1 = json.getJSONObject("result");
+		    System.out.println(json1.get("list"));
+		    JSONArray json2 = json1.getJSONArray("list");
+		    json3 = json2.getJSONObject(0);
+		    System.out.println(json3.get("title"));
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    }
+	    return (String) json3.get("title");
 
 	}
 
@@ -167,7 +216,7 @@ public class StuController {
 	public List<Sche> schedule(@RequestBody ScheSite ss) {
 		return stuServiceimp.getSchedule(ss.getId(), ss.getTime(), ss.getWeek());
 	}
-	
+
 	@PostMapping("/scheduleInfo")
 	@ResponseBody
 	public Schedule scheduleInfo(@RequestBody ScheSite ss) {

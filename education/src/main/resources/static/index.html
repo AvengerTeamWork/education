@@ -33,7 +33,7 @@
 		<img class="BG3" src="./images/BG3.jpg" alt="中南林业科技大学">
 		<!-- <form class="form-signin"> -->
 		<div class="form-signin">
-			<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+			<h1 class="h3 mb-3 font-weight-normal">请登录</h1>
 			<label for="inputusername" class="sr-only">Username</label> <input
 				v-model="id" type="text" id="inputusername" class="form-control"
 				placeholder="Username" required autofocus> <label
@@ -43,15 +43,15 @@
 				@keyup.enter.native="handleLogin" required>
 			<div class="checkbox mb-3">
 				<label> <input v-model="sredio" type="radio"
-					name="remember-me" value="admin"> administrator <input
+					name="remember-me" value="admin"> 管理员 <input
 					v-model="sredio" type="radio" name="remember-me" value="teacher">
-					teacher <input v-model="sredio" type="radio" name="remember-me"
-					value="student"> student
+					教师 <input v-model="sredio" type="radio" name="remember-me"
+					value="student"> 学生
 				</label>
 			</div>
 
 			<button type="button" class="btn btn-lg btn-primary btn-block" data-toggle="modal"
-				data-target="#exampleModal" @click="handleLogin" >login</button>
+				data-target="#exampleModal" @click="handleLogin" >登录</button>
 			<a href="reset.html">
 				<h6>忘记密码？</h6>
 			</a>
